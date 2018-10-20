@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace SCE;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -31,7 +31,7 @@ class User extends Authenticatable
     public function roles()
     {
         return $this
-            ->belongsToMany('App\Role')
+            ->belongsToMany('SCE\Role')
             ->withTimestamps();
     }
 
