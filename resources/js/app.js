@@ -4,8 +4,10 @@
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
-
 require('./bootstrap');
+window.Vue = require('vue'); 
+Vue.use(require('vue-resource')); 
+Vue.http.headers.common['X-CSRF-TOKEN'] = document.getElementById('csrf_token').value;
 
 window.Vue = require('vue');
 
@@ -16,7 +18,7 @@ window.Vue = require('vue');
  */
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
-
+Vue.component('roles', require('./components/Roles.vue'));
 const app = new Vue({
     el: '#app'
 });
