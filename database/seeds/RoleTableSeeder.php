@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Role;
+use SCE\Role;
 
 class RoleTableSeeder extends Seeder
 {
@@ -14,12 +14,27 @@ class RoleTableSeeder extends Seeder
     {
         $role = new Role();
         $role->name = 'admin';
-        $role->description = 'Administrator';
+        $role->description = 'Administrador';
         $role->save();
 
         $role = new Role();
-        $role->name = 'user';
-        $role->description = 'User';
+        $role->name = 'alumno';
+        $role->description = 'Alumno';
+        $role->save();
+
+        $role = new Role();
+        $role->name = 'directivo';
+        $role->description = 'Directivo';
+        $role->save();
+
+        $role = new Role();
+        $role->name = 'profesor';
+        $role->description = 'Profesor';
+        $role->save();
+
+        $role = new Role();
+        $role->name = 'administrativo';
+        $role->description = 'Administrativo';
         $role->save();
     }
 }

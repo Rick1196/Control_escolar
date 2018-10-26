@@ -7,7 +7,6 @@
 require('./bootstrap');
 window.Vue = require('vue'); 
 Vue.use(require('vue-resource')); 
-Vue.http.headers.common['X-CSRF-TOKEN'] = document.getElementById('csrf_token').value;
 
 window.Vue = require('vue');
 

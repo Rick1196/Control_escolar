@@ -24,7 +24,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app">
+    <div>
         <button id="demo-menu-lower-left"
                 class="mdl-button mdl-js-button mdl-button--icon">
         <i class="material-icons">more_vert</i>
@@ -60,7 +60,5 @@
             @yield('content')
         </main>
     </div>
-    <input type="hidden" id="csrf_token" value="{{ csrf_token() }}" /> 
-    <script src="{{ elixir('js/app.js') }}"></script> 
 </body>
 </html>

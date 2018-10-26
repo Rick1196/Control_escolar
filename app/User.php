@@ -1,7 +1,7 @@
 <?php
 
 namespace SCE;
-
+use DB;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'last_name', 'curp', 'username', 'email', 'password',
+        'name', 'email', 'password',
     ];
 
     /**
@@ -67,5 +67,8 @@ class User extends Authenticatable
         return false;
     }
 
-
+    public static function get_roles(){
+        $roles =  DB::select('SELECT * from roles order by id');
+        return $roles;
+    }
 }

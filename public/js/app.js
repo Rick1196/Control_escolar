@@ -24970,7 +24970,6 @@ module.exports = __webpack_require__(48);
 __webpack_require__(15);
 window.Vue = __webpack_require__(11);
 Vue.use(__webpack_require__(40));
-Vue.http.headers.common['X-CSRF-TOKEN'] = document.getElementById('csrf_token').value;
 
 window.Vue = __webpack_require__(11);
 
@@ -49046,7 +49045,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -49055,21 +49053,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             selected: null
         };
     },
-
     methods: {
-        get_materias: function get_materias(clave) {
+        get_roles: function get_roles(clave) {
             var _this = this;
 
             this.$http.get('/roles').then(function (response) {
                 _this.roles = response.body;
-                console.log(response.body);
+                console.log(_this.roles);
             }, function (response) {
                 console.log(response);
             });
         }
     },
-    mounted: function mounted() {
-        this.get_materias();
+    created: function created() {
+        this.get_roles();
     }
 });
 
@@ -49086,15 +49083,38 @@ var render = function() {
     _vm._v(" "),
     _c(
       "select",
-      { staticClass: "custom-select", attrs: { name: "rol", id: "rol" } },
-      [
-        _c("option", { attrs: { value: "0" } }, [_vm._v("Uno")]),
-        _vm._v(" "),
-        _vm._l(_vm.roles, function(rol) {
-          return _c("option", [_vm._v(_vm._s(rol.name))])
-        })
-      ],
-      2
+      {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.selected,
+            expression: "selected"
+          }
+        ],
+        staticClass: "custom-select",
+        attrs: { name: "rol", id: "rol" },
+        on: {
+          change: function($event) {
+            var $$selectedVal = Array.prototype.filter
+              .call($event.target.options, function(o) {
+                return o.selected
+              })
+              .map(function(o) {
+                var val = "_value" in o ? o._value : o.value
+                return val
+              })
+            _vm.selected = $event.target.multiple
+              ? $$selectedVal
+              : $$selectedVal[0]
+          }
+        }
+      },
+      _vm._l(_vm.roles, function(rol) {
+        return _c("option", { key: rol.id, domProps: { value: rol.id } }, [
+          _vm._v(_vm._s(rol.name))
+        ])
+      })
     )
   ])
 }

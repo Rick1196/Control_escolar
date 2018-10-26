@@ -3,12 +3,13 @@
 namespace SCE\Http\Controllers\Auth;
 
 use SCE\User;
-use SCE\Role;
 use SCE\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
-
+use SCE\Http\Controllers\UsersControlller;
+use Illuminate\Support\Facades\Redirect;
+use View;
 class RegisterController extends Controller
 {
     /*
@@ -53,6 +54,7 @@ class RegisterController extends Controller
             'name' => 'required|string|max:50',
             'email' => 'required|string|email|max:100|unique:users',
             'password' => 'required|string|min:6|confirmed',
+            'rol_selected' => 'required',
         ]);
     }
 
@@ -71,7 +73,13 @@ class RegisterController extends Controller
         ]);
         $user
         ->roles()
-        ->attach(Role::where('name', 'user')->first());
+        ->attach($data['rol_selected']);
         return $user;
     }
+
+    function index(){
+        $roles = User::get_roles();
+        return View::make("auth/register", compact('roles'));
+    }
+
 }

@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header">{{ __('Registro de alumnos') }}</div>
 
-                <div class="card-body">
+                <div class="card-body" >
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
 
@@ -59,9 +59,15 @@
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
                             </div>
                         </div>
-
                         <div class="form-group row">
-                            <roles></roles>
+                            <label for="rol" class="col-md-4 col-form-label text-md-right">{{ __('Nivel del usuario') }}</label>
+                            <div class="col-md-6">
+                                <select id="rol_selected" name="rol_selected" class="form-control">
+                                    @foreach($roles as $rol)
+                                    <option value="{{$rol->id}}">{{$rol->description}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
                         
                         <div class="form-group row mb-0">
@@ -78,5 +84,6 @@
         </div>
     </div>
 </div>
+
 
 @endsection
