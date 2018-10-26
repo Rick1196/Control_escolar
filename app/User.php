@@ -68,7 +68,7 @@ class User extends Authenticatable
     }
 
     public static function get_roles(){
-        $roles =  DB::select('SELECT * from roles order by id');
+        $roles =  DB::select('SELECT * from roles order by description');
         return $roles;
     }
 }

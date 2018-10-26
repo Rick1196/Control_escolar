@@ -59,10 +59,11 @@
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
                             </div>
                         </div>
+                        
                         <div class="form-group row">
                             <label for="rol" class="col-md-4 col-form-label text-md-right">{{ __('Nivel del usuario') }}</label>
-                            <div class="col-md-6">
-                                <select id="rol_selected" name="rol_selected" class="form-control">
+                            <div class="input-field col s12">
+                                <select id="rol_selected" name="rol_selected" >
                                     @foreach($roles as $rol)
                                     <option value="{{$rol->id}}">{{$rol->description}}</option>
                                     @endforeach
@@ -73,7 +74,7 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
+                                    {{ __('Registrar') }}
                                 </button>
                             </div>
                         </div>

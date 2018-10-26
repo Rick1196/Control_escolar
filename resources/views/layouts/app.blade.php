@@ -14,38 +14,31 @@
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="{{ asset('node_modules/material-design-lite/material.min.css') }}" rel="stylesheet">
-    <script  type="text/javascript"  src="{{ asset('node_modules/material-design-lite/material.min.js') }}"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-
-
+    
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="{{asset('node_modules/materialize-css/dist/css/materialize.min.css')}} "  media="screen,projection"/>
+    <script type="text/javascript" src="{{asset('node_modules/materialize-css/dist/js/materialize.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('node_modules/jquery/dist/jquery.min.js')}}"></script>
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
     <div>
-        <button id="demo-menu-lower-left"
-                class="mdl-button mdl-js-button mdl-button--icon">
-        <i class="material-icons">more_vert</i>
-        </button>
-
-
-        <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
-        for="demo-menu-lower-left">
-            @guest
-                <li class="mdl-menu__item">
-                    <a class="nav-link" href="{{ route('login') }}">{{ __('Inicio de sesion') }}</a>
+        <ul id="dropdown1" class="dropdown-content">
+        @guest
+                <li>
+                    <a  href="{{ route('login') }}">{{ __('Inicio de sesion') }}</a>
                 </li>
-                <li class="mdl-menu__item">
+                <li>
                     @if (Route::has('register'))
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('Registrarse') }}</a>
+                            <a href="{{ route('register') }}">{{ __('Registrarse') }}</a>
                     @endif
                 </li>
             @else
-                <li disabled class="mdl-menu__item">{{ Auth::user()->name }} <span class="caret"></span></li>
-                <li class="mdl-menu__item">
-                    <a class="dropdown-item" href="{{ route('logout') }}"
+                <li class="disabled"><a>{{ Auth::user()->name }} <span class="badge"></span></a></li>
+                <li>
+                    <a href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
                                                 document.getElementById('logout-form').submit();">
                                 {{ __('Logout') }}
@@ -56,9 +49,25 @@
                 </li>
             @endguest
         </ul>
+        <nav>
+            <div class="nav-wrapper">
+            <a href="/" class="brand-logo">SCE</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="badges.html">Components</a></li>
+                <!-- Dropdown Trigger -->
+                <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Sesion<i class="material-icons right">arrow_drop_down</i></a></li>
+            </ul>
+            </div>
+        </nav>
         <main class="py-4">
             @yield('content')
         </main>
     </div>
 </body>
+<script>
+
+    document.addEventListener('DOMContentLoaded', function() {
+        M.AutoInit();
+    });
+</script>
 </html>

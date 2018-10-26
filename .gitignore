@@ -2,6 +2,7 @@
 /.idea
 /.vscode
 /.vagrant
+/.node_modules
 yarn-error.log
 .env
 .phpunit.result.cache
