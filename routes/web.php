@@ -21,3 +21,5 @@ Route::group(['middleware' => 'auth'], function (){
 });
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('register', 'Auth\RegisterController@index')->name('register');
+Route::get('/subjects', 'SubjectsController@getSubjects');
+Route::get('/subjects_key/{key}', 'SubjectsController@getSubjectsByKey');

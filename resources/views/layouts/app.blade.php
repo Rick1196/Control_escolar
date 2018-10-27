@@ -10,64 +10,65 @@
     <title>SCE</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/app.js')}}" ></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-      <!--Import materialize.css-->
+      <!--Import materialize.css
     <link type="text/css" rel="stylesheet" href="{{asset('node_modules/materialize-css/dist/css/materialize.min.css')}} "  media="screen,projection"/>
     <script type="text/javascript" src="{{asset('node_modules/materialize-css/dist/js/materialize.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('node_modules/jquery/dist/jquery.min.js')}}"></script>
-    <!-- Styles -->
+    Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
     <div>
-        <ul id="dropdown1" class="dropdown-content">
-        @guest
-                <li>
-                    <a  href="{{ route('login') }}">{{ __('Inicio de sesion') }}</a>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <a class="navbar-brand" href="#">SCE</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                 </li>
-                <li>
-                    @if (Route::has('register'))
-                            <a href="{{ route('register') }}">{{ __('Registrarse') }}</a>
-                    @endif
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
                 </li>
-            @else
-                <li class="disabled"><a>{{ Auth::user()->name }} <span class="badge"></span></a></li>
-                <li>
-                    <a href="{{ route('logout') }}"
-                                onclick="event.preventDefault();
-                                                document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Sesion
                     </a>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                @csrf
-                    </form>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    @guest
+                            <a class="dropdown-item" href="{{ route('login') }}">{{ __('Inicio de sesion') }}</a>
+                            @if (Route::has('register'))
+                                    <a class="dropdown-item" href="{{ route('register') }}">{{ __('Registrarse') }}</a>
+                            @endif
+                    @else
+                        <a class="dropdown-item">{{ Auth::user()->name }} <span class="badge"></span></a>
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                        document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                            </form>
+                    @endguest
+                    </div>
                 </li>
-            @endguest
-        </ul>
-        <nav>
-            <div class="nav-wrapper">
-            <a href="/" class="brand-logo">SCE</a>
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a href="badges.html">Components</a></li>
-                <!-- Dropdown Trigger -->
-                <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Sesion<i class="material-icons right">arrow_drop_down</i></a></li>
-            </ul>
+                </ul>
             </div>
         </nav>
+
         <main class="py-4">
             @yield('content')
         </main>
     </div>
 </body>
-<script>
-
-    document.addEventListener('DOMContentLoaded', function() {
-        M.AutoInit();
-    });
-</script>
 </html>
