@@ -17,7 +17,8 @@ window.Vue = require('vue');
  */
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
-Vue.component('roles', require('./components/Roles.vue'));
+Vue.component('groups-crud', require('./components/GroupsCrud.vue'));
+Vue.component('data-roles', require('./components/RolesGetData.vue'));
 const app = new Vue({
-    el: '#app'
+    el: '#app1'
 });

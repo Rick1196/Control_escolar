@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use SCE\Http\Controllers\UsersControlller;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Http\Request;
+use Illuminate\Auth\Events\Registered;
+
 use View;
 class RegisterController extends Controller
 {
@@ -30,7 +33,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/welcome';
 
     /**
      * Create a new controller instance.
@@ -57,6 +60,25 @@ class RegisterController extends Controller
             'rol_selected' => 'required',
         ]);
     }
+
+     /**
+     * Handle a registration request for the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+
+        event(new Registered($user = $this->create($request->all())));
+
+        // $this->guard()->login($user);
+        return View::make("fill_data", compact('user'));
+        //return $this->registered($request, $user)
+                        //?: redirect($this->redirectPath());
+    }
+
 
     /**
      * Create a new user instance after a valid registration.
