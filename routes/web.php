@@ -30,3 +30,7 @@ Route::get('/groups_full_description','SubjectsController@getGroupsFullDescripti
 Route::get('/group_full_description/{identifier}','SubjectsController@getGroupFullDescription');
 Route::get('/get_genders','PersonalInfoController@getGenders');
 
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+

@@ -4,9 +4,8 @@
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
+
 require('./bootstrap');
-window.Vue = require('vue'); 
-Vue.use(require('vue-resource')); 
 
 window.Vue = require('vue');
 
@@ -17,8 +16,41 @@ window.Vue = require('vue');
  */
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
-Vue.component('groups-crud', require('./components/GroupsCrud.vue'));
-Vue.component('data-roles', require('./components/RolesGetData.vue'));
+
+Vue.component('roles-component', require('./components/RolesGetData.vue'));
 const app = new Vue({
-    el: '#app1'
+    el: '#app'
 });
+
+
+// Bulma NavBar Burger Script
+document.addEventListener('DOMContentLoaded', function () {
+
+    // Get all "navbar-burger" elements
+    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+    var bulmaCarousel = require('bulma-extensions/bulma-carousel/dist/js/bulma-carousel');
+    bulmaCarousel.attach();
+    // Check if there are any navbar burgers
+    if ($navbarBurgers.length > 0) {
+        
+        // Add a click event on each of them
+        $navbarBurgers.forEach(function ($el) {
+            $el.addEventListener('click', function () {
+                
+                // Get the target from the "data-target" attribute
+                let target = $el.dataset.target;
+                let $target = document.getElementById(target);
+                
+                // Toggle the class on both the "navbar-burger" and the "navbar-menu"
+                $el.classList.toggle('is-active');
+                $target.classList.toggle('is-active');
+                
+            });
+        });
+    }
+    
+});
+
+
+
+require('./bulma-extensions');

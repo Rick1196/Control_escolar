@@ -85,6 +85,7 @@ class ComposerStaticInitca49b554a5b4ce6a93a625264c6e4212
         array (
             'League\\Flysystem\\' => 17,
             'Laravel\\Tinker\\' => 15,
+            'LaravelFrontendPresets\\BulmaPreset\\' => 35,
         ),
         'J' => 
         array (
@@ -250,6 +251,10 @@ class ComposerStaticInitca49b554a5b4ce6a93a625264c6e4212
         'Laravel\\Tinker\\' => 
         array (
             0 => __DIR__ . '/..' . '/laravel/tinker/src',
+        ),
+        'LaravelFrontendPresets\\BulmaPreset\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/laravel-frontend-presets/bulma/src',
         ),
         'JakubOnderka\\PhpConsoleColor\\' => 
         array (
@@ -1773,6 +1778,8 @@ class ComposerStaticInitca49b554a5b4ce6a93a625264c6e4212
         'JakubOnderka\\PhpConsoleColor\\InvalidStyleException' => __DIR__ . '/..' . '/jakub-onderka/php-console-color/src/InvalidStyleException.php',
         'JakubOnderka\\PhpConsoleHighlighter\\Highlighter' => __DIR__ . '/..' . '/jakub-onderka/php-console-highlighter/src/JakubOnderka/PhpConsoleHighlighter/Highlighter.php',
         'JsonSerializable' => __DIR__ . '/..' . '/nesbot/carbon/src/JsonSerializable.php',
+        'LaravelFrontendPresets\\BulmaPreset\\BulmaPreset' => __DIR__ . '/..' . '/laravel-frontend-presets/bulma/src/BulmaPreset.php',
+        'LaravelFrontendPresets\\BulmaPreset\\BulmaPresetServiceProvider' => __DIR__ . '/..' . '/laravel-frontend-presets/bulma/src/BulmaPresetServiceProvider.php',
         'Laravel\\Tinker\\ClassAliasAutoloader' => __DIR__ . '/..' . '/laravel/tinker/src/ClassAliasAutoloader.php',
         'Laravel\\Tinker\\Console\\TinkerCommand' => __DIR__ . '/..' . '/laravel/tinker/src/Console/TinkerCommand.php',
         'Laravel\\Tinker\\TinkerCaster' => __DIR__ . '/..' . '/laravel/tinker/src/TinkerCaster.php',
@@ -2969,6 +2976,9 @@ class ComposerStaticInitca49b554a5b4ce6a93a625264c6e4212
         'SCE\\Http\\Controllers\\Auth\\VerificationController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/VerificationController.php',
         'SCE\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'SCE\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
+        'SCE\\Http\\Controllers\\PersonalInfoController' => __DIR__ . '/../..' . '/app/Http/Controllers/PersonalInfoController.php',
+        'SCE\\Http\\Controllers\\SubjectsController' => __DIR__ . '/../..' . '/app/Http/Controllers/SubjectsController.php',
+        'SCE\\Http\\Controllers\\UsersController' => __DIR__ . '/../..' . '/app/Http/Controllers/UsersController.php',
         'SCE\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'SCE\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
         'SCE\\Http\\Middleware\\CheckForMaintenanceMode' => __DIR__ . '/../..' . '/app/Http/Middleware/CheckForMaintenanceMode.php',
