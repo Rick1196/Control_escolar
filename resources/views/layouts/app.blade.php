@@ -16,46 +16,92 @@
     </head>
     <body>
         <div id="app">
-            <nav class="navbar has-shadow">
-                <div class="container">
-                    <div class="navbar-brand">
-                        <a href="{{ url('/') }}" class="navbar-item">{{ config('app.name', 'Laravel') }}</a>
-
-                        <div class="navbar-burger burger" data-target="navMenu">
-                            <span></span>
-                            <span></span>
-                            <span></span>
+            <section class="hero is-medium has-carousel">
+                <div class="hero-carousel carousel-animated carousel-animate-fade">
+                    <div class='carousel-container'>
+                        <div class='carousel-item has-background is-active'>
+                            <img class="is-background" src="{{url('images/galeriaInicio1.jpg')}}" alt="ap1" />
+                        </div>
+                        <div class='carousel-item has-background'>
+                            <img class="is-background" src="{{url('images/galeriaInicio2.jpg')}}" alt="ap2" />
+                        </div>
+                        <div class='carousel-item has-background'>
+                            <img class="is-background" src="{{url('images/galeriaInicio3.jpg')}}" alt="ap3" />
+                        </div>
+                        <div class='carousel-item has-background'>
+                            <img class="is-background" src="{{url('images/galeriaInicio4.jpg')}}" alt="ap4" />
                         </div>
                     </div>
-
-                    <div class="navbar-menu" id="navMenu">
-                        <div class="navbar-start"></div>
-
-                        <div class="navbar-end">
-                            @if (Auth::guest())
-                                <a class="navbar-item " href="{{ route('login') }}">Login</a>
-                                <a class="navbar-item " href="{{ route('register') }}">Register</a>
-                            @else
-                                <div class="navbar-item has-dropdown is-hoverable">
-                                    <a class="navbar-link" href="#">{{ Auth::user()->name }}</a>
-
-                                    <div class="navbar-dropdown">
-                                        <a class="navbar-item" href="{{ route('logout') }}"
-                                           onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
-
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                              style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </div>
-                                </div>
-                            @endif
+                    <div class="carousel-navigation is-overlay">
+                        <div class="carousel-nav-left">
+                            <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                        </div>
+                        <div class="carousel-nav-right">
+                            <i class="fa fa-chevron-right" aria-hidden="true"></i>
                         </div>
                     </div>
                 </div>
-            </nav>
+                <div class="hero-head">
+                    <nav class="navbar is-transparent">
+                        <div class="container">
+                            <div class="navbar-brand">
+                                <a class="navbar-item">
+                                    SCE
+                                </a>
+                                <span class="navbar-burger burger" data-target="navbarMenuHeroA">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </span>
+                            </div>
+                            <div id="navbarMenuHeroA" class="navbar-menu">
+                                <div class="navbar-end">
+                                    @if (Auth::guest())
+                                        <a class="navbar-item " href="{{ route('login') }}">Login</a>
+                                        <a class="navbar-item " href="{{ route('register') }}">Register</a>
+                                    @else
+                                        <div class="navbar-item has-dropdown is-hoverable">
+                                            <a class="navbar-link" href="#">{{ Auth::user()->name }}</a>
+
+                                            <div class="navbar-dropdown">
+                                                <a class="navbar-item" href="{{ route('logout') }}"
+                                                   onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                                                    Logout
+                                                </a>
+
+                                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                                      style="display: none;">
+                                                    {{ csrf_field() }}
+                                                </form>
+                                            </div>
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+                <div class="hero-body has-text-centered">
+                    <div class="columns is-mobile is-centered">
+                        <div class="column is-half is-narrow">
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-foot">
+                    <nav class="tabs is-boxed is-fullwidth">
+                        <div class="container">
+                            <ul>
+                                <li class="is-active"><a>Overview</a></li>
+                                <li><a class="has-text-white">Modifiers</a></li>
+                                <li><a class="has-text-white">Grid</a></li>
+                                <li><a class="has-text-white">Elements</a></li>
+                                <li><a class="has-text-white">Components</a></li>
+                                <li><a class="has-text-white">Layout</a></li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </section>
             @yield('content')
         </div>
 

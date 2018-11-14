@@ -1,62 +1,60 @@
 @extends('layouts.app')
 @section('content')
-                <section class="hero is-medium has-carousel">
-                    <div class="hero-carousel carousel-animated carousel-animate-fade">
-                        <div class='carousel-container'>
-                            <div class='carousel-item has-background is-active'>
-                                <img class="is-background" src="{{url('images/galeriaInicio1.jpg')}}" alt="ap1" />
-                            </div>
-                            <div class='carousel-item has-background'>
-                                <img class="is-background" src="{{url('images/galeriaInicio2.jpg')}}" alt="ap2" />
-                            </div>
-                            <div class='carousel-item has-background'>
-                                <img class="is-background" src="{{url('images/galeriaInicio3.jpg')}}" alt="ap3" />
-                            </div>
-                            <div class='carousel-item has-background'>
-                                <img class="is-background" src="{{url('images/galeriaInicio4.jpg')}}" alt="ap4" />
-                            </div>
-                        </div>
-                        <div class="carousel-navigation is-overlay">
-                            <div class="carousel-nav-left">
-                                <i class="fa fa-chevron-left" aria-hidden="true"></i>
-                            </div>
-                            <div class="carousel-nav-right">
-                                <i class="fa fa-chevron-right" aria-hidden="true"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="hero-body has-text-centered">
-                        <div class="columns is-mobile is-centered">
-                            <div class="column is-half is-narrow">
-                                <div class="field has-addons">
-                                    <div class="control is-expanded">
-                                        <input class="input" type="text" placeholder="Find a repository">
-                                    </div>
-                                    <div class="control">
-                                        <a class="button is-info">
-                                            Search
-                                        </a>
-                                    </div>
+
+    <section>
+        @if (Auth::guest())
+            <section>
+                <div class="container">
+                    <div class="tile is-ancestor">
+                        <div class="tile is-vertical is-8">
+                            <div class="tile">
+                                <div class="tile is-parent is-vertical">
+                                    <article class="tile is-child notification is-primary">
+                                        <p class="title">Vertical...</p>
+                                        <p class="subtitle">Top tile</p>
+                                    </article>
+                                    <article class="tile is-child notification is-warning">
+                                        <p class="title">...tiles</p>
+                                        <p class="subtitle">Bottom tile</p>
+                                    </article>
+                                </div>
+                                <div class="tile is-parent">
+                                    <article class="tile is-child notification is-info">
+                                        <p class="title">Middle tile</p>
+                                        <p class="subtitle">With an image</p>
+                                        <figure class="image is-4by3">
+                                            <img src="https://bulma.io/images/placeholders/640x480.png">
+                                        </figure>
+                                    </article>
                                 </div>
                             </div>
+                            <div class="tile is-parent">
+                                <article class="tile is-child notification is-danger">
+                                    <p class="title">Wide tile</p>
+                                    <p class="subtitle">Aligned with the right tile</p>
+                                    <div class="content">
+                                        <!-- Content -->
+                                    </div>
+                                </article>
+                            </div>
+                        </div>
+                        <div class="tile is-parent">
+                            <article class="tile is-child notification is-success">
+                                <div class="content">
+                                    <p class="title">Tall tile</p>
+                                    <p class="subtitle">With even more content</p>
+                                    <div class="content">
+                                        <!-- Content -->
+                                    </div>
+                                </div>
+                            </article>
                         </div>
                     </div>
-                    <div class="hero-foot">
-                        <nav class="tabs is-boxed is-fullwidth">
-                            <div class="container">
-                                <ul>
-                                    <li class="is-active"><a>Overview</a></li>
-                                    <li><a class="has-text-white">Modifiers</a></li>
-                                    <li><a class="has-text-white">Grid</a></li>
-                                    <li><a class="has-text-white">Elements</a></li>
-                                    <li><a class="has-text-white">Components</a></li>
-                                    <li><a class="has-text-white">Layout</a></li>
-                                </ul>
-                            </div>
-                        </nav>
-                    </div>
-                </section>
-    <section>
-        <roles-component></roles-component>
+                </div>
+            </section>
+        @else
+            <h1>Bienvenido</h1>
+
+        @endif
     </section>
 @endsection
