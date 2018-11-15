@@ -45,7 +45,7 @@
                     <nav class="navbar is-transparent">
                         <div class="container">
                             <div class="navbar-brand">
-                                <a class="navbar-item">
+                                <a class="navbar-item" href="{{ url('/') }}">
                                     SCE
                                 </a>
                                 <span class="navbar-burger burger" data-target="navbarMenuHeroA">
@@ -87,24 +87,30 @@
                         </div>
                     </div>
                 </div>
-                <div class="hero-foot">
-                    <nav class="tabs is-boxed is-fullwidth">
-                        <div class="container">
-                            <ul>
-                                <li class="is-active"><a>Overview</a></li>
-                                <li><a class="has-text-white">Modifiers</a></li>
-                                <li><a class="has-text-white">Grid</a></li>
-                                <li><a class="has-text-white">Elements</a></li>
-                                <li><a class="has-text-white">Components</a></li>
-                                <li><a class="has-text-white">Layout</a></li>
-                            </ul>
-                        </div>
-                    </nav>
-                </div>
+                @if (Auth::guest())
+                    <div class="hero-foot">
+                        <nav class="tabs is-boxed is-fullwidth">
+                            <div class="container">
+                                <ul>
+                                    <li class="has-text-white" ><a href="{{ route('login') }}">Iniciar sesion</a></li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                @elseif(Auth::user()->hasRole('admin'))
+                    <nav-slider-adm></nav-slider-adm>
+                @endif
             </section>
             @yield('content')
         </div>
-
+        <footer class="footer">
+            <div class="content has-text-centered">
+                <p>
+                    <strong>SCE</strong>Jeremy Thomas</a>. The source code is licensed
+                    <a href="http://www.uaemex.mx">UAEMEX</a>.
+                </p>
+            </div>
+        </footer>
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}"></script>
     </body>

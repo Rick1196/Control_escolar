@@ -53,8 +53,15 @@
                 </div>
             </section>
         @else
-            <h1>Bienvenido</h1>
-
+            @if(Auth::user()->hasRole('admin'))
+                <h1>Admin</h1>
+            @elseif(Auth::user()->hasRole('alumno'))
+                    <h1>Estudiante</h1>
+            @elseif(Auth::user()->hasRole('profesor'))
+                <h1>Profesor</h1>
+            @else
+                    <h1>Otro</h1>
+            @endif
         @endif
     </section>
 @endsection
