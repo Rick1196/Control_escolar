@@ -1,20 +1,40 @@
 <template>
+    <div>
     <div class="hero-foot">
         <nav class="tabs is-boxed is-fullwidth">
             <div class="container">
                 <ul>
-                    <li class="has-text-white"><a>Registro</a></li>
-                    <li><a class="has-text-white">Notificaciones</a></li>
-                    <li><a class="has-text-white">Reportes</a></li>
-                    <li><a class="has-text-white">Exportaciones</a></li>
+                    <li><a class="has-text-white" v-on:click="usuarios()">Usuarios</a></li>
+                    <li><a class="has-text-white" v-on:click="notificaciones()">Notificaciones</a></li>
+                    <li><a class="has-text-white" v-on:click="reportes()">Reportes</a></li>
+                    <li><a class="has-text-white" v-on:click="importar()">Importaciones</a></li>
                 </ul>
             </div>
         </nav>
     </div>
-
-    <div class="container">
-        <section>
-            <h1>lakjsjdlakjsd</h1>
-        </section>
     </div>
 </template>
+<script>
+    export default {
+        data: function(){
+            return{
+                renderUsers: false
+            };
+        },
+        methods:{
+            usuarios() {
+                this.$root.$emit('usuarios');
+            },
+            notificaciones(){
+                this.$root.$emit('notificaciones');
+            },
+            reportes(){
+                this.$root.$emit('reportes');
+            },
+            importar(){
+                this.$root.$emit('importar');
+            }
+
+        },
+    }
+</script>

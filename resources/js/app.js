@@ -19,6 +19,7 @@ Vue.component('example-component', require('./components/ExampleComponent.vue'))
 
 Vue.component('roles-component', require('./components/RolesGetData.vue'));
 Vue.component('nav-slider-adm', require('./components/NavAdmn.vue'));
+Vue.component('adm-view', require('./components/AdmView.vue'));
 const app = new Vue({
     el: '#app'
 });

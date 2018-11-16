@@ -58,7 +58,7 @@
             @elseif(Auth::user()->hasRole('alumno'))
                     <h1>Estudiante</h1>
             @elseif(Auth::user()->hasRole('profesor'))
-                <h1>Profesor</h1>
+                <adm-view></adm-view>
             @else
                     <h1>Otro</h1>
             @endif

@@ -45,7 +45,7 @@
                     <nav class="navbar is-transparent">
                         <div class="container">
                             <div class="navbar-brand">
-                                <a class="navbar-item" href="{{ url('/') }}">
+                                <a class="navbar-item has-text-white" href="{{ url('/') }}">
                                     SCE
                                 </a>
                                 <span class="navbar-burger burger" data-target="navbarMenuHeroA">
@@ -57,16 +57,15 @@
                             <div id="navbarMenuHeroA" class="navbar-menu">
                                 <div class="navbar-end">
                                     @if (Auth::guest())
-                                        <a class="navbar-item " href="{{ route('login') }}">Login</a>
-                                        <a class="navbar-item " href="{{ route('register') }}">Register</a>
+                                        <a class="navbar-item has-text-white " href="{{ route('login') }}">Iniciar sesion</a>
                                     @else
                                         <div class="navbar-item has-dropdown is-hoverable">
-                                            <a class="navbar-link" href="#">{{ Auth::user()->name }}</a>
+                                            <a class="navbar-link has-text-white" href="#">{{ Auth::user()->name }}</a>
 
                                             <div class="navbar-dropdown">
                                                 <a class="navbar-item" href="{{ route('logout') }}"
                                                    onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                                                    Logout
+                                                    Cerrar sesion
                                                 </a>
 
                                                 <form id="logout-form" action="{{ route('logout') }}" method="POST"
@@ -97,7 +96,7 @@
                             </div>
                         </nav>
                     </div>
-                @elseif(Auth::user()->hasRole('admin'))
+                @elseif(Auth::user()->hasRole('profesor'))
                     <nav-slider-adm></nav-slider-adm>
                 @endif
             </section>
