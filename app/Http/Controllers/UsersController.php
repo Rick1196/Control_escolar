@@ -63,8 +63,9 @@ class UsersController extends Controller
     }
 
     function get_num_st(){
-        $cuenta = DB::table('students')->count();
-        return $cuenta;
+        $als = DB::select('select count(*) cantidad from users inner join role_user user2 on users.id = user2.user_id inner join roles r on user2.role_id = r.id where r.name = ?',['alumno']);
+        $als = $als[0]->cantidad;
+        return $als;
     }
 
     function get_num_users(){
@@ -73,8 +74,21 @@ class UsersController extends Controller
     }
 
     function get_num_tch(){
-        $cuenta = DB::table('teachers')->count();
-        return $cuenta;
+        $als = DB::select('select count(*) cantidad from users inner join role_user user2 on users.id = user2.user_id inner join roles r on user2.role_id = r.id where r.name = ?',['profesor']);
+        $als = $als[0]->cantidad;
+        return $als;
+    }
+
+    function get_users(Request $data){
+        $tipo = $data['tipo'];
+        if($tipo != 'todos'){
+            $res = DB::select('select users.id, users.name, users.email from users inner join role_user user2 on users.id = user2.user_id inner join roles r on user2.role_id = r.id where r.name = ?',[$tipo]);
+        }
+        else{
+            $res = DB::select('select users.id, users.name, users.email from users inner join role_user user2 on users.id = user2.user_id inner join roles r on user2.role_id = r.id');
+        }
+        return $res;
+
     }
 
     function get_users_all(){
@@ -88,6 +102,7 @@ class UsersController extends Controller
         $us = DB::select('select * from users where email = ?',[$mail]);
         return $us;
     }
+
 
     function delete_user(Request $data){
         $id = $data['id'];

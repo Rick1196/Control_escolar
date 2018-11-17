@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\User;
-use App\Role;
+use SCE\User;
+use SCE\Role;
 
 class UserTableSeeder extends Seeder
 {
@@ -13,21 +13,87 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
-            $role_user = Role::where('name', 'user')->first();
-            $role_admin = Role::where('name', 'admin')->first();
+            $alumno = Role::where('name', 'alumno')->first();
+            $admin = Role::where('name', 'admin')->first();
+            $administrativo = Role::where('name', 'administrativo')->first();
+            $profesor = Role::where('name', 'profesor')->first();
+
 
             $user = new User();
-            $user->name = 'User';
-            $user->email = 'user@example.com';
+            $user->name = 'ricardo.admin';
+            $user->email = 'ricardo.admin@gmail.com';
             $user->password = bcrypt('secret');
             $user->save();
-            $user->roles()->attach($role_user);
+            $user->roles()->attach($admin);
 
             $user = new User();
-            $user->name = 'Admin';
-            $user->email = 'admin@example.com';
+            $user->name = 'ricardo.profesor';
+            $user->email = 'ricardo.profesor@gmail.com';
             $user->password = bcrypt('secret');
             $user->save();
-            $user->roles()->attach($role_admin);
+            $user->roles()->attach($profesor);
+
+            $user = new User();
+            $user->name = 'ricardo.adminis';
+            $user->email = 'ricardo.adminis@gmail.com';
+            $user->password = bcrypt('secret');
+            $user->save();
+            $user->roles()->attach($administrativo);
+
+            $user = new User();
+            $user->name = 'abril.adminis';
+            $user->email = 'abril.adminis@gmail.com';
+            $user->password = bcrypt('secret');
+            $user->save();
+            $user->roles()->attach($administrativo);
+
+            $user = new User();
+            $user->name = 'ricardo.alumno';
+            $user->email = 'ricardo.alumno@gmail.com';
+            $user->password = bcrypt('secret');
+            $user->save();
+            $user->roles()->attach($alumno);
+
+            $user = new User();
+            $user->name = 'abril.admin';
+            $user->email = 'abril.admin@gmail.com';
+            $user->password = bcrypt('secret');
+            $user->save();
+            $user->roles()->attach($admin);
+
+            $user = new User();
+            $user->name = 'abril.profesor';
+            $user->email = 'abril.profesor@gmail.com';
+            $user->password = bcrypt('secret');
+            $user->save();
+            $user->roles()->attach($profesor);
+
+            $user = new User();
+            $user->name = 'abril.alumno';
+            $user->email = 'abril.alumno@gmail.com';
+            $user->password = bcrypt('secret');
+            $user->save();
+            $user->roles()->attach($alumno);
+
+            /*
+            for ($i = 0; $i < 20; $i++){
+
+                $user = new User();
+                $user->name = 'profesor'.$i;
+                $user->email = 'profesor'.$i.'@gmail.com';
+                $user->password = bcrypt('secret');
+                $user->save();
+                $user->roles()->attach($profesor);
+            }
+
+            for ($i = 0; $i < 50; $i++){
+
+                $user = new User();
+                $user->name = 'alumno'.$i;
+                $user->email = 'alumno'.$i.'@gmail.com';
+                $user->password = bcrypt('secret');
+                $user->save();
+                $user->roles()->attach($alumno);
+            }*/
     }
 }

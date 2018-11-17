@@ -53,12 +53,14 @@
                 </div>
             </section>
         @else
-            @if(Auth::user()->hasRole('admin'))
-                <h1>Admin</h1>
+            @if(Auth::user()->hasRole('profesor'))
+                <h1>Profesor</h1>
             @elseif(Auth::user()->hasRole('alumno'))
                     <h1>Estudiante</h1>
-            @elseif(Auth::user()->hasRole('profesor'))
+            @elseif(Auth::user()->hasRole('admin'))
                 <adm-view></adm-view>
+            @elseif(Auth::user()->hasRole('administrativo'))
+                <direc-view></direc-view>
             @else
                     <h1>Otro</h1>
             @endif

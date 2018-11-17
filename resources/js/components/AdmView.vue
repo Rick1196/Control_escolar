@@ -196,6 +196,17 @@
                                         </a>
                                     </div>
                                 </div>
+                                <div class="field">
+                                    <div class="control">
+                                        <div class="select is-primary">
+                                            <select v-model="buscados" v-on:change="getUsers()">
+                                                <option :value="'todos'">Todos</option>
+                                                <option  v-for="rol in roles" :value="rol.name" :key="rol.id">{{rol.description}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </section>
                             <section style="overflow-y: scroll; max-height: 400px;">
                                 <table class="table">
@@ -289,6 +300,7 @@
                 nSt:0,
                 usuarios:[],
                 search:'',
+                buscados:'',
             };
         },
         mounted(){
@@ -335,6 +347,7 @@
                 this.importacionRender = false;
                 this.limpiarReg();
                 this.getAlumnosAll();
+                this.getRoles();
             },
             importacion(){
                 this.listadoRender = false;
@@ -352,6 +365,17 @@
             getNumU(){
                 axios.get('api/get_num_users').then(response => {
                     this.nUsers = response.data;
+                })
+                    .catch(error => {
+                        console.log(error.response)
+                    });
+            },
+            getUsers(){
+                axios.post('api/get_users',{
+                    tipo:this.buscados
+                }).then(response => {
+                    this.usuarios = response.data;
+                    console.log(response);
                 })
                     .catch(error => {
                         console.log(error.response)
@@ -449,6 +473,9 @@
                         curp:this.students.curp
                     }).then(response => {
                         this.limpiarReg();
+                        this.getNumS();
+                        this.getNumT();
+                        this.getNumU();
                     })
                         .catch(error => {
                             console.log(error.response)
@@ -470,6 +497,9 @@
                         sal:this.worker.salary
                     }).then(response => {
                         this.limpiarReg();
+                        this.getNumS();
+                        this.getNumT();
+                        this.getNumU();
                     })
                         .catch(error => {
                             console.log(error.response)

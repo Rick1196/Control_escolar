@@ -96,9 +96,11 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="g-recaptcha" data-sitekey="6Ld54XQUAAAAAPxHo4Oo_kSET4qswT6A_Snndm4d"></div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
 @endsection

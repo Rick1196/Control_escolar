@@ -14,6 +14,7 @@
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     </head>
+
     <body>
         <div id="app">
             <section class="hero is-medium has-carousel">
@@ -96,8 +97,10 @@
                             </div>
                         </nav>
                     </div>
-                @elseif(Auth::user()->hasRole('profesor'))
+                @elseif(Auth::user()->hasRole('admin'))
                     <nav-slider-adm></nav-slider-adm>
+                @elseif(Auth::user()->hasRole('directivo') or Auth::user()->hasRole('administrativo') )
+                    <nav-slider-dir></nav-slider-dir>
                 @endif
             </section>
             @yield('content')
@@ -105,7 +108,7 @@
         <footer class="footer">
             <div class="content has-text-centered">
                 <p>
-                    <strong>SCE</strong>Jeremy Thomas</a>. The source code is licensed
+                    <strong>SCE</strong>Ricardo Perez | Abril Polo</a>. The source code is licensed
                     <a href="http://www.uaemex.mx">UAEMEX</a>.
                 </p>
             </div>
