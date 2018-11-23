@@ -14,7 +14,7 @@ class GroupsController extends Controller
             $grupos = DB::select('select groups.id gid,groups.subject sid ,t.id tid, groups.identifier, u.email, s2.name subject from groups inner join teachers t on groups.teacher = t.id inner join workers w2 on t.worker_id = w2.id inner join users u on w2.user_info = u.id inner join subjects s2 on groups.subject = s2.id');
         }
         else{
-            $groups = DB::select('select groups.id,groups.subject, groups.identifier, u.email, s2.name from groups inner join teachers t on groups.teacher = t.id inner join workers w2 on t.worker_id = w2.id inner join users u on w2.user_info = u.id inner join subjects s2 on groups.subject = s2.id inner join group_period period2 on groups.id = period2."group" inner join periods p on period2.period = p.id where p."desc"= ?',[$per]);
+            $grupos = DB::select('select groups.id,groups.subject, groups.identifier, u.email, s2.name subject  from groups inner join teachers t on groups.teacher = t.id inner join workers w2 on t.worker_id = w2.id inner join users u on w2.user_info = u.id inner join subjects s2 on groups.subject = s2.id inner join group_period period2 on groups.id = period2."group" inner join periods p on period2.period = p.id where p."desc"= ?',[$per]);
         }
         return $grupos;
     }
@@ -48,6 +48,31 @@ class GroupsController extends Controller
         DB::insert('insert into segments_group(segment, "group") select segments.id, ? from segments',[$id]);
         DB::insert('insert into group_period("group", period) values(?,?)',[$id,$per]);
 
+    }
+
+    public function get_als_gr(Request $data){
+        $gr = $data['gr'];
+        $res = DB::select('select student_group_period.student,student_group_period.id pgs, mat, grade from student_group_period inner join students s2 on student_group_period.student = s2.id inner join group_period period on student_group_period.group_period = period.id where period."group" = ?',[$gr]);
+        return $res;
+    }
+
+    public function delete_al_gr(Request $data){
+        $la = $data['id'];
+        DB::delete('delete from student_group_period where student =?',[$la]);
+    }
+
+    public function post_std_gr(Request $data){
+        $al = $data['al'];
+        $gr = $data['gr'];
+        $per = $data['per'];
+        $grpr = DB::select('select id from group_period where "group" = ?',[$gr]);
+        $grpr = $grpr[0]->id;
+        DB::insert('insert into student_group_period(student,grade, group_period) values(?,0,?)',[$al,$grpr]);
+    }
+
+    public function  get_all_students(){
+        $res = DB::select('select * from students order by mat');
+        return $res;
     }
 
 }

@@ -1,5 +1,9 @@
 <template>
     <div>
+        <div class="notification is-success" v-if="errores">
+            <button class="delete" v-on:click="clearErr"></button>
+            <strong>{{mensajes}}</strong>
+        </div>
         <div v-if="renderUsers">
             <div class="section">
                 <section>
@@ -198,6 +202,9 @@
                                 </div>
                                 <div class="field">
                                     <div class="control">
+                                        <div class="control">
+                                            <p>Tipo de usuario</p>
+                                        </div>
                                         <div class="select is-primary">
                                             <select v-model="buscados" v-on:change="getUsers()">
                                                 <option :value="'todos'">Todos</option>
@@ -209,52 +216,98 @@
 
                             </section>
                             <section style="overflow-y: scroll; max-height: 400px;">
-                                <table class="table">
-                                    <thead>
-                                    <tr>
-                                        <th><abbr title="#"></abbr>#</th>
-                                        <th><abbr title="Correo"></abbr>Direccion de correo</th>
-                                        <th><abbr title="Correo"></abbr>Nombre de usuario</th>
-                                        <th><abbr title="Acciones">Acciones</abbr></th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr v-for="(usuario,num) in usuarios">
-                                        <th>{{num}}</th>
-                                        <td>{{usuario.email}}</td>
-                                        <td>{{usuario.name}}</td>
-                                        <td><button v-on:click="deleteU(usuario.id)" class="button is-danger">Eliminar</button></td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </section>
-                        </div>
-                    </div>
-                    <div class="column" v-if="importacionRender">
-
-                    </div>
-                    <div v-if="renderNotificaciones">
-                        <div class="section">
-                            <section>
-
-                            </section>
-                        </div>
-                    </div>
-                    <div v-if="renderReportes">
-                        <div class="section">
-                            <section>
-
-                            </section>
-                        </div>
-                    </div>
-                    <div v-if="renderImportar">
-                        <div class="section">
-                            <section>
-
+                                <center>
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th><abbr title="#"></abbr>#</th>
+                                            <th><abbr title="Correo"></abbr>Direccion de correo</th>
+                                            <th><abbr title="Correo"></abbr>Nombre de usuario</th>
+                                            <th><abbr title="Acciones">Acciones</abbr></th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr v-for="(usuario,num) in usuarios">
+                                            <th>{{num}}</th>
+                                            <td>{{usuario.email}}</td>
+                                            <td>{{usuario.name}}</td>
+                                            <td><button v-on:click="deleteU(usuario.id)" class="button is-danger">Eliminar</button></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </center>
                             </section>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="column" v-if="importacionRender">
+
+        </div>
+        <div v-if="renderNotificaciones">
+            <div class="section">
+                <section>  
+                    <div class="field">
+                        <label class="label">Titulo</label>
+                        <div class="control">
+                            <input class="input" v-model="notificacion.titulo" type="text" placeholder="Titulo de la notificacion">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label">Cuerpo de la notificacion</label>
+                        <div class="control">
+                            <textarea class="textarea" v-model="notificacion.texto" placeholder="Cuerpo de la notificacion"></textarea>
+                        </div>
+                    </div>
+                    <div class="field is-grouped">
+                    <div class="control">
+                        <button class="button is-link" v-on:click="postNotificacion">Registrar</button>
+                    </div>
+                    <div class="control">
+                        <button class="button is-text" v-on:click="clearNot">Cancelar</button>
+                    </div>
+                    </div>
+                </section>
+            </div>
+            <div class="section">
+                <section style="overflow-y: scroll; max-height: 400px;">
+                    <center>
+                        <table class="table">
+                            <thead>
+                                <th><abbr title="Numero">#</abbr></th>
+                                <th><abbr title="Titulo">Titulo</abbr></th>
+                                <th><abbr title="Texto">Texto</abbr></th>
+                                <th><abbr title="Acciones">Acciones</abbr></th>
+                            </thead>
+                            <tbody>
+                                <tr v-for="(not,num) in notificaciones">
+                                    <th>{{num}}</th>
+                                    <td><input class="input" type="text"  v-model="not.titulo"></td>
+                                    <td><input class="textarea" type="text"  v-model="not.texto" ></td>
+                                    <td>
+                                        <button class="button is-link is-rounded" v-on:click="upDateNot(not.titulo,not.texto)">Actualizar</button>
+                                        <button class="button is-danger is-rounded" v-on:click="delNot(not.id)">Eliminar</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </center>
+                </section>
+            </div>
+        </div>
+        <div v-if="renderReportes">
+            <div class="section">
+                <section>
+
+                </section>
+            </div>
+        </div>
+        <div v-if="renderImportar">
+            <div class="section">
+                <section>
+
+                </section>
             </div>
         </div>
     </div>
@@ -301,6 +354,13 @@
                 usuarios:[],
                 search:'',
                 buscados:'',
+                mensajes:'',
+                errores: false,
+                notificaciones:[],
+                notificacion:{
+                    titulo:'',
+                    texto:'',
+                }
             };
         },
         mounted(){
@@ -310,27 +370,28 @@
             this.getNumU();
             this.$root.$on('usuarios',() => {
                 this.renderUsers =true;
-                renderImportar= false;
-                renderNotificaciones=false;
-                renderReportes= false;
+                this.renderImportar= false;
+                this.renderNotificaciones=false;
+                this.renderReportes= false;
             });
             this.$root.$on('notificaciones',() => {
                 this.renderUsers =false;
-                renderImportar= false;
-                renderNotificaciones=true;
-                renderReportes= false;
+                this.renderImportar= false;
+                this.renderNotificaciones=true;
+                this.renderReportes= false;
+                this.getNotificaciones();
             });
             this.$root.$on('reportes',() => {
                 this.renderUsers =false;
-                renderImportar= false;
-                renderNotificaciones=false;
-                renderReportes= true;
+                this.renderImportar= false;
+                this.renderNotificaciones=false;
+                this.renderReportes= true;
             });
             this.$root.$on('importar',() => {
                 this.renderUsers =false;
-                renderImportar= true;
-                renderNotificaciones=false;
-                renderReportes= false;
+                this.renderImportar= true;
+                this.renderNotificaciones=false;
+                this.renderReportes= false;
             })
         },
         methods:{
@@ -427,6 +488,13 @@
                         });
                 }
             },
+            getNotificaciones(){
+                axios.get('api/get_notificaciones').then(response => {
+                    this.notificaciones = response.data;
+                }).catch(error => {
+                        console.log(error.response)
+                });
+            },
             deleteU(id){
                 axios.post('api/delete_user',{
                     id:id
@@ -435,6 +503,8 @@
                     this.getNumS();
                     this.getNumT();
                     this.getNumU();
+                    this.mensajes = 'Usuario eliminado';
+                    this.errores = true;
                 })
                 .catch(error => {
                     console.log(error.response)
@@ -476,6 +546,8 @@
                         this.getNumS();
                         this.getNumT();
                         this.getNumU();
+                        this.mensajes = 'Registro exitoso';
+                        this.errores = true;
                     })
                         .catch(error => {
                             console.log(error.response)
@@ -500,12 +572,58 @@
                         this.getNumS();
                         this.getNumT();
                         this.getNumU();
+                        this.mensajes = 'Registro exitoso';
+                        this.errores = true;
                     })
                         .catch(error => {
                             console.log(error.response)
                         });
                 }
-            }
+            },
+            clearErr(){
+                this.mensajes = '';
+                this.errores = false;
+            },
+            postNotificacion(){
+                axios.post('api/post_notificacion',{
+                        titulo:this.notificacion.titulo,
+                        texto:this.notificacion.texto
+                    }).then(response => {
+                        this.errores = true;
+                        this.mensajes = 'Notificacion registrada';
+                        this.getNotificaciones();
+                    }).catch(error => {
+                            console.log(error.response)
+                    });
+            },
+            clearNot(){
+                this.notificacion.titulo = '';
+                this.notificacion.texto = '';
+            },
+            upDateNot(titulo,texto){
+                axios.post('api/put_notificacion',{
+                        titulo:titulo,
+                        texto:texto
+                    }).then(response => {
+                        this.errores = true;
+                        this.mensajes = 'Notificacion actualizada';
+                        this.getNotificaciones();
+                    }).catch(error => {
+                            console.log(error.response)
+                    });
+            },
+            delNot(id){
+                axios.post('api/delete_notificacion',{
+                        id:id
+                    }).then(response => {
+                        this.errores = true;
+                        this.mensajes = 'Notificacion eliminada';
+                        this.getNotificaciones();
+                    }).catch(error => {
+                            console.log(error.response)
+                    });
+            },
+
         },
         watch:{
             "usuario.tipo.name": function(){

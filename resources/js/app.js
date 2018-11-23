@@ -22,6 +22,7 @@ Vue.component('nav-slider-adm', require('./components/NavAdmn.vue'));
 Vue.component('adm-view', require('./components/AdmView.vue'));
 Vue.component('nav-slider-dir',require('./components/NavDirec.vue'));
 Vue.component('direc-view',require('./components/DirecView.vue'));
+Vue.component('main-view',require('./components/MainView.vue'));
 const app = new Vue({
     el: '#app'
 });

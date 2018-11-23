@@ -4,8 +4,6 @@ namespace SCE\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
-use SCE\User;
-use SCE\Role;
 
 
 class UsersController extends Controller
@@ -21,37 +19,38 @@ class UsersController extends Controller
         $rol = $data['rol'];
         $name_user = $data['name_user'];
         $email = $data['email'];
-        $password = $data['password'];
-        $p_name = $data['p_name'];
-        $p_last = $data['p_last'];
-        $age = $data['age'];
-        $add = $data['add'];
+        $password = $data['pass'];
+        $tipo = DB::select('SELECT id from roles where name  = ?',[$rol]);
+        $tipo = $tipo[0]->id;
+        $pass = bcrypt($password);
+        DB::insert('INSERT into users(name,email,password,created_at,updated_at) values(?,?,?,now(),now())',[$name_user,$email,$pass]);
+        $usr = DB::select('SELECT id  from users where name = ?',[$name_user]);
+        $usr = $usr[0]->id;
+        DB::insert('INSERT into role_user(role_id,user_id,created_at,updated_at)  values(?,?,now(),now())',[$tipo,$usr]);
+        $nombre = $data['p_name'];
+        $apellido = $data['p_last'];
+        $edad = $data['age'];
+        $genero = $data['gen'];
         $phone = $data['phone'];
-        $gen = $data['gen'];
-        $role_user = Role::where('name', $rol)->first();
-        $user = new User();
-        $user->name = $name_user;
-        $user->email = $email;
-        $user->password = bcrypt($password);
-        $user->save();
-        $user->roles()->attach($role_user);
-        $nuevo = DB::table('users')->where('name', $name_user)->value('id');
-        $id = DB::table('personal_information')->insertGetId(
-            ['name' => $p_name,'last_name' => $p_last, 'age' => $age, 'address' => $add,'phone_number' => $phone,
-                'gender' => $gen, 'user_info'=>$nuevo
-            ]
-        );
-        if($rol === "alumno"){
+        $addr = $data['add'];
+        DB::insert('INSERT into personal_information(name,last_name,age,address,phone_number,user_info,gender) values(?,?,?,?,?,?,?)',[$nombre,$apellido,$edad,$addr,$phone,$usr,$genero]);
+        if($rol === 'alumno'){
             $curp = $data['curp'];
-            $this->post_al($curp,$id);
+            $this->post_al($curp,$usr);
         }
         else{
             $rfc = $data['rfc'];
-            $salary = $data['sal'];
-            $worker = DB::table('workers')->insertGetId( ['rfc' => $rfc,'salary' => $salary, 'person_info' => $id]);
-            if($rol === "profesor"){
-                DB::table('teachers')->insert(['worker_id' => $worker]);
-            }
+            $salario = $data['sal'];
+            $this->post_worker($rfc,$salario,$rol,$usr);
+        }
+    }
+
+    function post_worker($rfc,$salario,$tipo,$usuario){
+        DB::table('workers')->insert(['rfc' => $rfc,'salary' => $salario, 'user_info'=>$usuario]);
+        if($tipo === 'profesor'){
+            $id = DB::select('SELECT id from workers where rfc = ?',[$rfc]);
+            $id = $id[0]->id;
+            DB::table('teachers')->insert(['worker_id' => $id]);
         }
     }
 
@@ -59,7 +58,7 @@ class UsersController extends Controller
         $mat = substr($curp,0,11);
         $cuenta = DB::table('students')->count();
         $mat = $mat.$cuenta;
-        DB::table('students')->insert(['curp' => $curp,'mat' => $mat, 'personal_information'=>$info]);
+        DB::table('students')->insert(['curp' => $curp,'mat' => $mat, 'user_info'=>$info]);
     }
 
     function get_num_st(){
@@ -108,6 +107,35 @@ class UsersController extends Controller
         $id = $data['id'];
         DB::delete('delete from users where id = ?',[$id]);
         return $id;
+    }
+
+    function get_notificaciones(){
+        $nots = DB::select('SELECT * from notificaciones order by fecha asc');
+        return $nots;
+    }
+
+    function post_notificacion(Request $data){
+        $texto = $data['texto'];
+        $titulo = $data['titulo'];
+        DB::insert('INSERT into notificaciones(titulo, texto, fecha) values(?,?, now())',[$titulo,$texto]);
+        $cuenta = DB::select('SELECT count(*) cuenta from notificaciones');
+        $cuenta = $cuenta[0]->cuenta;
+        if($cuenta > 30){
+            $eliminar = DB::select('SELECT id  from notificaciones order by fecha desc');
+            $eliminar = $eliminar[0]->id;
+            DB::delete('DELETE from notificaciones where id = ?', [$eliminar]);
+        }
+    }
+
+    function put_notificacion(Request $data){
+        $texto = $data['texto'];
+        $titulo = $data['titulo'];
+        DB::update('UPDATE notificaciones set titulo = ?, texto = ?',[$titulo,$texto]);
+    }
+
+    function delete_notificacion(Request $data){
+        $id = $data['id'];
+        DB::delete('DELETE from notificaciones where id = ?',[$id]);
     }
 
 

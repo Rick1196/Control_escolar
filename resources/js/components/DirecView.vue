@@ -32,7 +32,7 @@
                             </td>
                             <td>
                                 <div class="select">
-                                    <select v-model="grupo.periodo" class="select">
+                                    <select v-model="grupo.periodo"  class="select">
                                         <option  v-for="per in periodos" :value="per.id" :key="per.id">{{per.desc}}</option>
                                     </select>
                                 </div>
@@ -83,7 +83,30 @@
                         <button v-on:click="clearModal" class="delete" aria-label="close"></button>
                     </header>
                     <section class="modal-card-body">
-                        <!-- Content ... -->
+                        <div class="section">
+                            <select v-model="alumnos.new"  class="select">
+                                <option  v-for="al in allSt" :value="al.id" :key="al.id">{{al.mat}}</option>
+                            </select>
+                            <a v-on:click="postStdGr" class="button is-primary is-rounded">Agregar al grupo</a>
+                        </div>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th><abbr title="#">#</abbr></th>
+                                <th><abbr title="Grupo">Matricula</abbr></th>
+                                <th><abbr title="Materia">Calificacion</abbr></th>
+                                <th><abbr title="Acciones">Eliminar</abbr></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr v-for="(al,num) in alumnos.lista">
+                                <td>{{num}}</td>
+                                <td>{{al.mat}}</td>
+                                <td>{{al.grade}}</td>
+                                <td><a v-on:click="delStd(al.student)" class="button is-primary is-rounded">Eliminar</a></td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </section>
                     <footer class="modal-card-foot">
                         <button class="button is-success">Save changes</button>
@@ -106,7 +129,7 @@
                     identificador:'',
                     materia:'',
                     profesor:'',
-                    periodo:''
+                    periodo:'',
                 },
                 materias:[],
                 profesores:[],
@@ -114,9 +137,13 @@
                 alumnos:{
                     grupo:'',
                     lista:[],
+                    periodo:'',
+                    new:'',
+
                 },
                 periodos:[],
-                selectedPer:'todos'
+                selectedPer:'todos',
+                allSt:[],
             }
 
 
@@ -166,9 +193,38 @@
                     });
 
             },
+            getMaterias(){
+                axios.get('api/get_materias').then(response => {
+                    this.materias = response.data;
+                })
+                    .catch(error => {
+                        console.log(error.response)
+                    });
+
+            },
             getPeriodos(){
                 axios.get('api/get_peridos').then(response => {
                     this.periodos = response.data;
+                })
+                    .catch(error => {
+                        console.log(error.response)
+                    });
+
+            },
+            getAllSt(){
+                axios.get('api/get_all_students').then(response => {
+                    this.allSt = response.data;
+                })
+                    .catch(error => {
+                        console.log(error.response)
+                    });
+
+            },
+            getAlsGr(){
+                axios.post('api/get_als_gr',{
+                    gr:this.alumnos.grupo
+                }).then(response => {
+                    this.alumnos.lista = response.data;
                 })
                     .catch(error => {
                         console.log(error.response)
@@ -190,15 +246,40 @@
                     });
 
             },
+            postStdGr(){
+                axios.post('api/post_std_gr',{
+                    gr:this.alumnos.grupo,
+                    per:this.selectedPer,
+                    al:this.alumnos.new,
+                }).then(response => {
+                    console.log(response);
+                    this.getAlsGr();
+                })
+                    .catch(error => {
+                        console.log(error.response)
+                    });
+            },
             addUsrsM(id){
                 this.modal = true;
                 this.alumnos.grupo = id;
+                this.getAlsGr();
+                this.getAllSt();
+            },
+            delStd(id){
+                axios.post('api/delete_al_gr',{
+                    id:id
+                }).then(response => {
+                    this.getAlsGr();
+                })
+                    .catch(error => {
+                        console.log(error.response)
+                    });
             },
             clearModal(){
               this.modal = false;
               this.alumnos.grupo = '';
             },
 
-        }
+        },
     }
 </script>
