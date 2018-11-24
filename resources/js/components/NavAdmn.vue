@@ -6,7 +6,6 @@
                 <ul>
                     <li><a class="has-text-white" v-on:click="usuarios()">Usuarios</a></li>
                     <li><a class="has-text-white" v-on:click="notificaciones()">Notificaciones</a></li>
-                    <li><a class="has-text-white" v-on:click="reportes()">Reportes</a></li>
                 </ul>
             </div>
         </nav>

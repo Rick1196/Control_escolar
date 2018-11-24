@@ -1,6 +1,10 @@
 <template>
     <div class="container" >
         <div class="container" v-if="renderGroups">
+            <div class="notification is-success" v-if="body_errores">
+                <button class="delete" v-on:click="clearErr2"></button>
+                <strong>{{body_mensajes}}</strong>
+            </div>
             <section>
                 <div class="section">
                     <table class="table">
@@ -83,34 +87,74 @@
                         <button v-on:click="clearModal" class="delete" aria-label="close"></button>
                     </header>
                     <section class="modal-card-body">
-                        <div class="section">
-                            <select v-model="alumnos.new"  class="select">
-                                <option  v-for="al in allSt" :value="al.id" :key="al.id">{{al.mat}}</option>
-                            </select>
-                            <a v-on:click="postStdGr" class="button is-primary is-rounded">Agregar al grupo</a>
+                        <div class="notification is-success" v-if="modal_errores">
+                            <button class="delete" v-on:click="clearErr"></button>
+                            <strong>{{modal_mensajes}}</strong>
                         </div>
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th><abbr title="#">#</abbr></th>
-                                <th><abbr title="Grupo">Matricula</abbr></th>
-                                <th><abbr title="Materia">Calificacion</abbr></th>
-                                <th><abbr title="Acciones">Eliminar</abbr></th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr v-for="(al,num) in alumnos.lista">
-                                <td>{{num}}</td>
-                                <td>{{al.mat}}</td>
-                                <td>{{al.grade}}</td>
-                                <td><a v-on:click="delStd(al.student)" class="button is-primary is-rounded">Eliminar</a></td>
-                            </tr>
-                            </tbody>
-                        </table>
+                        <div class="field has-addons">
+                            <div class="control">
+                                <input class="input" v-model="matSearch" type="text" placeholder="Buscar por matricula">
+                            </div>
+                            <div class="control">
+                                <a class="button is-info" v-on:click="getMat">
+                                Buscar Matricula
+                                </a>
+                            </div>
+                        </div>
+                        <div class="field is-horizontal" v-if="alSearched.length > 0">
+                            <div class="field-label is-normal">
+                                <label class="label">Alumno</label>
+                            </div>
+                            <div class="field-body">
+                                <div class="field">
+                                    <p class="control is-expanded has-icons-left">
+                                        <input class="input" disabled type="text" v-model="alSearched[0].curp" placeholder="Name">
+                                        <span class="icon is-small is-left">
+                                        <i class="fas fa-user"></i>
+                                        </span>
+                                    </p>
+                                </div>
+                                <div class="field">
+                                    <p class="control is-expanded has-icons-left has-icons-right">
+                                        <input class="input " type="text" disabled v-model="alSearched[0].mat">
+                                        <span class="icon is-small is-left">
+                                        <i class="fas fa-envelope"></i>
+                                        </span>
+                                        <span class="icon is-small is-right">
+                                        <i class="fas fa-check"></i>
+                                        </span>
+                                    </p>
+                                </div>
+                                <div class="field">
+                                    <a v-on:click="postStdGr" class="button is-primary is-rounded">Agregar al grupo</a>
+                                </div>
+                            </div>
+                        </div>
+                        <center>
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th><abbr title="#">#</abbr></th>
+                                    <th><abbr title="Grupo">Matricula</abbr></th>
+                                    <th><abbr title="Materia">Calificacion</abbr></th>
+                                    <th><abbr title="Acciones">Eliminar</abbr></th>
+                                    <th><abbr title="Acciones">Actualizar</abbr></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr v-for="(al,num) in alumnos.lista">
+                                    <td>{{num}}</td>
+                                    <td>{{al.mat}}</td>
+                                    <td><input type="number" class="input is-rounded" v-model="al.grade"></td>
+                                    <td><a v-on:click="delStd(al.student)" class="button is-danger is-rounded">Eliminar</a></td>
+                                    <td><a v-on:click="updateStd(al.student,al.grade,al.pgs)" class="button is-link is-rounded">Actualizar</a></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </center>
                     </section>
                     <footer class="modal-card-foot">
-                        <button class="button is-success">Save changes</button>
-                        <button class="button" v-on:click="clearModal">Cancel</button>
+                        <button class="button" v-on:click="clearModal">Cerrar</button>
                     </footer>
                 </div>
             </div>
@@ -144,6 +188,12 @@
                 periodos:[],
                 selectedPer:'todos',
                 allSt:[],
+                alSearched:'',
+                matSearch:'',
+                modal_errores: false,
+                modal_mensajes:'',
+                body_errores: false,
+                body_mensajes:''
             }
 
 
@@ -240,6 +290,12 @@
                 }).then(response => {
                     console.log(response);
                     this.getGroups();
+                    this.body_mensajes = 'Grupo agregado';
+                    this.body_errores = true;
+                    this.grupo.identificador  = '';
+                    this.grupo.materia  = '';
+                    this.grupo.profesor  = '';
+                    this.grupo.periodo  = '';
                 })
                     .catch(error => {
                         console.log(error.response)
@@ -250,7 +306,7 @@
                 axios.post('api/post_std_gr',{
                     gr:this.alumnos.grupo,
                     per:this.selectedPer,
-                    al:this.alumnos.new,
+                    al:this.alSearched[0].id,
                 }).then(response => {
                     console.log(response);
                     this.getAlsGr();
@@ -278,6 +334,36 @@
             clearModal(){
               this.modal = false;
               this.alumnos.grupo = '';
+            },
+            getMat(){
+                 axios.post('api/get_al_mat',{
+                    mat:this.matSearch
+                }).then(response => {
+                    this.alSearched = response.data;
+                }).catch(error => {
+                        console.log(error.response)
+                });
+            },
+            updateStd(std,grade,mat){
+                axios.post('api/up_al_gr',{
+                    std:std,
+                    grade:grade,
+                    mat:mat
+                }).then(response => {
+                    this.getAlsGr();
+                    this.modal_mensajes = 'Calificacion registrada';
+                    this.modal_errores = true;
+                }).catch(error => {
+                        console.log(error.response)
+                });
+            },
+            clearErr(){
+                this.modal_errores = false;
+                this.modal_mensajes = '';
+            },
+            clearErr2(){
+                this.body_errores = false;
+                this.body_mensajes = '';
             },
 
         },

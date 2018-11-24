@@ -5,7 +5,6 @@
                 <div class="container">
                     <ul>
                         <li><a class="has-text-white" v-on:click="usuarios()">Grupos</a></li>
-                        <li><a class="has-text-white" v-on:click="notificaciones()">Calificaciones</a></li>
                     </ul>
                 </div>
             </nav>

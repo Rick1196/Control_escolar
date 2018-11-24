@@ -15,4 +15,6 @@ mix.js('resources/js/app.js', 'public/js')
     .js('node_modules/bulma-extensions/bulma-carousel/dist/js/bulma-carousel.js','public/js')
     .js('node_modules/jquery/dist/jquery.js','public/js')
     .js('resources/js/bulma-extensions.js','public/js')
+    .js('node_modules/jspdf/dist/jspdf.min.js','public/js')
+    .js('node_modules/jspdf-autotable/dist/jspdf.plugin.autotable.min.js','public/js')
    .sass('resources/sass/app.scss', 'public/css');

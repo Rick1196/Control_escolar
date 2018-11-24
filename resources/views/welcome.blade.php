@@ -6,9 +6,9 @@
             <main-view></main-view>
         @else
             @if(Auth::user()->hasRole('profesor'))
-                <h1>Profesor</h1>
+                <prof-view user="{{ Auth::user()->id }}"></prof-view>
             @elseif(Auth::user()->hasRole('alumno'))
-                    <h1>Estudiante</h1>
+                    <std-view user="{{ Auth::user()->id }}"></std-view>
             @elseif(Auth::user()->hasRole('admin'))
                 <a class="button is-large is-fullwidth" href="{{url('/import')}}">Importar</a>
                 <adm-view></adm-view>

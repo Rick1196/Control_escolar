@@ -6,8 +6,10 @@
  */
 
 require('./bootstrap');
-
 window.Vue = require('vue');
+var jsPDF = require('jspdf');
+require('jspdf-autotable');
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -23,6 +25,10 @@ Vue.component('adm-view', require('./components/AdmView.vue'));
 Vue.component('nav-slider-dir',require('./components/NavDirec.vue'));
 Vue.component('direc-view',require('./components/DirecView.vue'));
 Vue.component('main-view',require('./components/MainView.vue'));
+Vue.component('nav-slider-prof',require('./components/NavProf.vue'));
+Vue.component('prof-view',require('./components/ProfView.vue'));
+Vue.component('std-view',require('./components/StdView.vue'));
+Vue.component('nav-slider-std',require('./components/NavStd.vue'));
 const app = new Vue({
     el: '#app'
 });

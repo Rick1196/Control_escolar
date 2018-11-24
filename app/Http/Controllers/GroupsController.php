@@ -11,7 +11,7 @@ class GroupsController extends Controller
     public function get_groups(Request $data){
         $per = $data['per'];
         if($per === 'todos') {
-            $grupos = DB::select('select groups.id gid,groups.subject sid ,t.id tid, groups.identifier, u.email, s2.name subject from groups inner join teachers t on groups.teacher = t.id inner join workers w2 on t.worker_id = w2.id inner join users u on w2.user_info = u.id inner join subjects s2 on groups.subject = s2.id');
+            $grupos = DB::select('select groups.id gid,groups.subject sid ,t.id tid, groups.identifier, u.email, s2.name subject from groups inner join teachers t on groups.teacher = t.id inner join workers w2 on t.worker_id = w2.id inner join users u on w2.user_info = u.id inner join subjects s2 on groups.subject = s2.id order by u.email');
         }
         else{
             $grupos = DB::select('select groups.id,groups.subject, groups.identifier, u.email, s2.name subject  from groups inner join teachers t on groups.teacher = t.id inner join workers w2 on t.worker_id = w2.id inner join users u on w2.user_info = u.id inner join subjects s2 on groups.subject = s2.id inner join group_period period2 on groups.id = period2."group" inner join periods p on period2.period = p.id where p."desc"= ?',[$per]);
@@ -52,7 +52,7 @@ class GroupsController extends Controller
 
     public function get_als_gr(Request $data){
         $gr = $data['gr'];
-        $res = DB::select('select student_group_period.student,student_group_period.id pgs, mat, grade from student_group_period inner join students s2 on student_group_period.student = s2.id inner join group_period period on student_group_period.group_period = period.id where period."group" = ?',[$gr]);
+        $res = DB::select('SELECT student_group_period.student,student_group_period.id pgs, mat, grade from student_group_period inner join students s2 on student_group_period.student = s2.id inner join group_period period on student_group_period.group_period = period.id where period."group" = ?',[$gr]);
         return $res;
     }
 
@@ -72,6 +72,37 @@ class GroupsController extends Controller
 
     public function  get_all_students(){
         $res = DB::select('select * from students order by mat');
+        return $res;
+    }
+
+    public function get_al_mat(Request $data){
+        $mat = $data['mat'];
+        $res = DB::select('SELECT * from students where mat = ?',[$mat]);
+        return $res;
+    }
+
+    public function up_al_gr(Request $data){
+        $al = $data['std'];
+        $grade = $data['grade'];
+        $materia = $data['mat'];
+        DB::update('UPDATE student_group_period set grade = ? where student = ? and id = ? ',[$grade,$al,$materia]);
+    }
+
+    public function get_groups_pr(Request $data){
+        $user = $data['user'];
+        $groups = DB::select('SELECT groups.id id, groups.identifier grupo, s2.name from groups inner join teachers t on groups.teacher = t.id inner join workers w2 on t.worker_id = w2.id inner join users u on w2.user_info = u.id inner join subjects s2 on groups.subject = s2.id where u.id = ?',[$user]);
+        return $groups;
+    }
+
+    public function get_groups_al(Request $data){
+        $user = $data['user'];
+        $groups = DB::select('SELECT g.identifier, s3.name, student_group_period.grade from student_group_period inner join group_period period on student_group_period.group_period = period.id inner join groups g on period."group" = g.id inner join students s2 on student_group_period.student = s2.id inner join subjects s3 on g.subject = s3.id inner join users u on s2.user_info = u.id where u.id = ?',[$user]);
+        return $groups;
+    }
+    
+    public function get_prom_gr(Request $data){
+        $pr = $data['id'];
+        $res = DB::select('SELECT g.identifier, s2.name, avg(student_group_period.grade) calificacion from student_group_period inner join group_period period on student_group_period.group_period = period.id inner join groups g on period."group" = g.id inner join teachers t on g.teacher = t.id inner join workers w2 on t.worker_id = w2.id inner join users u on w2.user_info = u.id inner join subjects s2 on g.subject = s2.id where u.id = ? group by (g.identifier, s2.name)',[$pr]);
         return $res;
     }
 

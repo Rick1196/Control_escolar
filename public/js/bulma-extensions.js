@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 71);
+/******/ 	return __webpack_require__(__webpack_require__.s = 86);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -68,2973 +68,15 @@
 /***/ 10:
 /***/ (function(module, exports, __webpack_require__) {
 
-(function webpackUniversalModuleDefinition(root, factory) {
-	if(true)
-		module.exports = factory();
-	else if(typeof define === 'function' && define.amd)
-		define([], factory);
-	else if(typeof exports === 'object')
-		exports["bulmaQuickview"] = factory();
-	else
-		root["bulmaQuickview"] = factory();
-})(typeof self !== 'undefined' ? self : this, function() {
-return /******/ (function(modules) { // webpackBootstrap
-/******/ 	// The module cache
-/******/ 	var installedModules = {};
-/******/
-/******/ 	// The require function
-/******/ 	function __webpack_require__(moduleId) {
-/******/
-/******/ 		// Check if module is in cache
-/******/ 		if(installedModules[moduleId]) {
-/******/ 			return installedModules[moduleId].exports;
-/******/ 		}
-/******/ 		// Create a new module (and put it into the cache)
-/******/ 		var module = installedModules[moduleId] = {
-/******/ 			i: moduleId,
-/******/ 			l: false,
-/******/ 			exports: {}
-/******/ 		};
-/******/
-/******/ 		// Execute the module function
-/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-/******/
-/******/ 		// Flag the module as loaded
-/******/ 		module.l = true;
-/******/
-/******/ 		// Return the exports of the module
-/******/ 		return module.exports;
-/******/ 	}
-/******/
-/******/
-/******/ 	// expose the modules object (__webpack_modules__)
-/******/ 	__webpack_require__.m = modules;
-/******/
-/******/ 	// expose the module cache
-/******/ 	__webpack_require__.c = installedModules;
-/******/
-/******/ 	// define getter function for harmony exports
-/******/ 	__webpack_require__.d = function(exports, name, getter) {
-/******/ 		if(!__webpack_require__.o(exports, name)) {
-/******/ 			Object.defineProperty(exports, name, {
-/******/ 				configurable: false,
-/******/ 				enumerable: true,
-/******/ 				get: getter
-/******/ 			});
-/******/ 		}
-/******/ 	};
-/******/
-/******/ 	// getDefaultExport function for compatibility with non-harmony modules
-/******/ 	__webpack_require__.n = function(module) {
-/******/ 		var getter = module && module.__esModule ?
-/******/ 			function getDefault() { return module['default']; } :
-/******/ 			function getModuleExports() { return module; };
-/******/ 		__webpack_require__.d(getter, 'a', getter);
-/******/ 		return getter;
-/******/ 	};
-/******/
-/******/ 	// Object.prototype.hasOwnProperty.call
-/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
-/******/
-/******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "";
-/******/
-/******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
-/******/ })
-/************************************************************************/
-/******/ ([
-/* 0 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__events__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__defaultOptions__ = __webpack_require__(2);
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-
-
-
-var onQuickviewShowClick = Symbol('onQuickviewShowClick');
-var onQuickviewDismissClick = Symbol('onQuickviewDismissClick');
-
-var bulmaQuickview = function (_EventEmitter) {
-  _inherits(bulmaQuickview, _EventEmitter);
-
-  function bulmaQuickview(selector) {
-    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-
-    _classCallCheck(this, bulmaQuickview);
-
-    var _this = _possibleConstructorReturn(this, (bulmaQuickview.__proto__ || Object.getPrototypeOf(bulmaQuickview)).call(this));
-
-    _this.element = typeof selector === 'string' ? document.querySelector(selector) : selector;
-    // An invalid selector or non-DOM node has been provided.
-    if (!_this.element) {
-      throw new Error('An invalid selector or non-DOM node has been provided.');
-    }
-
-    _this._clickEvents = ['click'];
-    /// Set default options and merge with instance defined
-    _this.options = _extends({}, __WEBPACK_IMPORTED_MODULE_1__defaultOptions__["a" /* default */], options);
-
-    _this[onQuickviewShowClick] = _this[onQuickviewShowClick].bind(_this);
-    _this[onQuickviewDismissClick] = _this[onQuickviewDismissClick].bind(_this);
-
-    _this.init();
-    return _this;
-  }
-
-  /**
-   * Initiate all DOM element containing carousel class
-   * @method
-   * @return {Array} Array of all Carousel instances
-   */
-
-
-  _createClass(bulmaQuickview, [{
-    key: 'init',
-
-
-    /**
-     * Initiate plugin
-     * @method init
-     * @return {void}
-     */
-    value: function init() {
-      this.quickview = document.getElementById(this.element.dataset['target']);
-      this.dismissElements = document.querySelectorAll('[data-dismiss="quickview"]');
-
-      this._bindEvents();
-
-      this.emit('quickview:ready', {
-        element: this.element,
-        quickview: this.quickview
-      });
-    }
-
-    /**
-     * Bind all events
-     * @method _bindEvents
-     * @return {void}
-     */
-
-  }, {
-    key: '_bindEvents',
-    value: function _bindEvents() {
-      var _this2 = this;
-
-      this._clickEvents.forEach(function (event) {
-        _this2.element.addEventListener(event, _this2[onQuickviewShowClick], false);
-      });
-
-      [].forEach.call(this.dismissElements, function (dismissElement) {
-        _this2._clickEvents.forEach(function (event) {
-          dismissElement.addEventListener(event, _this2[onQuickviewDismissClick], false);
-        });
-      });
-    }
-  }, {
-    key: onQuickviewShowClick,
-    value: function value(e) {
-      this.quickview.classList.add('is-active');
-
-      this.emit('quickview:show', {
-        element: this.element,
-        quickview: this.quickview
-      });
-    }
-  }, {
-    key: onQuickviewDismissClick,
-    value: function value(e) {
-      this.quickview.classList.remove('is-active');
-
-      this.emit('quickview:hide', {
-        element: this.element,
-        quickview: this.quickview
-      });
-    }
-  }], [{
-    key: 'attach',
-    value: function attach() {
-      var selector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '[data-show="quickview"]';
-      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-
-      var instances = new Array();
-
-      var elements = document.querySelectorAll(selector);
-      [].forEach.call(elements, function (element) {
-        setTimeout(function () {
-          instances.push(new bulmaQuickview(element, options));
-        }, 100);
-      });
-      return instances;
-    }
-  }]);
-
-  return bulmaQuickview;
-}(__WEBPACK_IMPORTED_MODULE_0__events__["a" /* default */]);
-
-/* harmony default export */ __webpack_exports__["default"] = (bulmaQuickview);
-
-/***/ }),
-/* 1 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var EventEmitter = function () {
-  function EventEmitter() {
-    var listeners = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-
-    _classCallCheck(this, EventEmitter);
-
-    this._listeners = new Map(listeners);
-    this._middlewares = new Map();
-  }
-
-  _createClass(EventEmitter, [{
-    key: "listenerCount",
-    value: function listenerCount(eventName) {
-      if (!this._listeners.has(eventName)) {
-        return 0;
-      }
-
-      var eventListeners = this._listeners.get(eventName);
-      return eventListeners.length;
-    }
-  }, {
-    key: "removeListeners",
-    value: function removeListeners() {
-      var _this = this;
-
-      var eventName = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-      var middleware = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-
-      if (eventName !== null) {
-        if (Array.isArray(eventName)) {
-          name.forEach(function (e) {
-            return _this.removeListeners(e, middleware);
-          });
-        } else {
-          this._listeners.delete(eventName);
-
-          if (middleware) {
-            this.removeMiddleware(eventName);
-          }
-        }
-      } else {
-        this._listeners = new Map();
-      }
-    }
-  }, {
-    key: "middleware",
-    value: function middleware(eventName, fn) {
-      var _this2 = this;
-
-      if (Array.isArray(eventName)) {
-        name.forEach(function (e) {
-          return _this2.middleware(e, fn);
-        });
-      } else {
-        if (!Array.isArray(this._middlewares.get(eventName))) {
-          this._middlewares.set(eventName, []);
-        }
-
-        this._middlewares.get(eventName).push(fn);
-      }
-    }
-  }, {
-    key: "removeMiddleware",
-    value: function removeMiddleware() {
-      var _this3 = this;
-
-      var eventName = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-
-      if (eventName !== null) {
-        if (Array.isArray(eventName)) {
-          name.forEach(function (e) {
-            return _this3.removeMiddleware(e);
-          });
-        } else {
-          this._middlewares.delete(eventName);
-        }
-      } else {
-        this._middlewares = new Map();
-      }
-    }
-  }, {
-    key: "on",
-    value: function on(name, callback) {
-      var _this4 = this;
-
-      var once = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-
-      if (Array.isArray(name)) {
-        name.forEach(function (e) {
-          return _this4.on(e, callback);
-        });
-      } else {
-        name = name.toString();
-        var split = name.split(/,|, | /);
-
-        if (split.length > 1) {
-          split.forEach(function (e) {
-            return _this4.on(e, callback);
-          });
-        } else {
-          if (!Array.isArray(this._listeners.get(name))) {
-            this._listeners.set(name, []);
-          }
-
-          this._listeners.get(name).push({ once: once, callback: callback });
-        }
-      }
-    }
-  }, {
-    key: "once",
-    value: function once(name, callback) {
-      this.on(name, callback, true);
-    }
-  }, {
-    key: "emit",
-    value: function emit(name, data) {
-      var _this5 = this;
-
-      var silent = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-
-      name = name.toString();
-      var listeners = this._listeners.get(name);
-      var middlewares = null;
-      var doneCount = 0;
-      var execute = silent;
-
-      if (Array.isArray(listeners)) {
-        listeners.forEach(function (listener, index) {
-          // Start Middleware checks unless we're doing a silent emit
-          if (!silent) {
-            middlewares = _this5._middlewares.get(name);
-            // Check and execute Middleware
-            if (Array.isArray(middlewares)) {
-              middlewares.forEach(function (middleware) {
-                middleware(data, function () {
-                  var newData = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-
-                  if (newData !== null) {
-                    data = newData;
-                  }
-                  doneCount++;
-                }, name);
-              });
-
-              if (doneCount >= middlewares.length) {
-                execute = true;
-              }
-            } else {
-              execute = true;
-            }
-          }
-
-          // If Middleware checks have been passed, execute
-          if (execute) {
-            if (listener.once) {
-              listeners[index] = null;
-            }
-            listener.callback(data);
-          }
-        });
-
-        // Dirty way of removing used Events
-        while (listeners.indexOf(null) !== -1) {
-          listeners.splice(listeners.indexOf(null), 1);
-        }
-      }
-    }
-  }]);
-
-  return EventEmitter;
-}();
-
-/* harmony default export */ __webpack_exports__["a"] = (EventEmitter);
-
-/***/ }),
-/* 2 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var defaultOptions = {};
-
-/* harmony default export */ __webpack_exports__["a"] = (defaultOptions);
-
-/***/ })
-/******/ ])["default"];
-});
-
-/***/ }),
-
-/***/ 11:
-/***/ (function(module, exports, __webpack_require__) {
-
-(function webpackUniversalModuleDefinition(root, factory) {
-	if(true)
-		module.exports = factory();
-	else if(typeof define === 'function' && define.amd)
-		define([], factory);
-	else if(typeof exports === 'object')
-		exports["bulmaSlider"] = factory();
-	else
-		root["bulmaSlider"] = factory();
-})(typeof self !== 'undefined' ? self : this, function() {
-return /******/ (function(modules) { // webpackBootstrap
-/******/ 	// The module cache
-/******/ 	var installedModules = {};
-/******/
-/******/ 	// The require function
-/******/ 	function __webpack_require__(moduleId) {
-/******/
-/******/ 		// Check if module is in cache
-/******/ 		if(installedModules[moduleId]) {
-/******/ 			return installedModules[moduleId].exports;
-/******/ 		}
-/******/ 		// Create a new module (and put it into the cache)
-/******/ 		var module = installedModules[moduleId] = {
-/******/ 			i: moduleId,
-/******/ 			l: false,
-/******/ 			exports: {}
-/******/ 		};
-/******/
-/******/ 		// Execute the module function
-/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-/******/
-/******/ 		// Flag the module as loaded
-/******/ 		module.l = true;
-/******/
-/******/ 		// Return the exports of the module
-/******/ 		return module.exports;
-/******/ 	}
-/******/
-/******/
-/******/ 	// expose the modules object (__webpack_modules__)
-/******/ 	__webpack_require__.m = modules;
-/******/
-/******/ 	// expose the module cache
-/******/ 	__webpack_require__.c = installedModules;
-/******/
-/******/ 	// define getter function for harmony exports
-/******/ 	__webpack_require__.d = function(exports, name, getter) {
-/******/ 		if(!__webpack_require__.o(exports, name)) {
-/******/ 			Object.defineProperty(exports, name, {
-/******/ 				configurable: false,
-/******/ 				enumerable: true,
-/******/ 				get: getter
-/******/ 			});
-/******/ 		}
-/******/ 	};
-/******/
-/******/ 	// getDefaultExport function for compatibility with non-harmony modules
-/******/ 	__webpack_require__.n = function(module) {
-/******/ 		var getter = module && module.__esModule ?
-/******/ 			function getDefault() { return module['default']; } :
-/******/ 			function getModuleExports() { return module; };
-/******/ 		__webpack_require__.d(getter, 'a', getter);
-/******/ 		return getter;
-/******/ 	};
-/******/
-/******/ 	// Object.prototype.hasOwnProperty.call
-/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
-/******/
-/******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "";
-/******/
-/******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
-/******/ })
-/************************************************************************/
-/******/ ([
-/* 0 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__events__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__defaultOptions__ = __webpack_require__(2);
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-
-
-
-var onSliderInput = Symbol('onSliderInput');
-
-var bulmaSlider = function (_EventEmitter) {
-  _inherits(bulmaSlider, _EventEmitter);
-
-  function bulmaSlider(selector) {
-    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-
-    _classCallCheck(this, bulmaSlider);
-
-    var _this = _possibleConstructorReturn(this, (bulmaSlider.__proto__ || Object.getPrototypeOf(bulmaSlider)).call(this));
-
-    _this.element = typeof selector === 'string' ? document.querySelector(selector) : selector;
-    // An invalid selector or non-DOM node has been provided.
-    if (!_this.element) {
-      throw new Error('An invalid selector or non-DOM node has been provided.');
-    }
-
-    _this._clickEvents = ['click'];
-    /// Set default options and merge with instance defined
-    _this.options = _extends({}, __WEBPACK_IMPORTED_MODULE_1__defaultOptions__["a" /* default */], options);
-
-    _this[onSliderInput] = _this[onSliderInput].bind(_this);
-
-    _this.init();
-    return _this;
-  }
-
-  /**
-   * Initiate all DOM element containing carousel class
-   * @method
-   * @return {Array} Array of all Carousel instances
-   */
-
-
-  _createClass(bulmaSlider, [{
-    key: 'init',
-
-
-    /**
-     * Initiate plugin
-     * @method init
-     * @return {void}
-     */
-    value: function init() {
-      this._id = 'bulmaSlider' + new Date().getTime() + Math.floor(Math.random() * Math.floor(9999));
-      this.output = this._findOutputForSlider();
-
-      if (this.output) {
-        if (this.element.classList.contains('has-output-tooltip')) {
-          // Get new output position
-          var newPosition = this._getSliderOutputPosition();
-
-          // Set output position
-          this.output.style['left'] = newPosition.position;
-        }
-      }
-
-      this.emit('bulmaslider:ready', this.element.value);
-    }
-  }, {
-    key: '_findOutputForSlider',
-    value: function _findOutputForSlider() {
-      var _this2 = this;
-
-      var outputs = document.getElementsByTagName('output');
-      [].forEach.call(outputs, function (output) {
-        if (output.htmlFor == _this2.element.getAttribute('id')) {
-          return output;
-        }
-      });
-      return null;
-    }
-  }, {
-    key: '_getSliderOutputPosition',
-    value: function _getSliderOutputPosition() {
-      // Update output position
-      var newPlace, minValue;
-
-      var style = window.getComputedStyle(this.element, null);
-      // Measure width of range input
-      var sliderWidth = parseInt(style.getPropertyValue('width'), 10);
-
-      // Figure out placement percentage between left and right of input
-      if (!this.element.getAttribute('min')) {
-        minValue = 0;
-      } else {
-        minValue = this.element.getAttribute('min');
-      }
-      var newPoint = (this.element.value - minValue) / (this.element.getAttribute('max') - minValue);
-
-      // Prevent bubble from going beyond left or right (unsupported browsers)
-      if (newPoint < 0) {
-        newPlace = 0;
-      } else if (newPoint > 1) {
-        newPlace = sliderWidth;
-      } else {
-        newPlace = sliderWidth * newPoint;
-      }
-
-      return {
-        'position': newPlace + 'px'
-      };
-    }
-
-    /**
-     * Bind all events
-     * @method _bindEvents
-     * @return {void}
-     */
-
-  }, {
-    key: '_bindEvents',
-    value: function _bindEvents() {
-      if (this.output) {
-        // Add event listener to update output when slider value change
-        this.element.addEventListener('input', this[onSliderInput], false);
-      }
-    }
-  }, {
-    key: onSliderInput,
-    value: function value(e) {
-      e.preventDefault();
-
-      if (this.element.classList.contains('has-output-tooltip')) {
-        // Get new output position
-        var newPosition = this._getSliderOutputPosition();
-
-        // Set output position
-        this.output.style['left'] = newPosition.position;
-      }
-
-      // Check for prefix and postfix
-      var prefix = this.output.hasAttribute('data-prefix') ? this.output.getAttribute('data-prefix') : '';
-      var postfix = this.output.hasAttribute('data-postfix') ? this.output.getAttribute('data-postfix') : '';
-
-      // Update output with slider value
-      this.output.value = prefix + this.element.value + postfix;
-
-      this.emit('bulmaslider:ready', this.element.value);
-    }
-  }], [{
-    key: 'attach',
-    value: function attach() {
-      var selector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'input[type="range"].slider';
-      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-
-      var instances = new Array();
-
-      var elements = document.querySelectorAll(selector);
-      [].forEach.call(elements, function (element) {
-        setTimeout(function () {
-          instances.push(new bulmaSlider(element, options));
-        }, 100);
-      });
-      return instances;
-    }
-  }]);
-
-  return bulmaSlider;
-}(__WEBPACK_IMPORTED_MODULE_0__events__["a" /* default */]);
-
-/* harmony default export */ __webpack_exports__["default"] = (bulmaSlider);
-
-/***/ }),
-/* 1 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var EventEmitter = function () {
-  function EventEmitter() {
-    var listeners = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-
-    _classCallCheck(this, EventEmitter);
-
-    this._listeners = new Map(listeners);
-    this._middlewares = new Map();
-  }
-
-  _createClass(EventEmitter, [{
-    key: "listenerCount",
-    value: function listenerCount(eventName) {
-      if (!this._listeners.has(eventName)) {
-        return 0;
-      }
-
-      var eventListeners = this._listeners.get(eventName);
-      return eventListeners.length;
-    }
-  }, {
-    key: "removeListeners",
-    value: function removeListeners() {
-      var _this = this;
-
-      var eventName = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-      var middleware = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-
-      if (eventName !== null) {
-        if (Array.isArray(eventName)) {
-          name.forEach(function (e) {
-            return _this.removeListeners(e, middleware);
-          });
-        } else {
-          this._listeners.delete(eventName);
-
-          if (middleware) {
-            this.removeMiddleware(eventName);
-          }
-        }
-      } else {
-        this._listeners = new Map();
-      }
-    }
-  }, {
-    key: "middleware",
-    value: function middleware(eventName, fn) {
-      var _this2 = this;
-
-      if (Array.isArray(eventName)) {
-        name.forEach(function (e) {
-          return _this2.middleware(e, fn);
-        });
-      } else {
-        if (!Array.isArray(this._middlewares.get(eventName))) {
-          this._middlewares.set(eventName, []);
-        }
-
-        this._middlewares.get(eventName).push(fn);
-      }
-    }
-  }, {
-    key: "removeMiddleware",
-    value: function removeMiddleware() {
-      var _this3 = this;
-
-      var eventName = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-
-      if (eventName !== null) {
-        if (Array.isArray(eventName)) {
-          name.forEach(function (e) {
-            return _this3.removeMiddleware(e);
-          });
-        } else {
-          this._middlewares.delete(eventName);
-        }
-      } else {
-        this._middlewares = new Map();
-      }
-    }
-  }, {
-    key: "on",
-    value: function on(name, callback) {
-      var _this4 = this;
-
-      var once = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-
-      if (Array.isArray(name)) {
-        name.forEach(function (e) {
-          return _this4.on(e, callback);
-        });
-      } else {
-        name = name.toString();
-        var split = name.split(/,|, | /);
-
-        if (split.length > 1) {
-          split.forEach(function (e) {
-            return _this4.on(e, callback);
-          });
-        } else {
-          if (!Array.isArray(this._listeners.get(name))) {
-            this._listeners.set(name, []);
-          }
-
-          this._listeners.get(name).push({ once: once, callback: callback });
-        }
-      }
-    }
-  }, {
-    key: "once",
-    value: function once(name, callback) {
-      this.on(name, callback, true);
-    }
-  }, {
-    key: "emit",
-    value: function emit(name, data) {
-      var _this5 = this;
-
-      var silent = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-
-      name = name.toString();
-      var listeners = this._listeners.get(name);
-      var middlewares = null;
-      var doneCount = 0;
-      var execute = silent;
-
-      if (Array.isArray(listeners)) {
-        listeners.forEach(function (listener, index) {
-          // Start Middleware checks unless we're doing a silent emit
-          if (!silent) {
-            middlewares = _this5._middlewares.get(name);
-            // Check and execute Middleware
-            if (Array.isArray(middlewares)) {
-              middlewares.forEach(function (middleware) {
-                middleware(data, function () {
-                  var newData = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-
-                  if (newData !== null) {
-                    data = newData;
-                  }
-                  doneCount++;
-                }, name);
-              });
-
-              if (doneCount >= middlewares.length) {
-                execute = true;
-              }
-            } else {
-              execute = true;
-            }
-          }
-
-          // If Middleware checks have been passed, execute
-          if (execute) {
-            if (listener.once) {
-              listeners[index] = null;
-            }
-            listener.callback(data);
-          }
-        });
-
-        // Dirty way of removing used Events
-        while (listeners.indexOf(null) !== -1) {
-          listeners.splice(listeners.indexOf(null), 1);
-        }
-      }
-    }
-  }]);
-
-  return EventEmitter;
-}();
-
-/* harmony default export */ __webpack_exports__["a"] = (EventEmitter);
-
-/***/ }),
-/* 2 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var defaultOptions = {};
-
-/* harmony default export */ __webpack_exports__["a"] = (defaultOptions);
-
-/***/ })
-/******/ ])["default"];
-});
-
-/***/ }),
-
-/***/ 12:
-/***/ (function(module, exports, __webpack_require__) {
-
-(function webpackUniversalModuleDefinition(root, factory) {
-	if(true)
-		module.exports = factory();
-	else if(typeof define === 'function' && define.amd)
-		define([], factory);
-	else if(typeof exports === 'object')
-		exports["bulmaSteps"] = factory();
-	else
-		root["bulmaSteps"] = factory();
-})(typeof self !== 'undefined' ? self : this, function() {
-return /******/ (function(modules) { // webpackBootstrap
-/******/ 	// The module cache
-/******/ 	var installedModules = {};
-/******/
-/******/ 	// The require function
-/******/ 	function __webpack_require__(moduleId) {
-/******/
-/******/ 		// Check if module is in cache
-/******/ 		if(installedModules[moduleId]) {
-/******/ 			return installedModules[moduleId].exports;
-/******/ 		}
-/******/ 		// Create a new module (and put it into the cache)
-/******/ 		var module = installedModules[moduleId] = {
-/******/ 			i: moduleId,
-/******/ 			l: false,
-/******/ 			exports: {}
-/******/ 		};
-/******/
-/******/ 		// Execute the module function
-/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-/******/
-/******/ 		// Flag the module as loaded
-/******/ 		module.l = true;
-/******/
-/******/ 		// Return the exports of the module
-/******/ 		return module.exports;
-/******/ 	}
-/******/
-/******/
-/******/ 	// expose the modules object (__webpack_modules__)
-/******/ 	__webpack_require__.m = modules;
-/******/
-/******/ 	// expose the module cache
-/******/ 	__webpack_require__.c = installedModules;
-/******/
-/******/ 	// define getter function for harmony exports
-/******/ 	__webpack_require__.d = function(exports, name, getter) {
-/******/ 		if(!__webpack_require__.o(exports, name)) {
-/******/ 			Object.defineProperty(exports, name, {
-/******/ 				configurable: false,
-/******/ 				enumerable: true,
-/******/ 				get: getter
-/******/ 			});
-/******/ 		}
-/******/ 	};
-/******/
-/******/ 	// getDefaultExport function for compatibility with non-harmony modules
-/******/ 	__webpack_require__.n = function(module) {
-/******/ 		var getter = module && module.__esModule ?
-/******/ 			function getDefault() { return module['default']; } :
-/******/ 			function getModuleExports() { return module; };
-/******/ 		__webpack_require__.d(getter, 'a', getter);
-/******/ 		return getter;
-/******/ 	};
-/******/
-/******/ 	// Object.prototype.hasOwnProperty.call
-/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
-/******/
-/******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "";
-/******/
-/******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
-/******/ })
-/************************************************************************/
-/******/ ([
-/* 0 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__events__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__defaultOptions__ = __webpack_require__(2);
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-
-
-
-var onStepsPrevious = Symbol('onStepsPrevious');
-var onStepsNext = Symbol('onStepsNext');
-
-var bulmaSteps = function (_EventEmitter) {
-  _inherits(bulmaSteps, _EventEmitter);
-
-  function bulmaSteps(selector) {
-    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-
-    _classCallCheck(this, bulmaSteps);
-
-    var _this = _possibleConstructorReturn(this, (bulmaSteps.__proto__ || Object.getPrototypeOf(bulmaSteps)).call(this));
-
-    _this.element = typeof selector === 'string' ? document.querySelector(selector) : selector;
-    // An invalid selector or non-DOM node has been provided.
-    if (!_this.element) {
-      throw new Error('An invalid selector or non-DOM node has been provided.');
-    }
-
-    _this._clickEvents = ['click'];
-    /// Set default options and merge with instance defined
-    _this.options = _extends({}, __WEBPACK_IMPORTED_MODULE_1__defaultOptions__["a" /* default */], options);
-
-    _this[onStepsPrevious] = _this[onStepsPrevious].bind(_this);
-    _this[onStepsNext] = _this[onStepsNext].bind(_this);
-
-    _this.init();
-    return _this;
-  }
-
-  /**
-   * Initiate all DOM element containing carousel class
-   * @method
-   * @return {Array} Array of all Carousel instances
-   */
-
-
-  _createClass(bulmaSteps, [{
-    key: 'init',
-
-
-    /**
-     * Initiate plugin
-     * @method init
-     * @return {void}
-     */
-    value: function init() {
-      this._id = 'bulmaSteps' + new Date().getTime() + Math.floor(Math.random() * Math.floor(9999));
-
-      this.steps = this.element.querySelectorAll(this.options.selector);
-      this.contents = this.element.querySelectorAll(this.options.selector_content);
-      this.previous_btn = this.element.querySelector(this.options.previous_selector);
-      this.next_btn = this.element.querySelector(this.options.next_selector);
-
-      [].forEach.call(this.steps, function (step, index) {
-        step.setAttribute('data-step-id', index);
-      });
-
-      if (this.steps && this.steps.length) {
-        this.activate_step(0);
-        this.updateActions(this.steps[0]);
-      }
-
-      this._bindEvents();
-
-      this.emit('bulmasteps:ready', this.element.value);
-    }
-
-    /**
-     * Bind all events
-     * @method _bindEvents
-     * @return {void}
-     */
-
-  }, {
-    key: '_bindEvents',
-    value: function _bindEvents() {
-      var _this2 = this;
-
-      if (this.previous_btn != null) {
-        this._clickEvents.forEach(function (event) {
-          _this2.previous_btn.addEventListener(event, _this2[onStepsPrevious], false);
-        });
-      }
-
-      if (this.next_btn != null) {
-        this._clickEvents.forEach(function (event) {
-          _this2.next_btn.addEventListener(event, _this2[onStepsNext], false);
-        });
-      }
-
-      if (this.options.stepClickable) {
-        [].forEach.call(this.steps, function (step, index) {
-          _this2._clickEvents.forEach(function (event) {
-            while (index > _this2.current_id) {
-              _this2[onStepsNext](event);
-            }
-            while (index < _this2.current_id) {
-              _this2[onStepsPrevious](event);
-            }
-          });
-        });
-      }
-    }
-  }, {
-    key: onStepsPrevious,
-    value: function value(e) {
-      e.preventDefault();
-
-      if (!e.target.getAttribute('disabled')) {
-        this.previous_step();
-      }
-    }
-  }, {
-    key: onStepsNext,
-    value: function value(e) {
-      e.preventDefault();
-
-      if (!e.target.getAttribute('disabled')) {
-        this.next_step();
-      }
-    }
-  }, {
-    key: 'get_current_step_id',
-    value: function get_current_step_id() {
-      for (var i = 0; i < this.steps.length; i++) {
-        var step = this.steps[i];
-
-        if (step.classList.contains(this.options.active_class)) {
-          return parseInt(step.getAttribute('data-step-id'));
-        }
-      }
-
-      return null;
-    }
-  }, {
-    key: 'updateActions',
-    value: function updateActions(step) {
-      var stepId = parseInt(step.getAttribute('data-step-id'));
-      if (stepId == 0) {
-        if (this.previous_btn != null) {
-          this.previous_btn.setAttribute('disabled', 'disabled');
-        }
-        if (this.next_btn != null) {
-          this.next_btn.removeAttribute('disabled', 'disabled');
-        }
-      } else if (stepId == this.steps.length - 1) {
-        if (this.previous_btn != null) {
-          this.previous_btn.removeAttribute('disabled', 'disabled');
-        }
-        if (this.next_btn != null) {
-          this.next_btn.setAttribute('disabled', 'disabled');
-        }
-      } else {
-        if (this.previous_btn != null) {
-          this.previous_btn.removeAttribute('disabled', 'disabled');
-        }
-        if (this.next_btn != null) {
-          this.next_btn.removeAttribute('disabled', 'disabled');
-        }
-      }
-    }
-  }, {
-    key: 'next_step',
-    value: function next_step() {
-      var current_id = this.get_current_step_id();
-
-      if (current_id == null) {
-        return;
-      }
-
-      var next_id = current_id + 1,
-          errors = [];
-
-      if (typeof this.options.beforeNext != 'undefined' && this.options.beforeNext != null && this.options.beforeNext) {
-        errors = this.options.beforeNext(current_id);
-      }
-      this.emit('bulmasteps:before:next', current_id);
-
-      if (typeof errors == 'undefined') {
-        errors = [];
-      }
-
-      if (errors.length > 0) {
-        this.emit('bulmasteps:errors', errors);
-        for (var i = 0; i < errors.length; i++) {
-          if (typeof this.options.onError != 'undefined' && this.options.onError != null && this.options.onError) {
-            this.options.onError(errors[i]);
-          }
-        }
-
-        return;
-      }
-
-      if (next_id >= this.steps.length - 1) {
-        if (typeof this.options.onFinish != 'undefined' && this.options.onFinish != null && this.options.onFinish) {
-          this.options.onFinish(current_id);
-        }
-        this.emit('bulmasteps:finish', current_id);
-      }
-      if (next_id < this.steps.length) {
-        this.complete_step(current_id);
-        this.activate_step(next_id);
-      }
-    }
-  }, {
-    key: 'previous_step',
-    value: function previous_step() {
-      var current_id = this.get_current_step_id();
-      if (current_id == null) {
-        return;
-      }
-
-      this.uncomplete_step(current_id - 1);
-      this.activate_step(current_id - 1);
-    }
-
-    /**
-     * Activate a single step,
-     * will deactivate all other steps.
-     */
-
-  }, {
-    key: 'activate_step',
-    value: function activate_step(step_id) {
-      this.updateActions(this.steps[step_id]);
-
-      for (var i = 0; i < this.steps.length; i++) {
-        var _step = this.steps[i];
-
-        if (_step == this.steps[step_id]) {
-          continue;
-        }
-
-        this.deactivate_step(i);
-      }
-
-      this.steps[step_id].classList.add(this.options.active_class);
-      if (typeof this.contents[step_id] !== 'undefined') {
-        this.contents[step_id].classList.add(this.options.active_class);
-      }
-
-      if (typeof this.options.onShow != 'undefined' && this.options.onShow != null && this.options.onShow) {
-        this.options.onShow(step_id);
-      }
-
-      this.emit('bulmasteps:step:show', step_id);
-    }
-  }, {
-    key: 'complete_step',
-    value: function complete_step(step_id) {
-      this.steps[step_id].classList.add(this.options.completed_class);
-      this.emit('bulmasteps:step:completed', step_id);
-    }
-  }, {
-    key: 'uncomplete_step',
-    value: function uncomplete_step(step_id) {
-      this.steps[step_id].classList.remove(this.options.completed_class);
-      this.emit('bulmasteps:step:uncompleted', step_id);
-    }
-  }, {
-    key: 'deactivate_step',
-    value: function deactivate_step(step_id) {
-      this.steps[step_id].classList.remove(this.options.active_class);
-      if (typeof this.contents[step_id] !== 'undefined') {
-        this.contents[step_id].classList.remove(this.options.active_class);
-      }
-    }
-  }], [{
-    key: 'attach',
-    value: function attach() {
-      var selector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '.steps';
-      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-
-      var instances = new Array();
-
-      var elements = document.querySelectorAll(selector);
-      [].forEach.call(elements, function (element) {
-        setTimeout(function () {
-          instances.push(new bulmaSteps(element, options));
-        }, 100);
-      });
-      return instances;
-    }
-  }]);
-
-  return bulmaSteps;
-}(__WEBPACK_IMPORTED_MODULE_0__events__["a" /* default */]);
-
-/* harmony default export */ __webpack_exports__["default"] = (bulmaSteps);
-
-/***/ }),
-/* 1 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var EventEmitter = function () {
-  function EventEmitter() {
-    var listeners = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-
-    _classCallCheck(this, EventEmitter);
-
-    this._listeners = new Map(listeners);
-    this._middlewares = new Map();
-  }
-
-  _createClass(EventEmitter, [{
-    key: "listenerCount",
-    value: function listenerCount(eventName) {
-      if (!this._listeners.has(eventName)) {
-        return 0;
-      }
-
-      var eventListeners = this._listeners.get(eventName);
-      return eventListeners.length;
-    }
-  }, {
-    key: "removeListeners",
-    value: function removeListeners() {
-      var _this = this;
-
-      var eventName = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-      var middleware = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-
-      if (eventName !== null) {
-        if (Array.isArray(eventName)) {
-          name.forEach(function (e) {
-            return _this.removeListeners(e, middleware);
-          });
-        } else {
-          this._listeners.delete(eventName);
-
-          if (middleware) {
-            this.removeMiddleware(eventName);
-          }
-        }
-      } else {
-        this._listeners = new Map();
-      }
-    }
-  }, {
-    key: "middleware",
-    value: function middleware(eventName, fn) {
-      var _this2 = this;
-
-      if (Array.isArray(eventName)) {
-        name.forEach(function (e) {
-          return _this2.middleware(e, fn);
-        });
-      } else {
-        if (!Array.isArray(this._middlewares.get(eventName))) {
-          this._middlewares.set(eventName, []);
-        }
-
-        this._middlewares.get(eventName).push(fn);
-      }
-    }
-  }, {
-    key: "removeMiddleware",
-    value: function removeMiddleware() {
-      var _this3 = this;
-
-      var eventName = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-
-      if (eventName !== null) {
-        if (Array.isArray(eventName)) {
-          name.forEach(function (e) {
-            return _this3.removeMiddleware(e);
-          });
-        } else {
-          this._middlewares.delete(eventName);
-        }
-      } else {
-        this._middlewares = new Map();
-      }
-    }
-  }, {
-    key: "on",
-    value: function on(name, callback) {
-      var _this4 = this;
-
-      var once = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-
-      if (Array.isArray(name)) {
-        name.forEach(function (e) {
-          return _this4.on(e, callback);
-        });
-      } else {
-        name = name.toString();
-        var split = name.split(/,|, | /);
-
-        if (split.length > 1) {
-          split.forEach(function (e) {
-            return _this4.on(e, callback);
-          });
-        } else {
-          if (!Array.isArray(this._listeners.get(name))) {
-            this._listeners.set(name, []);
-          }
-
-          this._listeners.get(name).push({ once: once, callback: callback });
-        }
-      }
-    }
-  }, {
-    key: "once",
-    value: function once(name, callback) {
-      this.on(name, callback, true);
-    }
-  }, {
-    key: "emit",
-    value: function emit(name, data) {
-      var _this5 = this;
-
-      var silent = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-
-      name = name.toString();
-      var listeners = this._listeners.get(name);
-      var middlewares = null;
-      var doneCount = 0;
-      var execute = silent;
-
-      if (Array.isArray(listeners)) {
-        listeners.forEach(function (listener, index) {
-          // Start Middleware checks unless we're doing a silent emit
-          if (!silent) {
-            middlewares = _this5._middlewares.get(name);
-            // Check and execute Middleware
-            if (Array.isArray(middlewares)) {
-              middlewares.forEach(function (middleware) {
-                middleware(data, function () {
-                  var newData = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-
-                  if (newData !== null) {
-                    data = newData;
-                  }
-                  doneCount++;
-                }, name);
-              });
-
-              if (doneCount >= middlewares.length) {
-                execute = true;
-              }
-            } else {
-              execute = true;
-            }
-          }
-
-          // If Middleware checks have been passed, execute
-          if (execute) {
-            if (listener.once) {
-              listeners[index] = null;
-            }
-            listener.callback(data);
-          }
-        });
-
-        // Dirty way of removing used Events
-        while (listeners.indexOf(null) !== -1) {
-          listeners.splice(listeners.indexOf(null), 1);
-        }
-      }
-    }
-  }]);
-
-  return EventEmitter;
-}();
-
-/* harmony default export */ __webpack_exports__["a"] = (EventEmitter);
-
-/***/ }),
-/* 2 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var defaultOptions = {
-    'selector': '.step-item',
-    'selector_content': '.step-content',
-    'previous_selector': '[data-nav="previous"]',
-    'next_selector': '[data-nav="next"]',
-    'active_class': 'is-active',
-    'completed_class': 'is-completed',
-    'stepClickable': false,
-    'beforeNext': null,
-    'onShow': null,
-    'onFinish': null,
-    'onError': null
-};
-
-/* harmony default export */ __webpack_exports__["a"] = (defaultOptions);
-
-/***/ })
-/******/ ])["default"];
-});
-
-/***/ }),
-
-/***/ 13:
-/***/ (function(module, exports, __webpack_require__) {
-
-(function webpackUniversalModuleDefinition(root, factory) {
-	if(true)
-		module.exports = factory();
-	else if(typeof define === 'function' && define.amd)
-		define([], factory);
-	else if(typeof exports === 'object')
-		exports["bulmaTagsinput"] = factory();
-	else
-		root["bulmaTagsinput"] = factory();
-})(typeof self !== 'undefined' ? self : this, function() {
-return /******/ (function(modules) { // webpackBootstrap
-/******/ 	// The module cache
-/******/ 	var installedModules = {};
-/******/
-/******/ 	// The require function
-/******/ 	function __webpack_require__(moduleId) {
-/******/
-/******/ 		// Check if module is in cache
-/******/ 		if(installedModules[moduleId]) {
-/******/ 			return installedModules[moduleId].exports;
-/******/ 		}
-/******/ 		// Create a new module (and put it into the cache)
-/******/ 		var module = installedModules[moduleId] = {
-/******/ 			i: moduleId,
-/******/ 			l: false,
-/******/ 			exports: {}
-/******/ 		};
-/******/
-/******/ 		// Execute the module function
-/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-/******/
-/******/ 		// Flag the module as loaded
-/******/ 		module.l = true;
-/******/
-/******/ 		// Return the exports of the module
-/******/ 		return module.exports;
-/******/ 	}
-/******/
-/******/
-/******/ 	// expose the modules object (__webpack_modules__)
-/******/ 	__webpack_require__.m = modules;
-/******/
-/******/ 	// expose the module cache
-/******/ 	__webpack_require__.c = installedModules;
-/******/
-/******/ 	// define getter function for harmony exports
-/******/ 	__webpack_require__.d = function(exports, name, getter) {
-/******/ 		if(!__webpack_require__.o(exports, name)) {
-/******/ 			Object.defineProperty(exports, name, {
-/******/ 				configurable: false,
-/******/ 				enumerable: true,
-/******/ 				get: getter
-/******/ 			});
-/******/ 		}
-/******/ 	};
-/******/
-/******/ 	// getDefaultExport function for compatibility with non-harmony modules
-/******/ 	__webpack_require__.n = function(module) {
-/******/ 		var getter = module && module.__esModule ?
-/******/ 			function getDefault() { return module['default']; } :
-/******/ 			function getModuleExports() { return module; };
-/******/ 		__webpack_require__.d(getter, 'a', getter);
-/******/ 		return getter;
-/******/ 	};
-/******/
-/******/ 	// Object.prototype.hasOwnProperty.call
-/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
-/******/
-/******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "";
-/******/
-/******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
-/******/ })
-/************************************************************************/
-/******/ ([
-/* 0 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_events__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__defaultOptions__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_type__ = __webpack_require__(3);
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-
-
-
-
-
-var KEY_BACKSPACE = 8,
-    KEY_TAB = 9,
-    KEY_ENTER = 13,
-    KEY_LEFT = 37,
-    KEY_RIGHT = 39,
-    KEY_DELETE = 46,
-    KEY_COMMA = 188;
-
-var bulmaTagsinput = function (_EventEmitter) {
-	_inherits(bulmaTagsinput, _EventEmitter);
-
-	function bulmaTagsinput(selector) {
-		var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-
-		_classCallCheck(this, bulmaTagsinput);
-
-		var _this = _possibleConstructorReturn(this, (bulmaTagsinput.__proto__ || Object.getPrototypeOf(bulmaTagsinput)).call(this));
-
-		_this.element = __WEBPACK_IMPORTED_MODULE_2__utils_type__["a" /* isString */](selector) ? document.querySelector(selector) : selector;
-		// An invalid selector or non-DOM node has been provided.
-		if (!_this.element) {
-			throw new Error('An invalid selector or non-DOM node has been provided.');
-		}
-		_this._clickEvents = ['click'];
-
-		/// Set default options and merge with instance defined
-		_this.options = _extends({}, __WEBPACK_IMPORTED_MODULE_1__defaultOptions__["a" /* default */], options);
-
-		if (_this.element.dataset.hasOwnProperty('lowercase')) {
-			_this.options.lowercase = _this.element.dataset('lowercase');
-		}
-		if (_this.element.dataset.hasOwnProperty('uppercase')) {
-			_this.options.lowercase = _this.element.dataset('uppercase');
-		}
-		if (_this.element.dataset.hasOwnProperty('duplicates')) {
-			_this.options.lowercase = _this.element.dataset('duplicates');
-		}
-
-		_this.init();
-		return _this;
-	}
-
-	/**
-   * Initiate all DOM element containing tagsinput class
-   * @method
-   * @return {Array} Array of all TagsInput instances
-   */
-
-
-	_createClass(bulmaTagsinput, [{
-		key: 'init',
-		value: function init() {
-			if (!this.options.disabled) {
-				this.tags = [];
-				// The container will visually looks like an input
-				this.container = document.createElement('div');
-				this.container.className = 'tagsinput';
-				this.container.classList.add('field');
-				this.container.classList.add('is-grouped');
-				this.container.classList.add('is-grouped-multiline');
-				this.container.classList.add('input');
-
-				var inputType = this.element.getAttribute('type');
-				if (!inputType || inputType === 'tags') {
-					inputType = 'text';
-				}
-				// Create an invisible input element so user will be able to enter value
-				this.input = document.createElement('input');
-				this.input.setAttribute('type', inputType);
-				if (this.element.getAttribute('placeholder')) {
-					this.input.setAttribute('placeholder', this.element.getAttribute('placeholder'));
-				} else {
-					this.input.setAttribute('placeholder', 'Add a Tag');
-				}
-				this.container.appendChild(this.input);
-
-				var sib = this.element.nextSibling;
-				this.element.parentNode[sib ? 'insertBefore' : 'appendChild'](this.container, sib);
-				this.element.style.cssText = 'position:absolute;left:0;top:0;width:1px;height:1px;opacity:0.01;';
-				this.element.tabIndex = -1;
-
-				this.enable();
-			}
-		}
-	}, {
-		key: 'enable',
-		value: function enable() {
-			var _this2 = this;
-
-			if (!this.enabled && !this.options.disabled) {
-
-				this.element.addEventListener('focus', function () {
-					_this2.container.classList.add('is-focused');
-					_this2.select(Array.prototype.slice.call(_this2.container.querySelectorAll('.tag:not(.is-delete)')).pop());
-				});
-
-				this.input.addEventListener('focus', function () {
-					_this2.container.classList.add('is-focused');
-					_this2.select(Array.prototype.slice.call(_this2.container.querySelectorAll('.tag:not(.is-delete)')).pop());
-				});
-				this.input.addEventListener('blur', function () {
-					_this2.container.classList.remove('is-focused');
-					_this2.select(Array.prototype.slice.call(_this2.container.querySelectorAll('.tag:not(.is-delete)')).pop());
-					_this2.savePartial();
-				});
-				this.input.addEventListener('keydown', function (e) {
-					var key = e.charCode || e.keyCode || e.which,
-					    selectedTag = void 0,
-					    activeTag = _this2.container.querySelector('.tag.is-active'),
-					    last = Array.prototype.slice.call(_this2.container.querySelectorAll('.tag:not(.is-delete)')).pop(),
-					    atStart = _this2.caretAtStart(_this2.input);
-
-					if (activeTag) {
-						selectedTag = _this2.container.querySelector('[data-tag="' + activeTag.innerHTML.trim() + '"]');
-					}
-					_this2.setInputWidth();
-
-					if (key === KEY_ENTER || key === _this2.options.delimiter.charCodeAt(0) || key === KEY_COMMA || key === KEY_TAB) {
-						if (!_this2.input.value && (key !== _this2.options.delimiter.charCodeAt(0) || key === KEY_COMMA)) {
-							return;
-						}
-						_this2.savePartial();
-					} else if (key === KEY_DELETE && selectedTag) {
-						if (selectedTag.nextSibling) {
-							_this2.select(selectedTag.nextSibling.querySelector('.tag'));
-						} else if (selectedTag.previousSibling) {
-							_this2.select(selectedTag.previousSibling.querySelector('.tag'));
-						}
-						_this2.container.removeChild(selectedTag);
-						_this2.tags.splice(_this2.tags.indexOf(selectedTag.getAttribute('data-tag')), 1);
-						_this2.setInputWidth();
-						_this2.save();
-					} else if (key === KEY_BACKSPACE) {
-						if (selectedTag) {
-							if (selectedTag.previousSibling) {
-								_this2.select(selectedTag.previousSibling.querySelector('.tag'));
-							} else if (selectedTag.nextSibling) {
-								_this2.select(selectedTag.nextSibling.querySelector('.tag'));
-							}
-							_this2.container.removeChild(selectedTag);
-							_this2.tags.splice(_this2.tags.indexOf(selectedTag.getAttribute('data-tag')), 1);
-							_this2.setInputWidth();
-							_this2.save();
-						} else if (last && atStart) {
-							_this2.select(last);
-						} else {
-							return;
-						}
-					} else if (key === KEY_LEFT) {
-						if (selectedTag) {
-							if (selectedTag.previousSibling) {
-								_this2.select(selectedTag.previousSibling.querySelector('.tag'));
-							}
-						} else if (!atStart) {
-							return;
-						} else {
-							_this2.select(last);
-						}
-					} else if (key === KEY_RIGHT) {
-						if (!selectedTag) {
-							return;
-						}
-						_this2.select(selectedTag.nextSibling.querySelector('.tag'));
-					} else {
-						return _this2.select();
-					}
-
-					e.preventDefault();
-					return false;
-				});
-				this.input.addEventListener('input', function () {
-					_this2.element.value = _this2.getValue();
-					_this2.element.dispatchEvent(new Event('input'));
-				});
-				this.input.addEventListener('paste', function () {
-					return setTimeout(savePartial, 0);
-				});
-
-				this.container.addEventListener('mousedown', function (e) {
-					_this2.refocus(e);
-				});
-				this.container.addEventListener('touchstart', function (e) {
-					_this2.refocus(e);
-				});
-
-				this.savePartial(this.element.value);
-
-				this.enabled = true;
-			}
-		}
-	}, {
-		key: 'disable',
-		value: function disable() {
-			if (this.enabled && !this.options.disabled) {
-				this.reset();
-
-				this.enabled = false;
-			}
-		}
-	}, {
-		key: 'select',
-		value: function select(el) {
-			var sel = this.container.querySelector('.is-active');
-			if (sel) {
-				sel.classList.remove('is-active');
-			}
-			if (el) {
-				el.classList.add('is-active');
-			}
-		}
-	}, {
-		key: 'addTag',
-		value: function addTag(text) {
-			var _this3 = this;
-
-			if (~text.indexOf(this.options.delimiter)) {
-				text = text.split(this.options.delimiter);
-			}
-			if (Array.isArray(text)) {
-				return text.forEach(function (text) {
-					_this3.addTag(text);
-				});
-			}
-
-			var tag = text && text.trim();
-			if (!tag) {
-				return false;
-			}
-
-			if (this.options['lowercase'] == 'true') {
-				tag = tag.toLowerCase();
-			}
-			if (this.options['uppercase'] == 'true') {
-				tag = tag.toUpperCase();
-			}
-			if (this.options['duplicates'] || this.tags.indexOf(tag) === -1) {
-				this.tags.push(tag);
-
-				var newTagWrapper = document.createElement('div');
-				newTagWrapper.className = 'control';
-				newTagWrapper.setAttribute('data-tag', tag);
-
-				var newTag = document.createElement('div');
-				newTag.className = 'tags';
-				newTag.classList.add('has-addons');
-
-				var newTagContent = document.createElement('span');
-				newTagContent.className = 'tag';
-				newTagContent.classList.add('is-active');
-				this.select(newTagContent);
-				newTagContent.innerHTML = tag;
-
-				newTag.appendChild(newTagContent);
-				if (this.options.allowDelete) {
-					var newTagDeleteButton = document.createElement('a');
-					newTagDeleteButton.className = 'tag';
-					newTagDeleteButton.classList.add('is-delete');
-					this._clickEvents.forEach(function (event) {
-						newTagDeleteButton.addEventListener(event, function (e) {
-							var selectedTag = void 0,
-							    activeTag = e.target.parentNode,
-							    last = Array.prototype.slice.call(_this3.container.querySelectorAll('.tag')).pop(),
-							    atStart = _this3.caretAtStart(_this3.input);
-
-							if (activeTag) {
-								selectedTag = _this3.container.querySelector('[data-tag="' + activeTag.innerText.trim() + '"]');
-							}
-
-							if (selectedTag) {
-								_this3.select(selectedTag.previousSibling);
-								_this3.container.removeChild(selectedTag);
-								_this3.tags.splice(_this3.tags.indexOf(selectedTag.getAttribute('data-tag')), 1);
-								_this3.setInputWidth();
-								_this3.save();
-							} else if (last && atStart) {
-								_this3.select(last);
-							} else {
-								return;
-							}
-						});
-					});
-					newTag.appendChild(newTagDeleteButton);
-				}
-				newTagWrapper.appendChild(newTag);
-
-				this.container.insertBefore(newTagWrapper, this.input);
-			}
-		}
-	}, {
-		key: 'getValue',
-		value: function getValue() {
-			return this.tags.join(this.options.delimiter);
-		}
-	}, {
-		key: 'setValue',
-		value: function setValue(value) {
-			var _this4 = this;
-
-			Array.prototype.slice.call(this.container.querySelectorAll('.tag')).forEach(function (tag) {
-				_this4.tags.splice(_this4.tags.indexOf(tag.innerHTML), 1);
-				_this4.container.removeChild(tag);
-			});
-			this.savePartial(value);
-		}
-	}, {
-		key: 'setInputWidth',
-		value: function setInputWidth() {
-			var last = Array.prototype.slice.call(this.container.querySelectorAll('.control')).pop();
-
-			if (!this.container.offsetWidth) {
-				return;
-			}
-			this.input.style.width = Math.max(this.container.offsetWidth - (last ? last.offsetLeft + last.offsetWidth : 30) - 30, this.container.offsetWidth / 4) + 'px';
-		}
-	}, {
-		key: 'savePartial',
-		value: function savePartial(value) {
-			if (typeof value !== 'string' && !Array.isArray(value)) {
-				value = this.input.value;
-			}
-			if (this.addTag(value) !== false) {
-				this.input.value = '';
-				this.save();
-				this.setInputWidth();
-			}
-		}
-	}, {
-		key: 'save',
-		value: function save() {
-			this.element.value = this.tags.join(this.options.delimiter);
-			this.element.dispatchEvent(new Event('change'));
-		}
-	}, {
-		key: 'caretAtStart',
-		value: function caretAtStart(el) {
-			try {
-				return el.selectionStart === 0 && el.selectionEnd === 0;
-			} catch (e) {
-				return el.value === '';
-			}
-		}
-	}, {
-		key: 'refocus',
-		value: function refocus(e) {
-			if (e.target.classList.contains('tag')) {
-				this.select(e.target);
-			}
-			if (e.target === this.input) {
-				return this.select();
-			}
-			this.input.focus();
-			e.preventDefault();
-			return false;
-		}
-	}, {
-		key: 'reset',
-		value: function reset() {
-			this.tags = [];
-		}
-	}, {
-		key: 'destroy',
-		value: function destroy() {
-			this.disable();
-			this.reset();
-			this.element = null;
-		}
-	}], [{
-		key: 'attach',
-		value: function attach() {
-			var selector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'input[type="tags"]';
-			var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-
-			var instances = new Array();
-
-			var elements = document.querySelectorAll(selector);
-			[].forEach.call(elements, function (element) {
-				setTimeout(function () {
-					instances.push(new bulmaTagsinput(element, options));
-				}, 100);
-			});
-			return instances;
-		}
-	}]);
-
-	return bulmaTagsinput;
-}(__WEBPACK_IMPORTED_MODULE_0__utils_events__["a" /* default */]);
-
-/* harmony default export */ __webpack_exports__["default"] = (bulmaTagsinput);
-
-/***/ }),
-/* 1 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var EventEmitter = function () {
-  function EventEmitter() {
-    var listeners = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-
-    _classCallCheck(this, EventEmitter);
-
-    this._listeners = new Map(listeners);
-    this._middlewares = new Map();
-  }
-
-  _createClass(EventEmitter, [{
-    key: "listenerCount",
-    value: function listenerCount(eventName) {
-      if (!this._listeners.has(eventName)) {
-        return 0;
-      }
-
-      var eventListeners = this._listeners.get(eventName);
-      return eventListeners.length;
-    }
-  }, {
-    key: "removeListeners",
-    value: function removeListeners() {
-      var _this = this;
-
-      var eventName = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-      var middleware = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-
-      if (eventName !== null) {
-        if (Array.isArray(eventName)) {
-          name.forEach(function (e) {
-            return _this.removeListeners(e, middleware);
-          });
-        } else {
-          this._listeners.delete(eventName);
-
-          if (middleware) {
-            this.removeMiddleware(eventName);
-          }
-        }
-      } else {
-        this._listeners = new Map();
-      }
-    }
-  }, {
-    key: "middleware",
-    value: function middleware(eventName, fn) {
-      var _this2 = this;
-
-      if (Array.isArray(eventName)) {
-        name.forEach(function (e) {
-          return _this2.middleware(e, fn);
-        });
-      } else {
-        if (!Array.isArray(this._middlewares.get(eventName))) {
-          this._middlewares.set(eventName, []);
-        }
-
-        this._middlewares.get(eventName).push(fn);
-      }
-    }
-  }, {
-    key: "removeMiddleware",
-    value: function removeMiddleware() {
-      var _this3 = this;
-
-      var eventName = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-
-      if (eventName !== null) {
-        if (Array.isArray(eventName)) {
-          name.forEach(function (e) {
-            return _this3.removeMiddleware(e);
-          });
-        } else {
-          this._middlewares.delete(eventName);
-        }
-      } else {
-        this._middlewares = new Map();
-      }
-    }
-  }, {
-    key: "on",
-    value: function on(name, callback) {
-      var _this4 = this;
-
-      var once = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-
-      if (Array.isArray(name)) {
-        name.forEach(function (e) {
-          return _this4.on(e, callback);
-        });
-      } else {
-        name = name.toString();
-        var split = name.split(/,|, | /);
-
-        if (split.length > 1) {
-          split.forEach(function (e) {
-            return _this4.on(e, callback);
-          });
-        } else {
-          if (!Array.isArray(this._listeners.get(name))) {
-            this._listeners.set(name, []);
-          }
-
-          this._listeners.get(name).push({ once: once, callback: callback });
-        }
-      }
-    }
-  }, {
-    key: "once",
-    value: function once(name, callback) {
-      this.on(name, callback, true);
-    }
-  }, {
-    key: "emit",
-    value: function emit(name, data) {
-      var _this5 = this;
-
-      var silent = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-
-      name = name.toString();
-      var listeners = this._listeners.get(name);
-      var middlewares = null;
-      var doneCount = 0;
-      var execute = silent;
-
-      if (Array.isArray(listeners)) {
-        listeners.forEach(function (listener, index) {
-          // Start Middleware checks unless we're doing a silent emit
-          if (!silent) {
-            middlewares = _this5._middlewares.get(name);
-            // Check and execute Middleware
-            if (Array.isArray(middlewares)) {
-              middlewares.forEach(function (middleware) {
-                middleware(data, function () {
-                  var newData = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-
-                  if (newData !== null) {
-                    data = newData;
-                  }
-                  doneCount++;
-                }, name);
-              });
-
-              if (doneCount >= middlewares.length) {
-                execute = true;
-              }
-            } else {
-              execute = true;
-            }
-          }
-
-          // If Middleware checks have been passed, execute
-          if (execute) {
-            if (listener.once) {
-              listeners[index] = null;
-            }
-            listener.callback(data);
-          }
-        });
-
-        // Dirty way of removing used Events
-        while (listeners.indexOf(null) !== -1) {
-          listeners.splice(listeners.indexOf(null), 1);
-        }
-      }
-    }
-  }]);
-
-  return EventEmitter;
-}();
-
-/* harmony default export */ __webpack_exports__["a"] = (EventEmitter);
-
-/***/ }),
-/* 2 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var defaultOptions = {
-		disabled: false,
-		delimiter: ',',
-		allowDelete: true,
-		lowercase: false,
-		uppercase: false,
-		duplicates: true
-};
-
-/* harmony default export */ __webpack_exports__["a"] = (defaultOptions);
-
-/***/ }),
-/* 3 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return isString; });
-/* unused harmony export isDate */
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-var isString = function isString(unknown) {
-  return typeof unknown === 'string' || !!unknown && (typeof unknown === 'undefined' ? 'undefined' : _typeof(unknown)) === 'object' && Object.prototype.toString.call(unknown) === '[object String]';
-};
-var isDate = function isDate(unknown) {
-  return (Object.prototype.toString.call(unknown) === '[object Date]' || unknown instanceof Date) && !isNaN(unknown.valueOf());
-};
-
-/***/ })
-/******/ ])["default"];
-});
-
-/***/ }),
-
-/***/ 2:
-/***/ (function(module, exports, __webpack_require__) {
-
-(function webpackUniversalModuleDefinition(root, factory) {
-	if(true)
-		module.exports = factory();
-	else if(typeof define === 'function' && define.amd)
-		define([], factory);
-	else if(typeof exports === 'object')
-		exports["bulmaCarousel"] = factory();
-	else
-		root["bulmaCarousel"] = factory();
-})(typeof self !== 'undefined' ? self : this, function() {
-return /******/ (function(modules) { // webpackBootstrap
-/******/ 	// The module cache
-/******/ 	var installedModules = {};
-/******/
-/******/ 	// The require function
-/******/ 	function __webpack_require__(moduleId) {
-/******/
-/******/ 		// Check if module is in cache
-/******/ 		if(installedModules[moduleId]) {
-/******/ 			return installedModules[moduleId].exports;
-/******/ 		}
-/******/ 		// Create a new module (and put it into the cache)
-/******/ 		var module = installedModules[moduleId] = {
-/******/ 			i: moduleId,
-/******/ 			l: false,
-/******/ 			exports: {}
-/******/ 		};
-/******/
-/******/ 		// Execute the module function
-/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-/******/
-/******/ 		// Flag the module as loaded
-/******/ 		module.l = true;
-/******/
-/******/ 		// Return the exports of the module
-/******/ 		return module.exports;
-/******/ 	}
-/******/
-/******/
-/******/ 	// expose the modules object (__webpack_modules__)
-/******/ 	__webpack_require__.m = modules;
-/******/
-/******/ 	// expose the module cache
-/******/ 	__webpack_require__.c = installedModules;
-/******/
-/******/ 	// define getter function for harmony exports
-/******/ 	__webpack_require__.d = function(exports, name, getter) {
-/******/ 		if(!__webpack_require__.o(exports, name)) {
-/******/ 			Object.defineProperty(exports, name, {
-/******/ 				configurable: false,
-/******/ 				enumerable: true,
-/******/ 				get: getter
-/******/ 			});
-/******/ 		}
-/******/ 	};
-/******/
-/******/ 	// getDefaultExport function for compatibility with non-harmony modules
-/******/ 	__webpack_require__.n = function(module) {
-/******/ 		var getter = module && module.__esModule ?
-/******/ 			function getDefault() { return module['default']; } :
-/******/ 			function getModuleExports() { return module; };
-/******/ 		__webpack_require__.d(getter, 'a', getter);
-/******/ 		return getter;
-/******/ 	};
-/******/
-/******/ 	// Object.prototype.hasOwnProperty.call
-/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
-/******/
-/******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "";
-/******/
-/******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
-/******/ })
-/************************************************************************/
-/******/ ([
-/* 0 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__events__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__defaultOptions__ = __webpack_require__(2);
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-
-
-
-var BULMA_CAROUSEL_EVENTS = {
-  'ready': 'carousel:ready',
-  'slideBefore': 'carousel:slide:before',
-  'slideAfter': 'carousel:slide:after'
-};
-
-var onSwipeStart = Symbol('onSwipeStart');
-var onSwipeMove = Symbol('onSwipeMove');
-var onSwipeEnd = Symbol('onSwipeEnd');
-
-var supportsPassive = false;
-try {
-  var opts = Object.defineProperty({}, 'passive', {
-    get: function get() {
-      supportsPassive = true;
-    }
-  });
-  window.addEventListener("testPassive", null, opts);
-  window.removeEventListener("testPassive", null, opts);
-} catch (e) {}
-
-var bulmaCarousel = function (_EventEmitter) {
-  _inherits(bulmaCarousel, _EventEmitter);
-
-  function bulmaCarousel(selector) {
-    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-
-    _classCallCheck(this, bulmaCarousel);
-
-    var _this = _possibleConstructorReturn(this, (bulmaCarousel.__proto__ || Object.getPrototypeOf(bulmaCarousel)).call(this));
-
-    _this.element = typeof selector === 'string' ? document.querySelector(selector) : selector;
-    // An invalid selector or non-DOM node has been provided.
-    if (!_this.element) {
-      throw new Error('An invalid selector or non-DOM node has been provided.');
-    }
-
-    _this._clickEvents = ['click'];
-    _this.options = Object.assign({}, __WEBPACK_IMPORTED_MODULE_1__defaultOptions__["a" /* default */], options);
-    if (_this.element.dataset.autoplay) {
-      _this.options.autoplay = _this.element.dataset.autoplay;
-    }
-    if (_this.element.dataset.delay) {
-      _this.options.delay = _this.element.dataset.delay;
-    }
-    if (_this.element.dataset.size && !_this.element.classList.contains('carousel-animate-fade')) {
-      _this.options.size = _this.element.dataset.size;
-    }
-    if (_this.element.classList.contains('carousel-animate-fade')) {
-      _this.options.size = 1;
-    }
-
-    _this.forceHiddenNavigation = false;
-
-    _this[onSwipeStart] = _this[onSwipeStart].bind(_this);
-    _this[onSwipeMove] = _this[onSwipeMove].bind(_this);
-    _this[onSwipeEnd] = _this[onSwipeEnd].bind(_this);
-
-    _this.init();
-    return _this;
-  }
-
-  /**
-   * Initiate all DOM element containing carousel class
-   * @method
-   * @return {Array} Array of all Carousel instances
-   */
-
-
-  _createClass(bulmaCarousel, [{
-    key: 'init',
-
-
-    /**
-     * Initiate plugin
-     * @method init
-     * @return {void}
-     */
-    value: function init() {
-      this.container = this.element.querySelector('.carousel-container');
-      this.items = this.element.querySelectorAll('.carousel-item');
-      this.currentItem = {
-        element: this.element,
-        node: this.element.querySelector('.carousel-item.is-active'),
-        pos: -1
-      };
-      this.currentItem.pos = this.currentItem.node ? Array.from(this.items).indexOf(this.currentItem.node) : -1;
-      if (!this.currentItem.node) {
-        this.currentItem.node = this.items[0];
-        this.currentItem.node.classList.add('is-active');
-        this.currentItem.pos = 0;
-      }
-      this.forceHiddenNavigation = this.items.length <= 1;
-
-      var images = this.element.querySelectorAll('img');
-      [].forEach.call(images, function (img) {
-        img.setAttribute('draggable', false);
-      });
-
-      this._resize();
-      this._setOrder();
-      this._initNavigation();
-      this._bindEvents();
-
-      if (this.options.autoplay) {
-        this._autoPlay(this.options.delay);
-      }
-
-      this.emit(BULMA_CAROUSEL_EVENTS.ready, this.currentItem);
-    }
-  }, {
-    key: '_resize',
-    value: function _resize() {
-      var _this2 = this;
-
-      var computedStyle = window.getComputedStyle(this.element);
-      var width = parseInt(computedStyle.getPropertyValue('width'), 10);
-
-      // Detect which animation is setup and auto-calculate size and transformation
-      if (this.options.size > 1) {
-        if (this.options.size >= Array.from(this.items).length) {
-          this.offset = 0;
-        } else {
-          this.offset = width / this.options.size;
-        }
-
-        this.container.style.left = 0 - this.offset + 'px';
-        this.container.style.transform = 'translateX(' + this.offset + 'px)';
-        [].forEach.call(this.items, function (item) {
-          item.style.flexBasis = _this2.offset + 'px';
-        });
-      }
-
-      // If animation is fade then force carouselContainer size (due to the position: absolute)
-      if (this.element.classList.contains('carousel-animate-fade') && this.items.length) {
-        var img = this.items[0].querySelector('img');
-        var scale = 1;
-        if (img.naturalWidth) {
-          scale = width / img.naturalWidth;
-          this.container.style.height = img.naturalHeight * scale + 'px';
-        } else {
-          img.onload = function () {
-            scale = width / img.naturalWidth;
-            _this2.container.style.height = img.naturalHeight * scale + 'px';
-          };
-        }
-      }
-    }
-
-    /**
-     * Bind all events
-     * @method _bindEvents
-     * @return {void}
-     */
-
-  }, {
-    key: '_bindEvents',
-    value: function _bindEvents() {
-      var _this3 = this;
-
-      if (this.previousControl) {
-        this._clickEvents.forEach(function (clickEvent) {
-          _this3.previousControl.addEventListener(clickEvent, function (e) {
-            if (!supportsPassive) {
-              e.preventDefault();
-            }
-            if (_this3._autoPlayInterval) {
-              clearInterval(_this3._autoPlayInterval);
-              _this3._autoPlay(_this3.optionsdelay);
-            }
-            _this3._slide('previous');
-          }, supportsPassive ? { passive: true } : false);
-        });
-      }
-
-      if (this.nextControl) {
-        this._clickEvents.forEach(function (clickEvent) {
-          _this3.nextControl.addEventListener(clickEvent, function (e) {
-            if (!supportsPassive) {
-              e.preventDefault();
-            }
-            if (_this3._autoPlayInterval) {
-              clearInterval(_this3._autoPlayInterval);
-              _this3._autoPlay(_this3.options.delay);
-            }
-            _this3._slide('next');
-          }, supportsPassive ? { passive: true } : false);
-        });
-      }
-
-      // Bind swipe events
-      this.element.addEventListener('touchstart', this[onSwipeStart], supportsPassive ? { passive: true } : false);
-      this.element.addEventListener('mousedown', this[onSwipeStart], supportsPassive ? { passive: true } : false);
-      this.element.addEventListener('touchmove', this[onSwipeMove], supportsPassive ? { passive: true } : false);
-      this.element.addEventListener('mousemove', this[onSwipeMove], supportsPassive ? { passive: true } : false);
-      this.element.addEventListener('touchend', this[onSwipeEnd], supportsPassive ? { passive: true } : false);
-      this.element.addEventListener('mouseup', this[onSwipeEnd], supportsPassive ? { passive: true } : false);
-    }
-  }, {
-    key: 'destroy',
-    value: function destroy() {
-      this.element.removeEventListener('touchstart', this[onSwipeStart], supportsPassive ? { passive: true } : false);
-      this.element.removeEventListener('mousedown', this[onSwipeStart], supportsPassive ? { passive: true } : false);
-      this.element.removeEventListener('touchmove', this[onSwipeMove], supportsPassive ? { passive: true } : false);
-      this.element.removeEventListener('mousemove', this[onSwipeMove], supportsPassive ? { passive: true } : false);
-      this.element.removeEventListener('touchend', this[onSwipeEnd], supportsPassive ? { passive: true } : false);
-      this.element.removeEventListener('mouseup', this[onSwipeEnd], supportsPassive ? { passive: true } : false);
-    }
-
-    /**
-     * Save current position on start swiping
-     * @method onSwipeStart
-     * @param  {Event}    e Swipe event
-     * @return {void}
-     */
-
-  }, {
-    key: onSwipeStart,
-    value: function value(e) {
-      if (!supportsPassive) {
-        e.preventDefault();
-      }
-
-      e = e ? e : window.event;
-      e = 'changedTouches' in e ? e.changedTouches[0] : e;
-      this._touch = {
-        start: {
-          time: new Date().getTime(), // record time when finger first makes contact with surface
-          x: e.pageX,
-          y: e.pageY
-        },
-        dist: {
-          x: 0,
-          y: 0
-        }
-      };
-    }
-
-    /**
-     * Save current position on end swiping
-     * @method onSwipeMove
-     * @param  {Event}  e swipe event
-     * @return {void}
-     */
-
-  }, {
-    key: onSwipeMove,
-    value: function value(e) {
-      if (!supportsPassive) {
-        e.preventDefault();
-      }
-    }
-
-    /**
-     * Save current position on end swiping
-     * @method onSwipeEnd
-     * @param  {Event}  e swipe event
-     * @return {void}
-     */
-
-  }, {
-    key: onSwipeEnd,
-    value: function value(e) {
-      if (!supportsPassive) {
-        e.preventDefault();
-      }
-
-      e = e ? e : window.event;
-      e = 'changedTouches' in e ? e.changedTouches[0] : e;
-      this._touch.dist = {
-        x: e.pageX - this._touch.start.x, // get horizontal dist traveled by finger while in contact with surface
-        y: e.pageY - this._touch.start.y // get vertical dist traveled by finger while in contact with surface
-      };
-
-      this._handleGesture();
-    }
-
-    /**
-     * Identify the gestureand slide if necessary
-     * @method _handleGesture
-     * @return {void}
-     */
-
-  }, {
-    key: '_handleGesture',
-    value: function _handleGesture() {
-      var elapsedTime = new Date().getTime() - this._touch.start.time; // get time elapsed
-      if (elapsedTime <= this.options.allowedTime) {
-        // first condition for awipe met
-        if (Math.abs(this._touch.dist.x) >= this.options.threshold && Math.abs(this._touch.dist.y) <= this.options.restraint) {
-          // 2nd condition for horizontal swipe met
-          this._touch.dist.x < 0 ? this._slide('next') : this._slide('previous'); // if dist traveled is negative, it indicates left swipe
-        }
-      }
-    }
-
-    /**
-     * Initiate Navigation area and Previous/Next buttons
-     * @method _initNavigation
-     * @return {[type]}        [description]
-     */
-
-  }, {
-    key: '_initNavigation',
-    value: function _initNavigation() {
-      this.previousControl = this.element.querySelector('.carousel-nav-left');
-      this.nextControl = this.element.querySelector('.carousel-nav-right');
-
-      if (this.items.length <= 1 || this.forceHiddenNavigation) {
-        if (this.container) {
-          this.container.style.left = '0';
-        }
-        if (this.previousControl) {
-          this.previousControl.style.display = 'none';
-        }
-        if (this.nextControl) {
-          this.nextControl.style.display = 'none';
-        }
-      }
-    }
-
-    /**
-     * Update each item order
-     * @method _setOrder
-     */
-
-  }, {
-    key: '_setOrder',
-    value: function _setOrder() {
-      this.currentItem.node.style.order = '1';
-      this.currentItem.node.style.zIndex = '1';
-      var item = this.currentItem.node;
-      var i = void 0,
-          j = void 0,
-          ref = void 0;
-      for (i = j = 2, ref = Array.from(this.items).length; 2 <= ref ? j <= ref : j >= ref; i = 2 <= ref ? ++j : --j) {
-        item = this._next(item);
-        item.style.order = '' + i % Array.from(this.items).length;
-        item.style.zIndex = '0';
-      }
-    }
-
-    /**
-     * Find next item to display
-     * @method _next
-     * @param  {Node} element Current Node element
-     * @return {Node}         Next Node element
-     */
-
-  }, {
-    key: '_next',
-    value: function _next(element) {
-      if (element.nextElementSibling) {
-        return element.nextElementSibling;
-      } else {
-        return this.items[0];
-      }
-    }
-
-    /**
-     * Find previous item to display
-     * @method _previous
-     * @param  {Node}  element Current Node element
-     * @return {Node}          Previous Node element
-     */
-
-  }, {
-    key: '_previous',
-    value: function _previous(element) {
-      if (element.previousElementSibling) {
-        return element.previousElementSibling;
-      } else {
-        return this.items[this.items.length - 1];
-      }
-    }
-
-    /**
-     * Update slides to display the wanted one
-     * @method _slide
-     * @param  {String} [direction='next'] Direction in which items need to move
-     * @return {void}
-     */
-
-  }, {
-    key: '_slide',
-    value: function _slide() {
-      var _this4 = this;
-
-      var direction = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'next';
-
-      if (this.items.length) {
-        this.oldItemNode = this.currentItem.node;
-        this.emit(BULMA_CAROUSEL_EVENTS.slideBefore, this.currentItem);
-        // initialize direction to change order
-        if (direction === 'previous') {
-          this.currentItem.node = this._previous(this.currentItem.node);
-          // add reverse class
-          if (!this.element.classList.contains('carousel-animate-fade')) {
-            this.element.classList.add('is-reversing');
-            this.container.style.transform = 'translateX(' + -Math.abs(this.offset) + 'px)';
-          }
-        } else {
-          // Reorder items
-          this.currentItem.node = this._next(this.currentItem.node);
-          // re_slide reverse class
-          this.element.classList.remove('is-reversing');
-          this.container.style.transform = 'translateX(' + Math.abs(this.offset) + 'px)';
-        }
-        this.currentItem.node.classList.add('is-active');
-        this.oldItemNode.classList.remove('is-active');
-
-        // Disable transition to instant change order
-        this.element.classList.remove('carousel-animated');
-        // Enable transition to animate order 1 to order 2
-        setTimeout(function () {
-          _this4.element.classList.add('carousel-animated');
-        }, 50);
-
-        this._setOrder();
-        this.emit(BULMA_CAROUSEL_EVENTS.slideAfter, this.currentItem);
-      }
-    }
-
-    /**
-     * Initiate autoplay system
-     * @method _autoPlay
-     * @param  {Number}  [delay=5000] Delay between slides in milliseconds
-     * @return {void}
-     */
-
-  }, {
-    key: '_autoPlay',
-    value: function _autoPlay() {
-      var _this5 = this;
-
-      var delay = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 5000;
-
-      this._autoPlayInterval = setInterval(function () {
-        _this5._slide('next');
-      }, delay);
-    }
-  }], [{
-    key: 'attach',
-    value: function attach() {
-      var selector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '.carousel, .hero-carousel';
-      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-
-      var instances = new Array();
-
-      var elements = document.querySelectorAll(selector);
-      [].forEach.call(elements, function (element) {
-        setTimeout(function () {
-          instances.push(new bulmaCarousel(element, options));
-        }, 100);
-      });
-      return instances;
-    }
-  }]);
-
-  return bulmaCarousel;
-}(__WEBPACK_IMPORTED_MODULE_0__events__["a" /* default */]);
-
-/* harmony default export */ __webpack_exports__["default"] = (bulmaCarousel);
-
-/***/ }),
-/* 1 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var EventEmitter = function () {
-  function EventEmitter() {
-    var listeners = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-
-    _classCallCheck(this, EventEmitter);
-
-    this._listeners = new Map(listeners);
-    this._middlewares = new Map();
-  }
-
-  _createClass(EventEmitter, [{
-    key: "listenerCount",
-    value: function listenerCount(eventName) {
-      if (!this._listeners.has(eventName)) {
-        return 0;
-      }
-
-      var eventListeners = this._listeners.get(eventName);
-      return eventListeners.length;
-    }
-  }, {
-    key: "removeListeners",
-    value: function removeListeners() {
-      var _this = this;
-
-      var eventName = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-      var middleware = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-
-      if (eventName !== null) {
-        if (Array.isArray(eventName)) {
-          name.forEach(function (e) {
-            return _this.removeListeners(e, middleware);
-          });
-        } else {
-          this._listeners.delete(eventName);
-
-          if (middleware) {
-            this.removeMiddleware(eventName);
-          }
-        }
-      } else {
-        this._listeners = new Map();
-      }
-    }
-  }, {
-    key: "middleware",
-    value: function middleware(eventName, fn) {
-      var _this2 = this;
-
-      if (Array.isArray(eventName)) {
-        name.forEach(function (e) {
-          return _this2.middleware(e, fn);
-        });
-      } else {
-        if (!Array.isArray(this._middlewares.get(eventName))) {
-          this._middlewares.set(eventName, []);
-        }
-
-        this._middlewares.get(eventName).push(fn);
-      }
-    }
-  }, {
-    key: "removeMiddleware",
-    value: function removeMiddleware() {
-      var _this3 = this;
-
-      var eventName = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-
-      if (eventName !== null) {
-        if (Array.isArray(eventName)) {
-          name.forEach(function (e) {
-            return _this3.removeMiddleware(e);
-          });
-        } else {
-          this._middlewares.delete(eventName);
-        }
-      } else {
-        this._middlewares = new Map();
-      }
-    }
-  }, {
-    key: "on",
-    value: function on(name, callback) {
-      var _this4 = this;
-
-      var once = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-
-      if (Array.isArray(name)) {
-        name.forEach(function (e) {
-          return _this4.on(e, callback);
-        });
-      } else {
-        name = name.toString();
-        var split = name.split(/,|, | /);
-
-        if (split.length > 1) {
-          split.forEach(function (e) {
-            return _this4.on(e, callback);
-          });
-        } else {
-          if (!Array.isArray(this._listeners.get(name))) {
-            this._listeners.set(name, []);
-          }
-
-          this._listeners.get(name).push({ once: once, callback: callback });
-        }
-      }
-    }
-  }, {
-    key: "once",
-    value: function once(name, callback) {
-      this.on(name, callback, true);
-    }
-  }, {
-    key: "emit",
-    value: function emit(name, data) {
-      var _this5 = this;
-
-      var silent = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-
-      name = name.toString();
-      var listeners = this._listeners.get(name);
-      var middlewares = null;
-      var doneCount = 0;
-      var execute = silent;
-
-      if (Array.isArray(listeners)) {
-        listeners.forEach(function (listener, index) {
-          // Start Middleware checks unless we're doing a silent emit
-          if (!silent) {
-            middlewares = _this5._middlewares.get(name);
-            // Check and execute Middleware
-            if (Array.isArray(middlewares)) {
-              middlewares.forEach(function (middleware) {
-                middleware(data, function () {
-                  var newData = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-
-                  if (newData !== null) {
-                    data = newData;
-                  }
-                  doneCount++;
-                }, name);
-              });
-
-              if (doneCount >= middlewares.length) {
-                execute = true;
-              }
-            } else {
-              execute = true;
-            }
-          }
-
-          // If Middleware checks have been passed, execute
-          if (execute) {
-            if (listener.once) {
-              listeners[index] = null;
-            }
-            listener.callback(data);
-          }
-        });
-
-        // Dirty way of removing used Events
-        while (listeners.indexOf(null) !== -1) {
-          listeners.splice(listeners.indexOf(null), 1);
-        }
-      }
-    }
-  }]);
-
-  return EventEmitter;
-}();
-
-/* harmony default export */ __webpack_exports__["a"] = (EventEmitter);
-
-/***/ }),
-/* 2 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var defaultOptions = {
-  size: 1,
-  autoplay: false,
-  delay: 5000,
-  threshold: 50, //required min distance traveled to be considered swipe
-  restraint: 100, // maximum distance allowed at the same time in perpendicular direction
-  allowedTime: 500 // maximum time allowed to travel that distance
-};
-
-/* harmony default export */ __webpack_exports__["a"] = (defaultOptions);
-
-/***/ })
-/******/ ])["default"];
-});
-
-/***/ }),
-
-/***/ 6:
-/***/ (function(module, exports, __webpack_require__) {
-
-
-var bulmaAccordion = __webpack_require__(7);
-var bulmaCalendar = __webpack_require__(8);
-var bulmaCarousel = __webpack_require__(2);
-var bulmaIconpicker = __webpack_require__(9);
-var bulmaQuickview = __webpack_require__(10);
-var bulmaSlider = __webpack_require__(11);
-var bulmaSteps = __webpack_require__(12);
-var bulmaTagsinput = __webpack_require__(13);
+var bulmaAccordion = __webpack_require__(11);
+var bulmaCalendar = __webpack_require__(12);
+var bulmaCarousel = __webpack_require__(4);
+var bulmaIconpicker = __webpack_require__(13);
+var bulmaQuickview = __webpack_require__(14);
+var bulmaSlider = __webpack_require__(15);
+var bulmaSteps = __webpack_require__(16);
+var bulmaTagsinput = __webpack_require__(17);
 
 // Instantiate
 bulmaAccordion.attach();
@@ -3048,7 +90,7 @@ bulmaTagsinput.attach();
 
 /***/ }),
 
-/***/ 7:
+/***/ 11:
 /***/ (function(module, exports, __webpack_require__) {
 
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -3454,15 +496,7 @@ var EventEmitter = function () {
 
 /***/ }),
 
-/***/ 71:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(6);
-
-
-/***/ }),
-
-/***/ 8:
+/***/ 12:
 /***/ (function(module, exports, __webpack_require__) {
 
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -20042,7 +17076,7 @@ webpackContext.id = 301;
 
 /***/ }),
 
-/***/ 9:
+/***/ 13:
 /***/ (function(module, exports, __webpack_require__) {
 
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -20681,6 +17715,2972 @@ var defaultOptions = {
 /***/ })
 /******/ ])["default"];
 });
+
+/***/ }),
+
+/***/ 14:
+/***/ (function(module, exports, __webpack_require__) {
+
+(function webpackUniversalModuleDefinition(root, factory) {
+	if(true)
+		module.exports = factory();
+	else if(typeof define === 'function' && define.amd)
+		define([], factory);
+	else if(typeof exports === 'object')
+		exports["bulmaQuickview"] = factory();
+	else
+		root["bulmaQuickview"] = factory();
+})(typeof self !== 'undefined' ? self : this, function() {
+return /******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__events__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__defaultOptions__ = __webpack_require__(2);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+
+var onQuickviewShowClick = Symbol('onQuickviewShowClick');
+var onQuickviewDismissClick = Symbol('onQuickviewDismissClick');
+
+var bulmaQuickview = function (_EventEmitter) {
+  _inherits(bulmaQuickview, _EventEmitter);
+
+  function bulmaQuickview(selector) {
+    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+    _classCallCheck(this, bulmaQuickview);
+
+    var _this = _possibleConstructorReturn(this, (bulmaQuickview.__proto__ || Object.getPrototypeOf(bulmaQuickview)).call(this));
+
+    _this.element = typeof selector === 'string' ? document.querySelector(selector) : selector;
+    // An invalid selector or non-DOM node has been provided.
+    if (!_this.element) {
+      throw new Error('An invalid selector or non-DOM node has been provided.');
+    }
+
+    _this._clickEvents = ['click'];
+    /// Set default options and merge with instance defined
+    _this.options = _extends({}, __WEBPACK_IMPORTED_MODULE_1__defaultOptions__["a" /* default */], options);
+
+    _this[onQuickviewShowClick] = _this[onQuickviewShowClick].bind(_this);
+    _this[onQuickviewDismissClick] = _this[onQuickviewDismissClick].bind(_this);
+
+    _this.init();
+    return _this;
+  }
+
+  /**
+   * Initiate all DOM element containing carousel class
+   * @method
+   * @return {Array} Array of all Carousel instances
+   */
+
+
+  _createClass(bulmaQuickview, [{
+    key: 'init',
+
+
+    /**
+     * Initiate plugin
+     * @method init
+     * @return {void}
+     */
+    value: function init() {
+      this.quickview = document.getElementById(this.element.dataset['target']);
+      this.dismissElements = document.querySelectorAll('[data-dismiss="quickview"]');
+
+      this._bindEvents();
+
+      this.emit('quickview:ready', {
+        element: this.element,
+        quickview: this.quickview
+      });
+    }
+
+    /**
+     * Bind all events
+     * @method _bindEvents
+     * @return {void}
+     */
+
+  }, {
+    key: '_bindEvents',
+    value: function _bindEvents() {
+      var _this2 = this;
+
+      this._clickEvents.forEach(function (event) {
+        _this2.element.addEventListener(event, _this2[onQuickviewShowClick], false);
+      });
+
+      [].forEach.call(this.dismissElements, function (dismissElement) {
+        _this2._clickEvents.forEach(function (event) {
+          dismissElement.addEventListener(event, _this2[onQuickviewDismissClick], false);
+        });
+      });
+    }
+  }, {
+    key: onQuickviewShowClick,
+    value: function value(e) {
+      this.quickview.classList.add('is-active');
+
+      this.emit('quickview:show', {
+        element: this.element,
+        quickview: this.quickview
+      });
+    }
+  }, {
+    key: onQuickviewDismissClick,
+    value: function value(e) {
+      this.quickview.classList.remove('is-active');
+
+      this.emit('quickview:hide', {
+        element: this.element,
+        quickview: this.quickview
+      });
+    }
+  }], [{
+    key: 'attach',
+    value: function attach() {
+      var selector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '[data-show="quickview"]';
+      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+      var instances = new Array();
+
+      var elements = document.querySelectorAll(selector);
+      [].forEach.call(elements, function (element) {
+        setTimeout(function () {
+          instances.push(new bulmaQuickview(element, options));
+        }, 100);
+      });
+      return instances;
+    }
+  }]);
+
+  return bulmaQuickview;
+}(__WEBPACK_IMPORTED_MODULE_0__events__["a" /* default */]);
+
+/* harmony default export */ __webpack_exports__["default"] = (bulmaQuickview);
+
+/***/ }),
+/* 1 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var EventEmitter = function () {
+  function EventEmitter() {
+    var listeners = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+
+    _classCallCheck(this, EventEmitter);
+
+    this._listeners = new Map(listeners);
+    this._middlewares = new Map();
+  }
+
+  _createClass(EventEmitter, [{
+    key: "listenerCount",
+    value: function listenerCount(eventName) {
+      if (!this._listeners.has(eventName)) {
+        return 0;
+      }
+
+      var eventListeners = this._listeners.get(eventName);
+      return eventListeners.length;
+    }
+  }, {
+    key: "removeListeners",
+    value: function removeListeners() {
+      var _this = this;
+
+      var eventName = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+      var middleware = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
+      if (eventName !== null) {
+        if (Array.isArray(eventName)) {
+          name.forEach(function (e) {
+            return _this.removeListeners(e, middleware);
+          });
+        } else {
+          this._listeners.delete(eventName);
+
+          if (middleware) {
+            this.removeMiddleware(eventName);
+          }
+        }
+      } else {
+        this._listeners = new Map();
+      }
+    }
+  }, {
+    key: "middleware",
+    value: function middleware(eventName, fn) {
+      var _this2 = this;
+
+      if (Array.isArray(eventName)) {
+        name.forEach(function (e) {
+          return _this2.middleware(e, fn);
+        });
+      } else {
+        if (!Array.isArray(this._middlewares.get(eventName))) {
+          this._middlewares.set(eventName, []);
+        }
+
+        this._middlewares.get(eventName).push(fn);
+      }
+    }
+  }, {
+    key: "removeMiddleware",
+    value: function removeMiddleware() {
+      var _this3 = this;
+
+      var eventName = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
+      if (eventName !== null) {
+        if (Array.isArray(eventName)) {
+          name.forEach(function (e) {
+            return _this3.removeMiddleware(e);
+          });
+        } else {
+          this._middlewares.delete(eventName);
+        }
+      } else {
+        this._middlewares = new Map();
+      }
+    }
+  }, {
+    key: "on",
+    value: function on(name, callback) {
+      var _this4 = this;
+
+      var once = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+
+      if (Array.isArray(name)) {
+        name.forEach(function (e) {
+          return _this4.on(e, callback);
+        });
+      } else {
+        name = name.toString();
+        var split = name.split(/,|, | /);
+
+        if (split.length > 1) {
+          split.forEach(function (e) {
+            return _this4.on(e, callback);
+          });
+        } else {
+          if (!Array.isArray(this._listeners.get(name))) {
+            this._listeners.set(name, []);
+          }
+
+          this._listeners.get(name).push({ once: once, callback: callback });
+        }
+      }
+    }
+  }, {
+    key: "once",
+    value: function once(name, callback) {
+      this.on(name, callback, true);
+    }
+  }, {
+    key: "emit",
+    value: function emit(name, data) {
+      var _this5 = this;
+
+      var silent = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+
+      name = name.toString();
+      var listeners = this._listeners.get(name);
+      var middlewares = null;
+      var doneCount = 0;
+      var execute = silent;
+
+      if (Array.isArray(listeners)) {
+        listeners.forEach(function (listener, index) {
+          // Start Middleware checks unless we're doing a silent emit
+          if (!silent) {
+            middlewares = _this5._middlewares.get(name);
+            // Check and execute Middleware
+            if (Array.isArray(middlewares)) {
+              middlewares.forEach(function (middleware) {
+                middleware(data, function () {
+                  var newData = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
+                  if (newData !== null) {
+                    data = newData;
+                  }
+                  doneCount++;
+                }, name);
+              });
+
+              if (doneCount >= middlewares.length) {
+                execute = true;
+              }
+            } else {
+              execute = true;
+            }
+          }
+
+          // If Middleware checks have been passed, execute
+          if (execute) {
+            if (listener.once) {
+              listeners[index] = null;
+            }
+            listener.callback(data);
+          }
+        });
+
+        // Dirty way of removing used Events
+        while (listeners.indexOf(null) !== -1) {
+          listeners.splice(listeners.indexOf(null), 1);
+        }
+      }
+    }
+  }]);
+
+  return EventEmitter;
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = (EventEmitter);
+
+/***/ }),
+/* 2 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var defaultOptions = {};
+
+/* harmony default export */ __webpack_exports__["a"] = (defaultOptions);
+
+/***/ })
+/******/ ])["default"];
+});
+
+/***/ }),
+
+/***/ 15:
+/***/ (function(module, exports, __webpack_require__) {
+
+(function webpackUniversalModuleDefinition(root, factory) {
+	if(true)
+		module.exports = factory();
+	else if(typeof define === 'function' && define.amd)
+		define([], factory);
+	else if(typeof exports === 'object')
+		exports["bulmaSlider"] = factory();
+	else
+		root["bulmaSlider"] = factory();
+})(typeof self !== 'undefined' ? self : this, function() {
+return /******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__events__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__defaultOptions__ = __webpack_require__(2);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+
+var onSliderInput = Symbol('onSliderInput');
+
+var bulmaSlider = function (_EventEmitter) {
+  _inherits(bulmaSlider, _EventEmitter);
+
+  function bulmaSlider(selector) {
+    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+    _classCallCheck(this, bulmaSlider);
+
+    var _this = _possibleConstructorReturn(this, (bulmaSlider.__proto__ || Object.getPrototypeOf(bulmaSlider)).call(this));
+
+    _this.element = typeof selector === 'string' ? document.querySelector(selector) : selector;
+    // An invalid selector or non-DOM node has been provided.
+    if (!_this.element) {
+      throw new Error('An invalid selector or non-DOM node has been provided.');
+    }
+
+    _this._clickEvents = ['click'];
+    /// Set default options and merge with instance defined
+    _this.options = _extends({}, __WEBPACK_IMPORTED_MODULE_1__defaultOptions__["a" /* default */], options);
+
+    _this[onSliderInput] = _this[onSliderInput].bind(_this);
+
+    _this.init();
+    return _this;
+  }
+
+  /**
+   * Initiate all DOM element containing carousel class
+   * @method
+   * @return {Array} Array of all Carousel instances
+   */
+
+
+  _createClass(bulmaSlider, [{
+    key: 'init',
+
+
+    /**
+     * Initiate plugin
+     * @method init
+     * @return {void}
+     */
+    value: function init() {
+      this._id = 'bulmaSlider' + new Date().getTime() + Math.floor(Math.random() * Math.floor(9999));
+      this.output = this._findOutputForSlider();
+
+      if (this.output) {
+        if (this.element.classList.contains('has-output-tooltip')) {
+          // Get new output position
+          var newPosition = this._getSliderOutputPosition();
+
+          // Set output position
+          this.output.style['left'] = newPosition.position;
+        }
+      }
+
+      this.emit('bulmaslider:ready', this.element.value);
+    }
+  }, {
+    key: '_findOutputForSlider',
+    value: function _findOutputForSlider() {
+      var _this2 = this;
+
+      var outputs = document.getElementsByTagName('output');
+      [].forEach.call(outputs, function (output) {
+        if (output.htmlFor == _this2.element.getAttribute('id')) {
+          return output;
+        }
+      });
+      return null;
+    }
+  }, {
+    key: '_getSliderOutputPosition',
+    value: function _getSliderOutputPosition() {
+      // Update output position
+      var newPlace, minValue;
+
+      var style = window.getComputedStyle(this.element, null);
+      // Measure width of range input
+      var sliderWidth = parseInt(style.getPropertyValue('width'), 10);
+
+      // Figure out placement percentage between left and right of input
+      if (!this.element.getAttribute('min')) {
+        minValue = 0;
+      } else {
+        minValue = this.element.getAttribute('min');
+      }
+      var newPoint = (this.element.value - minValue) / (this.element.getAttribute('max') - minValue);
+
+      // Prevent bubble from going beyond left or right (unsupported browsers)
+      if (newPoint < 0) {
+        newPlace = 0;
+      } else if (newPoint > 1) {
+        newPlace = sliderWidth;
+      } else {
+        newPlace = sliderWidth * newPoint;
+      }
+
+      return {
+        'position': newPlace + 'px'
+      };
+    }
+
+    /**
+     * Bind all events
+     * @method _bindEvents
+     * @return {void}
+     */
+
+  }, {
+    key: '_bindEvents',
+    value: function _bindEvents() {
+      if (this.output) {
+        // Add event listener to update output when slider value change
+        this.element.addEventListener('input', this[onSliderInput], false);
+      }
+    }
+  }, {
+    key: onSliderInput,
+    value: function value(e) {
+      e.preventDefault();
+
+      if (this.element.classList.contains('has-output-tooltip')) {
+        // Get new output position
+        var newPosition = this._getSliderOutputPosition();
+
+        // Set output position
+        this.output.style['left'] = newPosition.position;
+      }
+
+      // Check for prefix and postfix
+      var prefix = this.output.hasAttribute('data-prefix') ? this.output.getAttribute('data-prefix') : '';
+      var postfix = this.output.hasAttribute('data-postfix') ? this.output.getAttribute('data-postfix') : '';
+
+      // Update output with slider value
+      this.output.value = prefix + this.element.value + postfix;
+
+      this.emit('bulmaslider:ready', this.element.value);
+    }
+  }], [{
+    key: 'attach',
+    value: function attach() {
+      var selector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'input[type="range"].slider';
+      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+      var instances = new Array();
+
+      var elements = document.querySelectorAll(selector);
+      [].forEach.call(elements, function (element) {
+        setTimeout(function () {
+          instances.push(new bulmaSlider(element, options));
+        }, 100);
+      });
+      return instances;
+    }
+  }]);
+
+  return bulmaSlider;
+}(__WEBPACK_IMPORTED_MODULE_0__events__["a" /* default */]);
+
+/* harmony default export */ __webpack_exports__["default"] = (bulmaSlider);
+
+/***/ }),
+/* 1 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var EventEmitter = function () {
+  function EventEmitter() {
+    var listeners = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+
+    _classCallCheck(this, EventEmitter);
+
+    this._listeners = new Map(listeners);
+    this._middlewares = new Map();
+  }
+
+  _createClass(EventEmitter, [{
+    key: "listenerCount",
+    value: function listenerCount(eventName) {
+      if (!this._listeners.has(eventName)) {
+        return 0;
+      }
+
+      var eventListeners = this._listeners.get(eventName);
+      return eventListeners.length;
+    }
+  }, {
+    key: "removeListeners",
+    value: function removeListeners() {
+      var _this = this;
+
+      var eventName = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+      var middleware = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
+      if (eventName !== null) {
+        if (Array.isArray(eventName)) {
+          name.forEach(function (e) {
+            return _this.removeListeners(e, middleware);
+          });
+        } else {
+          this._listeners.delete(eventName);
+
+          if (middleware) {
+            this.removeMiddleware(eventName);
+          }
+        }
+      } else {
+        this._listeners = new Map();
+      }
+    }
+  }, {
+    key: "middleware",
+    value: function middleware(eventName, fn) {
+      var _this2 = this;
+
+      if (Array.isArray(eventName)) {
+        name.forEach(function (e) {
+          return _this2.middleware(e, fn);
+        });
+      } else {
+        if (!Array.isArray(this._middlewares.get(eventName))) {
+          this._middlewares.set(eventName, []);
+        }
+
+        this._middlewares.get(eventName).push(fn);
+      }
+    }
+  }, {
+    key: "removeMiddleware",
+    value: function removeMiddleware() {
+      var _this3 = this;
+
+      var eventName = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
+      if (eventName !== null) {
+        if (Array.isArray(eventName)) {
+          name.forEach(function (e) {
+            return _this3.removeMiddleware(e);
+          });
+        } else {
+          this._middlewares.delete(eventName);
+        }
+      } else {
+        this._middlewares = new Map();
+      }
+    }
+  }, {
+    key: "on",
+    value: function on(name, callback) {
+      var _this4 = this;
+
+      var once = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+
+      if (Array.isArray(name)) {
+        name.forEach(function (e) {
+          return _this4.on(e, callback);
+        });
+      } else {
+        name = name.toString();
+        var split = name.split(/,|, | /);
+
+        if (split.length > 1) {
+          split.forEach(function (e) {
+            return _this4.on(e, callback);
+          });
+        } else {
+          if (!Array.isArray(this._listeners.get(name))) {
+            this._listeners.set(name, []);
+          }
+
+          this._listeners.get(name).push({ once: once, callback: callback });
+        }
+      }
+    }
+  }, {
+    key: "once",
+    value: function once(name, callback) {
+      this.on(name, callback, true);
+    }
+  }, {
+    key: "emit",
+    value: function emit(name, data) {
+      var _this5 = this;
+
+      var silent = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+
+      name = name.toString();
+      var listeners = this._listeners.get(name);
+      var middlewares = null;
+      var doneCount = 0;
+      var execute = silent;
+
+      if (Array.isArray(listeners)) {
+        listeners.forEach(function (listener, index) {
+          // Start Middleware checks unless we're doing a silent emit
+          if (!silent) {
+            middlewares = _this5._middlewares.get(name);
+            // Check and execute Middleware
+            if (Array.isArray(middlewares)) {
+              middlewares.forEach(function (middleware) {
+                middleware(data, function () {
+                  var newData = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
+                  if (newData !== null) {
+                    data = newData;
+                  }
+                  doneCount++;
+                }, name);
+              });
+
+              if (doneCount >= middlewares.length) {
+                execute = true;
+              }
+            } else {
+              execute = true;
+            }
+          }
+
+          // If Middleware checks have been passed, execute
+          if (execute) {
+            if (listener.once) {
+              listeners[index] = null;
+            }
+            listener.callback(data);
+          }
+        });
+
+        // Dirty way of removing used Events
+        while (listeners.indexOf(null) !== -1) {
+          listeners.splice(listeners.indexOf(null), 1);
+        }
+      }
+    }
+  }]);
+
+  return EventEmitter;
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = (EventEmitter);
+
+/***/ }),
+/* 2 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var defaultOptions = {};
+
+/* harmony default export */ __webpack_exports__["a"] = (defaultOptions);
+
+/***/ })
+/******/ ])["default"];
+});
+
+/***/ }),
+
+/***/ 16:
+/***/ (function(module, exports, __webpack_require__) {
+
+(function webpackUniversalModuleDefinition(root, factory) {
+	if(true)
+		module.exports = factory();
+	else if(typeof define === 'function' && define.amd)
+		define([], factory);
+	else if(typeof exports === 'object')
+		exports["bulmaSteps"] = factory();
+	else
+		root["bulmaSteps"] = factory();
+})(typeof self !== 'undefined' ? self : this, function() {
+return /******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__events__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__defaultOptions__ = __webpack_require__(2);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+
+var onStepsPrevious = Symbol('onStepsPrevious');
+var onStepsNext = Symbol('onStepsNext');
+
+var bulmaSteps = function (_EventEmitter) {
+  _inherits(bulmaSteps, _EventEmitter);
+
+  function bulmaSteps(selector) {
+    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+    _classCallCheck(this, bulmaSteps);
+
+    var _this = _possibleConstructorReturn(this, (bulmaSteps.__proto__ || Object.getPrototypeOf(bulmaSteps)).call(this));
+
+    _this.element = typeof selector === 'string' ? document.querySelector(selector) : selector;
+    // An invalid selector or non-DOM node has been provided.
+    if (!_this.element) {
+      throw new Error('An invalid selector or non-DOM node has been provided.');
+    }
+
+    _this._clickEvents = ['click'];
+    /// Set default options and merge with instance defined
+    _this.options = _extends({}, __WEBPACK_IMPORTED_MODULE_1__defaultOptions__["a" /* default */], options);
+
+    _this[onStepsPrevious] = _this[onStepsPrevious].bind(_this);
+    _this[onStepsNext] = _this[onStepsNext].bind(_this);
+
+    _this.init();
+    return _this;
+  }
+
+  /**
+   * Initiate all DOM element containing carousel class
+   * @method
+   * @return {Array} Array of all Carousel instances
+   */
+
+
+  _createClass(bulmaSteps, [{
+    key: 'init',
+
+
+    /**
+     * Initiate plugin
+     * @method init
+     * @return {void}
+     */
+    value: function init() {
+      this._id = 'bulmaSteps' + new Date().getTime() + Math.floor(Math.random() * Math.floor(9999));
+
+      this.steps = this.element.querySelectorAll(this.options.selector);
+      this.contents = this.element.querySelectorAll(this.options.selector_content);
+      this.previous_btn = this.element.querySelector(this.options.previous_selector);
+      this.next_btn = this.element.querySelector(this.options.next_selector);
+
+      [].forEach.call(this.steps, function (step, index) {
+        step.setAttribute('data-step-id', index);
+      });
+
+      if (this.steps && this.steps.length) {
+        this.activate_step(0);
+        this.updateActions(this.steps[0]);
+      }
+
+      this._bindEvents();
+
+      this.emit('bulmasteps:ready', this.element.value);
+    }
+
+    /**
+     * Bind all events
+     * @method _bindEvents
+     * @return {void}
+     */
+
+  }, {
+    key: '_bindEvents',
+    value: function _bindEvents() {
+      var _this2 = this;
+
+      if (this.previous_btn != null) {
+        this._clickEvents.forEach(function (event) {
+          _this2.previous_btn.addEventListener(event, _this2[onStepsPrevious], false);
+        });
+      }
+
+      if (this.next_btn != null) {
+        this._clickEvents.forEach(function (event) {
+          _this2.next_btn.addEventListener(event, _this2[onStepsNext], false);
+        });
+      }
+
+      if (this.options.stepClickable) {
+        [].forEach.call(this.steps, function (step, index) {
+          _this2._clickEvents.forEach(function (event) {
+            while (index > _this2.current_id) {
+              _this2[onStepsNext](event);
+            }
+            while (index < _this2.current_id) {
+              _this2[onStepsPrevious](event);
+            }
+          });
+        });
+      }
+    }
+  }, {
+    key: onStepsPrevious,
+    value: function value(e) {
+      e.preventDefault();
+
+      if (!e.target.getAttribute('disabled')) {
+        this.previous_step();
+      }
+    }
+  }, {
+    key: onStepsNext,
+    value: function value(e) {
+      e.preventDefault();
+
+      if (!e.target.getAttribute('disabled')) {
+        this.next_step();
+      }
+    }
+  }, {
+    key: 'get_current_step_id',
+    value: function get_current_step_id() {
+      for (var i = 0; i < this.steps.length; i++) {
+        var step = this.steps[i];
+
+        if (step.classList.contains(this.options.active_class)) {
+          return parseInt(step.getAttribute('data-step-id'));
+        }
+      }
+
+      return null;
+    }
+  }, {
+    key: 'updateActions',
+    value: function updateActions(step) {
+      var stepId = parseInt(step.getAttribute('data-step-id'));
+      if (stepId == 0) {
+        if (this.previous_btn != null) {
+          this.previous_btn.setAttribute('disabled', 'disabled');
+        }
+        if (this.next_btn != null) {
+          this.next_btn.removeAttribute('disabled', 'disabled');
+        }
+      } else if (stepId == this.steps.length - 1) {
+        if (this.previous_btn != null) {
+          this.previous_btn.removeAttribute('disabled', 'disabled');
+        }
+        if (this.next_btn != null) {
+          this.next_btn.setAttribute('disabled', 'disabled');
+        }
+      } else {
+        if (this.previous_btn != null) {
+          this.previous_btn.removeAttribute('disabled', 'disabled');
+        }
+        if (this.next_btn != null) {
+          this.next_btn.removeAttribute('disabled', 'disabled');
+        }
+      }
+    }
+  }, {
+    key: 'next_step',
+    value: function next_step() {
+      var current_id = this.get_current_step_id();
+
+      if (current_id == null) {
+        return;
+      }
+
+      var next_id = current_id + 1,
+          errors = [];
+
+      if (typeof this.options.beforeNext != 'undefined' && this.options.beforeNext != null && this.options.beforeNext) {
+        errors = this.options.beforeNext(current_id);
+      }
+      this.emit('bulmasteps:before:next', current_id);
+
+      if (typeof errors == 'undefined') {
+        errors = [];
+      }
+
+      if (errors.length > 0) {
+        this.emit('bulmasteps:errors', errors);
+        for (var i = 0; i < errors.length; i++) {
+          if (typeof this.options.onError != 'undefined' && this.options.onError != null && this.options.onError) {
+            this.options.onError(errors[i]);
+          }
+        }
+
+        return;
+      }
+
+      if (next_id >= this.steps.length - 1) {
+        if (typeof this.options.onFinish != 'undefined' && this.options.onFinish != null && this.options.onFinish) {
+          this.options.onFinish(current_id);
+        }
+        this.emit('bulmasteps:finish', current_id);
+      }
+      if (next_id < this.steps.length) {
+        this.complete_step(current_id);
+        this.activate_step(next_id);
+      }
+    }
+  }, {
+    key: 'previous_step',
+    value: function previous_step() {
+      var current_id = this.get_current_step_id();
+      if (current_id == null) {
+        return;
+      }
+
+      this.uncomplete_step(current_id - 1);
+      this.activate_step(current_id - 1);
+    }
+
+    /**
+     * Activate a single step,
+     * will deactivate all other steps.
+     */
+
+  }, {
+    key: 'activate_step',
+    value: function activate_step(step_id) {
+      this.updateActions(this.steps[step_id]);
+
+      for (var i = 0; i < this.steps.length; i++) {
+        var _step = this.steps[i];
+
+        if (_step == this.steps[step_id]) {
+          continue;
+        }
+
+        this.deactivate_step(i);
+      }
+
+      this.steps[step_id].classList.add(this.options.active_class);
+      if (typeof this.contents[step_id] !== 'undefined') {
+        this.contents[step_id].classList.add(this.options.active_class);
+      }
+
+      if (typeof this.options.onShow != 'undefined' && this.options.onShow != null && this.options.onShow) {
+        this.options.onShow(step_id);
+      }
+
+      this.emit('bulmasteps:step:show', step_id);
+    }
+  }, {
+    key: 'complete_step',
+    value: function complete_step(step_id) {
+      this.steps[step_id].classList.add(this.options.completed_class);
+      this.emit('bulmasteps:step:completed', step_id);
+    }
+  }, {
+    key: 'uncomplete_step',
+    value: function uncomplete_step(step_id) {
+      this.steps[step_id].classList.remove(this.options.completed_class);
+      this.emit('bulmasteps:step:uncompleted', step_id);
+    }
+  }, {
+    key: 'deactivate_step',
+    value: function deactivate_step(step_id) {
+      this.steps[step_id].classList.remove(this.options.active_class);
+      if (typeof this.contents[step_id] !== 'undefined') {
+        this.contents[step_id].classList.remove(this.options.active_class);
+      }
+    }
+  }], [{
+    key: 'attach',
+    value: function attach() {
+      var selector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '.steps';
+      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+      var instances = new Array();
+
+      var elements = document.querySelectorAll(selector);
+      [].forEach.call(elements, function (element) {
+        setTimeout(function () {
+          instances.push(new bulmaSteps(element, options));
+        }, 100);
+      });
+      return instances;
+    }
+  }]);
+
+  return bulmaSteps;
+}(__WEBPACK_IMPORTED_MODULE_0__events__["a" /* default */]);
+
+/* harmony default export */ __webpack_exports__["default"] = (bulmaSteps);
+
+/***/ }),
+/* 1 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var EventEmitter = function () {
+  function EventEmitter() {
+    var listeners = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+
+    _classCallCheck(this, EventEmitter);
+
+    this._listeners = new Map(listeners);
+    this._middlewares = new Map();
+  }
+
+  _createClass(EventEmitter, [{
+    key: "listenerCount",
+    value: function listenerCount(eventName) {
+      if (!this._listeners.has(eventName)) {
+        return 0;
+      }
+
+      var eventListeners = this._listeners.get(eventName);
+      return eventListeners.length;
+    }
+  }, {
+    key: "removeListeners",
+    value: function removeListeners() {
+      var _this = this;
+
+      var eventName = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+      var middleware = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
+      if (eventName !== null) {
+        if (Array.isArray(eventName)) {
+          name.forEach(function (e) {
+            return _this.removeListeners(e, middleware);
+          });
+        } else {
+          this._listeners.delete(eventName);
+
+          if (middleware) {
+            this.removeMiddleware(eventName);
+          }
+        }
+      } else {
+        this._listeners = new Map();
+      }
+    }
+  }, {
+    key: "middleware",
+    value: function middleware(eventName, fn) {
+      var _this2 = this;
+
+      if (Array.isArray(eventName)) {
+        name.forEach(function (e) {
+          return _this2.middleware(e, fn);
+        });
+      } else {
+        if (!Array.isArray(this._middlewares.get(eventName))) {
+          this._middlewares.set(eventName, []);
+        }
+
+        this._middlewares.get(eventName).push(fn);
+      }
+    }
+  }, {
+    key: "removeMiddleware",
+    value: function removeMiddleware() {
+      var _this3 = this;
+
+      var eventName = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
+      if (eventName !== null) {
+        if (Array.isArray(eventName)) {
+          name.forEach(function (e) {
+            return _this3.removeMiddleware(e);
+          });
+        } else {
+          this._middlewares.delete(eventName);
+        }
+      } else {
+        this._middlewares = new Map();
+      }
+    }
+  }, {
+    key: "on",
+    value: function on(name, callback) {
+      var _this4 = this;
+
+      var once = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+
+      if (Array.isArray(name)) {
+        name.forEach(function (e) {
+          return _this4.on(e, callback);
+        });
+      } else {
+        name = name.toString();
+        var split = name.split(/,|, | /);
+
+        if (split.length > 1) {
+          split.forEach(function (e) {
+            return _this4.on(e, callback);
+          });
+        } else {
+          if (!Array.isArray(this._listeners.get(name))) {
+            this._listeners.set(name, []);
+          }
+
+          this._listeners.get(name).push({ once: once, callback: callback });
+        }
+      }
+    }
+  }, {
+    key: "once",
+    value: function once(name, callback) {
+      this.on(name, callback, true);
+    }
+  }, {
+    key: "emit",
+    value: function emit(name, data) {
+      var _this5 = this;
+
+      var silent = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+
+      name = name.toString();
+      var listeners = this._listeners.get(name);
+      var middlewares = null;
+      var doneCount = 0;
+      var execute = silent;
+
+      if (Array.isArray(listeners)) {
+        listeners.forEach(function (listener, index) {
+          // Start Middleware checks unless we're doing a silent emit
+          if (!silent) {
+            middlewares = _this5._middlewares.get(name);
+            // Check and execute Middleware
+            if (Array.isArray(middlewares)) {
+              middlewares.forEach(function (middleware) {
+                middleware(data, function () {
+                  var newData = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
+                  if (newData !== null) {
+                    data = newData;
+                  }
+                  doneCount++;
+                }, name);
+              });
+
+              if (doneCount >= middlewares.length) {
+                execute = true;
+              }
+            } else {
+              execute = true;
+            }
+          }
+
+          // If Middleware checks have been passed, execute
+          if (execute) {
+            if (listener.once) {
+              listeners[index] = null;
+            }
+            listener.callback(data);
+          }
+        });
+
+        // Dirty way of removing used Events
+        while (listeners.indexOf(null) !== -1) {
+          listeners.splice(listeners.indexOf(null), 1);
+        }
+      }
+    }
+  }]);
+
+  return EventEmitter;
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = (EventEmitter);
+
+/***/ }),
+/* 2 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var defaultOptions = {
+    'selector': '.step-item',
+    'selector_content': '.step-content',
+    'previous_selector': '[data-nav="previous"]',
+    'next_selector': '[data-nav="next"]',
+    'active_class': 'is-active',
+    'completed_class': 'is-completed',
+    'stepClickable': false,
+    'beforeNext': null,
+    'onShow': null,
+    'onFinish': null,
+    'onError': null
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (defaultOptions);
+
+/***/ })
+/******/ ])["default"];
+});
+
+/***/ }),
+
+/***/ 17:
+/***/ (function(module, exports, __webpack_require__) {
+
+(function webpackUniversalModuleDefinition(root, factory) {
+	if(true)
+		module.exports = factory();
+	else if(typeof define === 'function' && define.amd)
+		define([], factory);
+	else if(typeof exports === 'object')
+		exports["bulmaTagsinput"] = factory();
+	else
+		root["bulmaTagsinput"] = factory();
+})(typeof self !== 'undefined' ? self : this, function() {
+return /******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_events__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__defaultOptions__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_type__ = __webpack_require__(3);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+
+
+
+var KEY_BACKSPACE = 8,
+    KEY_TAB = 9,
+    KEY_ENTER = 13,
+    KEY_LEFT = 37,
+    KEY_RIGHT = 39,
+    KEY_DELETE = 46,
+    KEY_COMMA = 188;
+
+var bulmaTagsinput = function (_EventEmitter) {
+	_inherits(bulmaTagsinput, _EventEmitter);
+
+	function bulmaTagsinput(selector) {
+		var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+		_classCallCheck(this, bulmaTagsinput);
+
+		var _this = _possibleConstructorReturn(this, (bulmaTagsinput.__proto__ || Object.getPrototypeOf(bulmaTagsinput)).call(this));
+
+		_this.element = __WEBPACK_IMPORTED_MODULE_2__utils_type__["a" /* isString */](selector) ? document.querySelector(selector) : selector;
+		// An invalid selector or non-DOM node has been provided.
+		if (!_this.element) {
+			throw new Error('An invalid selector or non-DOM node has been provided.');
+		}
+		_this._clickEvents = ['click'];
+
+		/// Set default options and merge with instance defined
+		_this.options = _extends({}, __WEBPACK_IMPORTED_MODULE_1__defaultOptions__["a" /* default */], options);
+
+		if (_this.element.dataset.hasOwnProperty('lowercase')) {
+			_this.options.lowercase = _this.element.dataset('lowercase');
+		}
+		if (_this.element.dataset.hasOwnProperty('uppercase')) {
+			_this.options.lowercase = _this.element.dataset('uppercase');
+		}
+		if (_this.element.dataset.hasOwnProperty('duplicates')) {
+			_this.options.lowercase = _this.element.dataset('duplicates');
+		}
+
+		_this.init();
+		return _this;
+	}
+
+	/**
+   * Initiate all DOM element containing tagsinput class
+   * @method
+   * @return {Array} Array of all TagsInput instances
+   */
+
+
+	_createClass(bulmaTagsinput, [{
+		key: 'init',
+		value: function init() {
+			if (!this.options.disabled) {
+				this.tags = [];
+				// The container will visually looks like an input
+				this.container = document.createElement('div');
+				this.container.className = 'tagsinput';
+				this.container.classList.add('field');
+				this.container.classList.add('is-grouped');
+				this.container.classList.add('is-grouped-multiline');
+				this.container.classList.add('input');
+
+				var inputType = this.element.getAttribute('type');
+				if (!inputType || inputType === 'tags') {
+					inputType = 'text';
+				}
+				// Create an invisible input element so user will be able to enter value
+				this.input = document.createElement('input');
+				this.input.setAttribute('type', inputType);
+				if (this.element.getAttribute('placeholder')) {
+					this.input.setAttribute('placeholder', this.element.getAttribute('placeholder'));
+				} else {
+					this.input.setAttribute('placeholder', 'Add a Tag');
+				}
+				this.container.appendChild(this.input);
+
+				var sib = this.element.nextSibling;
+				this.element.parentNode[sib ? 'insertBefore' : 'appendChild'](this.container, sib);
+				this.element.style.cssText = 'position:absolute;left:0;top:0;width:1px;height:1px;opacity:0.01;';
+				this.element.tabIndex = -1;
+
+				this.enable();
+			}
+		}
+	}, {
+		key: 'enable',
+		value: function enable() {
+			var _this2 = this;
+
+			if (!this.enabled && !this.options.disabled) {
+
+				this.element.addEventListener('focus', function () {
+					_this2.container.classList.add('is-focused');
+					_this2.select(Array.prototype.slice.call(_this2.container.querySelectorAll('.tag:not(.is-delete)')).pop());
+				});
+
+				this.input.addEventListener('focus', function () {
+					_this2.container.classList.add('is-focused');
+					_this2.select(Array.prototype.slice.call(_this2.container.querySelectorAll('.tag:not(.is-delete)')).pop());
+				});
+				this.input.addEventListener('blur', function () {
+					_this2.container.classList.remove('is-focused');
+					_this2.select(Array.prototype.slice.call(_this2.container.querySelectorAll('.tag:not(.is-delete)')).pop());
+					_this2.savePartial();
+				});
+				this.input.addEventListener('keydown', function (e) {
+					var key = e.charCode || e.keyCode || e.which,
+					    selectedTag = void 0,
+					    activeTag = _this2.container.querySelector('.tag.is-active'),
+					    last = Array.prototype.slice.call(_this2.container.querySelectorAll('.tag:not(.is-delete)')).pop(),
+					    atStart = _this2.caretAtStart(_this2.input);
+
+					if (activeTag) {
+						selectedTag = _this2.container.querySelector('[data-tag="' + activeTag.innerHTML.trim() + '"]');
+					}
+					_this2.setInputWidth();
+
+					if (key === KEY_ENTER || key === _this2.options.delimiter.charCodeAt(0) || key === KEY_COMMA || key === KEY_TAB) {
+						if (!_this2.input.value && (key !== _this2.options.delimiter.charCodeAt(0) || key === KEY_COMMA)) {
+							return;
+						}
+						_this2.savePartial();
+					} else if (key === KEY_DELETE && selectedTag) {
+						if (selectedTag.nextSibling) {
+							_this2.select(selectedTag.nextSibling.querySelector('.tag'));
+						} else if (selectedTag.previousSibling) {
+							_this2.select(selectedTag.previousSibling.querySelector('.tag'));
+						}
+						_this2.container.removeChild(selectedTag);
+						_this2.tags.splice(_this2.tags.indexOf(selectedTag.getAttribute('data-tag')), 1);
+						_this2.setInputWidth();
+						_this2.save();
+					} else if (key === KEY_BACKSPACE) {
+						if (selectedTag) {
+							if (selectedTag.previousSibling) {
+								_this2.select(selectedTag.previousSibling.querySelector('.tag'));
+							} else if (selectedTag.nextSibling) {
+								_this2.select(selectedTag.nextSibling.querySelector('.tag'));
+							}
+							_this2.container.removeChild(selectedTag);
+							_this2.tags.splice(_this2.tags.indexOf(selectedTag.getAttribute('data-tag')), 1);
+							_this2.setInputWidth();
+							_this2.save();
+						} else if (last && atStart) {
+							_this2.select(last);
+						} else {
+							return;
+						}
+					} else if (key === KEY_LEFT) {
+						if (selectedTag) {
+							if (selectedTag.previousSibling) {
+								_this2.select(selectedTag.previousSibling.querySelector('.tag'));
+							}
+						} else if (!atStart) {
+							return;
+						} else {
+							_this2.select(last);
+						}
+					} else if (key === KEY_RIGHT) {
+						if (!selectedTag) {
+							return;
+						}
+						_this2.select(selectedTag.nextSibling.querySelector('.tag'));
+					} else {
+						return _this2.select();
+					}
+
+					e.preventDefault();
+					return false;
+				});
+				this.input.addEventListener('input', function () {
+					_this2.element.value = _this2.getValue();
+					_this2.element.dispatchEvent(new Event('input'));
+				});
+				this.input.addEventListener('paste', function () {
+					return setTimeout(savePartial, 0);
+				});
+
+				this.container.addEventListener('mousedown', function (e) {
+					_this2.refocus(e);
+				});
+				this.container.addEventListener('touchstart', function (e) {
+					_this2.refocus(e);
+				});
+
+				this.savePartial(this.element.value);
+
+				this.enabled = true;
+			}
+		}
+	}, {
+		key: 'disable',
+		value: function disable() {
+			if (this.enabled && !this.options.disabled) {
+				this.reset();
+
+				this.enabled = false;
+			}
+		}
+	}, {
+		key: 'select',
+		value: function select(el) {
+			var sel = this.container.querySelector('.is-active');
+			if (sel) {
+				sel.classList.remove('is-active');
+			}
+			if (el) {
+				el.classList.add('is-active');
+			}
+		}
+	}, {
+		key: 'addTag',
+		value: function addTag(text) {
+			var _this3 = this;
+
+			if (~text.indexOf(this.options.delimiter)) {
+				text = text.split(this.options.delimiter);
+			}
+			if (Array.isArray(text)) {
+				return text.forEach(function (text) {
+					_this3.addTag(text);
+				});
+			}
+
+			var tag = text && text.trim();
+			if (!tag) {
+				return false;
+			}
+
+			if (this.options['lowercase'] == 'true') {
+				tag = tag.toLowerCase();
+			}
+			if (this.options['uppercase'] == 'true') {
+				tag = tag.toUpperCase();
+			}
+			if (this.options['duplicates'] || this.tags.indexOf(tag) === -1) {
+				this.tags.push(tag);
+
+				var newTagWrapper = document.createElement('div');
+				newTagWrapper.className = 'control';
+				newTagWrapper.setAttribute('data-tag', tag);
+
+				var newTag = document.createElement('div');
+				newTag.className = 'tags';
+				newTag.classList.add('has-addons');
+
+				var newTagContent = document.createElement('span');
+				newTagContent.className = 'tag';
+				newTagContent.classList.add('is-active');
+				this.select(newTagContent);
+				newTagContent.innerHTML = tag;
+
+				newTag.appendChild(newTagContent);
+				if (this.options.allowDelete) {
+					var newTagDeleteButton = document.createElement('a');
+					newTagDeleteButton.className = 'tag';
+					newTagDeleteButton.classList.add('is-delete');
+					this._clickEvents.forEach(function (event) {
+						newTagDeleteButton.addEventListener(event, function (e) {
+							var selectedTag = void 0,
+							    activeTag = e.target.parentNode,
+							    last = Array.prototype.slice.call(_this3.container.querySelectorAll('.tag')).pop(),
+							    atStart = _this3.caretAtStart(_this3.input);
+
+							if (activeTag) {
+								selectedTag = _this3.container.querySelector('[data-tag="' + activeTag.innerText.trim() + '"]');
+							}
+
+							if (selectedTag) {
+								_this3.select(selectedTag.previousSibling);
+								_this3.container.removeChild(selectedTag);
+								_this3.tags.splice(_this3.tags.indexOf(selectedTag.getAttribute('data-tag')), 1);
+								_this3.setInputWidth();
+								_this3.save();
+							} else if (last && atStart) {
+								_this3.select(last);
+							} else {
+								return;
+							}
+						});
+					});
+					newTag.appendChild(newTagDeleteButton);
+				}
+				newTagWrapper.appendChild(newTag);
+
+				this.container.insertBefore(newTagWrapper, this.input);
+			}
+		}
+	}, {
+		key: 'getValue',
+		value: function getValue() {
+			return this.tags.join(this.options.delimiter);
+		}
+	}, {
+		key: 'setValue',
+		value: function setValue(value) {
+			var _this4 = this;
+
+			Array.prototype.slice.call(this.container.querySelectorAll('.tag')).forEach(function (tag) {
+				_this4.tags.splice(_this4.tags.indexOf(tag.innerHTML), 1);
+				_this4.container.removeChild(tag);
+			});
+			this.savePartial(value);
+		}
+	}, {
+		key: 'setInputWidth',
+		value: function setInputWidth() {
+			var last = Array.prototype.slice.call(this.container.querySelectorAll('.control')).pop();
+
+			if (!this.container.offsetWidth) {
+				return;
+			}
+			this.input.style.width = Math.max(this.container.offsetWidth - (last ? last.offsetLeft + last.offsetWidth : 30) - 30, this.container.offsetWidth / 4) + 'px';
+		}
+	}, {
+		key: 'savePartial',
+		value: function savePartial(value) {
+			if (typeof value !== 'string' && !Array.isArray(value)) {
+				value = this.input.value;
+			}
+			if (this.addTag(value) !== false) {
+				this.input.value = '';
+				this.save();
+				this.setInputWidth();
+			}
+		}
+	}, {
+		key: 'save',
+		value: function save() {
+			this.element.value = this.tags.join(this.options.delimiter);
+			this.element.dispatchEvent(new Event('change'));
+		}
+	}, {
+		key: 'caretAtStart',
+		value: function caretAtStart(el) {
+			try {
+				return el.selectionStart === 0 && el.selectionEnd === 0;
+			} catch (e) {
+				return el.value === '';
+			}
+		}
+	}, {
+		key: 'refocus',
+		value: function refocus(e) {
+			if (e.target.classList.contains('tag')) {
+				this.select(e.target);
+			}
+			if (e.target === this.input) {
+				return this.select();
+			}
+			this.input.focus();
+			e.preventDefault();
+			return false;
+		}
+	}, {
+		key: 'reset',
+		value: function reset() {
+			this.tags = [];
+		}
+	}, {
+		key: 'destroy',
+		value: function destroy() {
+			this.disable();
+			this.reset();
+			this.element = null;
+		}
+	}], [{
+		key: 'attach',
+		value: function attach() {
+			var selector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'input[type="tags"]';
+			var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+			var instances = new Array();
+
+			var elements = document.querySelectorAll(selector);
+			[].forEach.call(elements, function (element) {
+				setTimeout(function () {
+					instances.push(new bulmaTagsinput(element, options));
+				}, 100);
+			});
+			return instances;
+		}
+	}]);
+
+	return bulmaTagsinput;
+}(__WEBPACK_IMPORTED_MODULE_0__utils_events__["a" /* default */]);
+
+/* harmony default export */ __webpack_exports__["default"] = (bulmaTagsinput);
+
+/***/ }),
+/* 1 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var EventEmitter = function () {
+  function EventEmitter() {
+    var listeners = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+
+    _classCallCheck(this, EventEmitter);
+
+    this._listeners = new Map(listeners);
+    this._middlewares = new Map();
+  }
+
+  _createClass(EventEmitter, [{
+    key: "listenerCount",
+    value: function listenerCount(eventName) {
+      if (!this._listeners.has(eventName)) {
+        return 0;
+      }
+
+      var eventListeners = this._listeners.get(eventName);
+      return eventListeners.length;
+    }
+  }, {
+    key: "removeListeners",
+    value: function removeListeners() {
+      var _this = this;
+
+      var eventName = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+      var middleware = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
+      if (eventName !== null) {
+        if (Array.isArray(eventName)) {
+          name.forEach(function (e) {
+            return _this.removeListeners(e, middleware);
+          });
+        } else {
+          this._listeners.delete(eventName);
+
+          if (middleware) {
+            this.removeMiddleware(eventName);
+          }
+        }
+      } else {
+        this._listeners = new Map();
+      }
+    }
+  }, {
+    key: "middleware",
+    value: function middleware(eventName, fn) {
+      var _this2 = this;
+
+      if (Array.isArray(eventName)) {
+        name.forEach(function (e) {
+          return _this2.middleware(e, fn);
+        });
+      } else {
+        if (!Array.isArray(this._middlewares.get(eventName))) {
+          this._middlewares.set(eventName, []);
+        }
+
+        this._middlewares.get(eventName).push(fn);
+      }
+    }
+  }, {
+    key: "removeMiddleware",
+    value: function removeMiddleware() {
+      var _this3 = this;
+
+      var eventName = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
+      if (eventName !== null) {
+        if (Array.isArray(eventName)) {
+          name.forEach(function (e) {
+            return _this3.removeMiddleware(e);
+          });
+        } else {
+          this._middlewares.delete(eventName);
+        }
+      } else {
+        this._middlewares = new Map();
+      }
+    }
+  }, {
+    key: "on",
+    value: function on(name, callback) {
+      var _this4 = this;
+
+      var once = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+
+      if (Array.isArray(name)) {
+        name.forEach(function (e) {
+          return _this4.on(e, callback);
+        });
+      } else {
+        name = name.toString();
+        var split = name.split(/,|, | /);
+
+        if (split.length > 1) {
+          split.forEach(function (e) {
+            return _this4.on(e, callback);
+          });
+        } else {
+          if (!Array.isArray(this._listeners.get(name))) {
+            this._listeners.set(name, []);
+          }
+
+          this._listeners.get(name).push({ once: once, callback: callback });
+        }
+      }
+    }
+  }, {
+    key: "once",
+    value: function once(name, callback) {
+      this.on(name, callback, true);
+    }
+  }, {
+    key: "emit",
+    value: function emit(name, data) {
+      var _this5 = this;
+
+      var silent = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+
+      name = name.toString();
+      var listeners = this._listeners.get(name);
+      var middlewares = null;
+      var doneCount = 0;
+      var execute = silent;
+
+      if (Array.isArray(listeners)) {
+        listeners.forEach(function (listener, index) {
+          // Start Middleware checks unless we're doing a silent emit
+          if (!silent) {
+            middlewares = _this5._middlewares.get(name);
+            // Check and execute Middleware
+            if (Array.isArray(middlewares)) {
+              middlewares.forEach(function (middleware) {
+                middleware(data, function () {
+                  var newData = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
+                  if (newData !== null) {
+                    data = newData;
+                  }
+                  doneCount++;
+                }, name);
+              });
+
+              if (doneCount >= middlewares.length) {
+                execute = true;
+              }
+            } else {
+              execute = true;
+            }
+          }
+
+          // If Middleware checks have been passed, execute
+          if (execute) {
+            if (listener.once) {
+              listeners[index] = null;
+            }
+            listener.callback(data);
+          }
+        });
+
+        // Dirty way of removing used Events
+        while (listeners.indexOf(null) !== -1) {
+          listeners.splice(listeners.indexOf(null), 1);
+        }
+      }
+    }
+  }]);
+
+  return EventEmitter;
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = (EventEmitter);
+
+/***/ }),
+/* 2 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var defaultOptions = {
+		disabled: false,
+		delimiter: ',',
+		allowDelete: true,
+		lowercase: false,
+		uppercase: false,
+		duplicates: true
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (defaultOptions);
+
+/***/ }),
+/* 3 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return isString; });
+/* unused harmony export isDate */
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var isString = function isString(unknown) {
+  return typeof unknown === 'string' || !!unknown && (typeof unknown === 'undefined' ? 'undefined' : _typeof(unknown)) === 'object' && Object.prototype.toString.call(unknown) === '[object String]';
+};
+var isDate = function isDate(unknown) {
+  return (Object.prototype.toString.call(unknown) === '[object Date]' || unknown instanceof Date) && !isNaN(unknown.valueOf());
+};
+
+/***/ })
+/******/ ])["default"];
+});
+
+/***/ }),
+
+/***/ 4:
+/***/ (function(module, exports, __webpack_require__) {
+
+(function webpackUniversalModuleDefinition(root, factory) {
+	if(true)
+		module.exports = factory();
+	else if(typeof define === 'function' && define.amd)
+		define([], factory);
+	else if(typeof exports === 'object')
+		exports["bulmaCarousel"] = factory();
+	else
+		root["bulmaCarousel"] = factory();
+})(typeof self !== 'undefined' ? self : this, function() {
+return /******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__events__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__defaultOptions__ = __webpack_require__(2);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+
+var BULMA_CAROUSEL_EVENTS = {
+  'ready': 'carousel:ready',
+  'slideBefore': 'carousel:slide:before',
+  'slideAfter': 'carousel:slide:after'
+};
+
+var onSwipeStart = Symbol('onSwipeStart');
+var onSwipeMove = Symbol('onSwipeMove');
+var onSwipeEnd = Symbol('onSwipeEnd');
+
+var supportsPassive = false;
+try {
+  var opts = Object.defineProperty({}, 'passive', {
+    get: function get() {
+      supportsPassive = true;
+    }
+  });
+  window.addEventListener("testPassive", null, opts);
+  window.removeEventListener("testPassive", null, opts);
+} catch (e) {}
+
+var bulmaCarousel = function (_EventEmitter) {
+  _inherits(bulmaCarousel, _EventEmitter);
+
+  function bulmaCarousel(selector) {
+    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+    _classCallCheck(this, bulmaCarousel);
+
+    var _this = _possibleConstructorReturn(this, (bulmaCarousel.__proto__ || Object.getPrototypeOf(bulmaCarousel)).call(this));
+
+    _this.element = typeof selector === 'string' ? document.querySelector(selector) : selector;
+    // An invalid selector or non-DOM node has been provided.
+    if (!_this.element) {
+      throw new Error('An invalid selector or non-DOM node has been provided.');
+    }
+
+    _this._clickEvents = ['click'];
+    _this.options = Object.assign({}, __WEBPACK_IMPORTED_MODULE_1__defaultOptions__["a" /* default */], options);
+    if (_this.element.dataset.autoplay) {
+      _this.options.autoplay = _this.element.dataset.autoplay;
+    }
+    if (_this.element.dataset.delay) {
+      _this.options.delay = _this.element.dataset.delay;
+    }
+    if (_this.element.dataset.size && !_this.element.classList.contains('carousel-animate-fade')) {
+      _this.options.size = _this.element.dataset.size;
+    }
+    if (_this.element.classList.contains('carousel-animate-fade')) {
+      _this.options.size = 1;
+    }
+
+    _this.forceHiddenNavigation = false;
+
+    _this[onSwipeStart] = _this[onSwipeStart].bind(_this);
+    _this[onSwipeMove] = _this[onSwipeMove].bind(_this);
+    _this[onSwipeEnd] = _this[onSwipeEnd].bind(_this);
+
+    _this.init();
+    return _this;
+  }
+
+  /**
+   * Initiate all DOM element containing carousel class
+   * @method
+   * @return {Array} Array of all Carousel instances
+   */
+
+
+  _createClass(bulmaCarousel, [{
+    key: 'init',
+
+
+    /**
+     * Initiate plugin
+     * @method init
+     * @return {void}
+     */
+    value: function init() {
+      this.container = this.element.querySelector('.carousel-container');
+      this.items = this.element.querySelectorAll('.carousel-item');
+      this.currentItem = {
+        element: this.element,
+        node: this.element.querySelector('.carousel-item.is-active'),
+        pos: -1
+      };
+      this.currentItem.pos = this.currentItem.node ? Array.from(this.items).indexOf(this.currentItem.node) : -1;
+      if (!this.currentItem.node) {
+        this.currentItem.node = this.items[0];
+        this.currentItem.node.classList.add('is-active');
+        this.currentItem.pos = 0;
+      }
+      this.forceHiddenNavigation = this.items.length <= 1;
+
+      var images = this.element.querySelectorAll('img');
+      [].forEach.call(images, function (img) {
+        img.setAttribute('draggable', false);
+      });
+
+      this._resize();
+      this._setOrder();
+      this._initNavigation();
+      this._bindEvents();
+
+      if (this.options.autoplay) {
+        this._autoPlay(this.options.delay);
+      }
+
+      this.emit(BULMA_CAROUSEL_EVENTS.ready, this.currentItem);
+    }
+  }, {
+    key: '_resize',
+    value: function _resize() {
+      var _this2 = this;
+
+      var computedStyle = window.getComputedStyle(this.element);
+      var width = parseInt(computedStyle.getPropertyValue('width'), 10);
+
+      // Detect which animation is setup and auto-calculate size and transformation
+      if (this.options.size > 1) {
+        if (this.options.size >= Array.from(this.items).length) {
+          this.offset = 0;
+        } else {
+          this.offset = width / this.options.size;
+        }
+
+        this.container.style.left = 0 - this.offset + 'px';
+        this.container.style.transform = 'translateX(' + this.offset + 'px)';
+        [].forEach.call(this.items, function (item) {
+          item.style.flexBasis = _this2.offset + 'px';
+        });
+      }
+
+      // If animation is fade then force carouselContainer size (due to the position: absolute)
+      if (this.element.classList.contains('carousel-animate-fade') && this.items.length) {
+        var img = this.items[0].querySelector('img');
+        var scale = 1;
+        if (img.naturalWidth) {
+          scale = width / img.naturalWidth;
+          this.container.style.height = img.naturalHeight * scale + 'px';
+        } else {
+          img.onload = function () {
+            scale = width / img.naturalWidth;
+            _this2.container.style.height = img.naturalHeight * scale + 'px';
+          };
+        }
+      }
+    }
+
+    /**
+     * Bind all events
+     * @method _bindEvents
+     * @return {void}
+     */
+
+  }, {
+    key: '_bindEvents',
+    value: function _bindEvents() {
+      var _this3 = this;
+
+      if (this.previousControl) {
+        this._clickEvents.forEach(function (clickEvent) {
+          _this3.previousControl.addEventListener(clickEvent, function (e) {
+            if (!supportsPassive) {
+              e.preventDefault();
+            }
+            if (_this3._autoPlayInterval) {
+              clearInterval(_this3._autoPlayInterval);
+              _this3._autoPlay(_this3.optionsdelay);
+            }
+            _this3._slide('previous');
+          }, supportsPassive ? { passive: true } : false);
+        });
+      }
+
+      if (this.nextControl) {
+        this._clickEvents.forEach(function (clickEvent) {
+          _this3.nextControl.addEventListener(clickEvent, function (e) {
+            if (!supportsPassive) {
+              e.preventDefault();
+            }
+            if (_this3._autoPlayInterval) {
+              clearInterval(_this3._autoPlayInterval);
+              _this3._autoPlay(_this3.options.delay);
+            }
+            _this3._slide('next');
+          }, supportsPassive ? { passive: true } : false);
+        });
+      }
+
+      // Bind swipe events
+      this.element.addEventListener('touchstart', this[onSwipeStart], supportsPassive ? { passive: true } : false);
+      this.element.addEventListener('mousedown', this[onSwipeStart], supportsPassive ? { passive: true } : false);
+      this.element.addEventListener('touchmove', this[onSwipeMove], supportsPassive ? { passive: true } : false);
+      this.element.addEventListener('mousemove', this[onSwipeMove], supportsPassive ? { passive: true } : false);
+      this.element.addEventListener('touchend', this[onSwipeEnd], supportsPassive ? { passive: true } : false);
+      this.element.addEventListener('mouseup', this[onSwipeEnd], supportsPassive ? { passive: true } : false);
+    }
+  }, {
+    key: 'destroy',
+    value: function destroy() {
+      this.element.removeEventListener('touchstart', this[onSwipeStart], supportsPassive ? { passive: true } : false);
+      this.element.removeEventListener('mousedown', this[onSwipeStart], supportsPassive ? { passive: true } : false);
+      this.element.removeEventListener('touchmove', this[onSwipeMove], supportsPassive ? { passive: true } : false);
+      this.element.removeEventListener('mousemove', this[onSwipeMove], supportsPassive ? { passive: true } : false);
+      this.element.removeEventListener('touchend', this[onSwipeEnd], supportsPassive ? { passive: true } : false);
+      this.element.removeEventListener('mouseup', this[onSwipeEnd], supportsPassive ? { passive: true } : false);
+    }
+
+    /**
+     * Save current position on start swiping
+     * @method onSwipeStart
+     * @param  {Event}    e Swipe event
+     * @return {void}
+     */
+
+  }, {
+    key: onSwipeStart,
+    value: function value(e) {
+      if (!supportsPassive) {
+        e.preventDefault();
+      }
+
+      e = e ? e : window.event;
+      e = 'changedTouches' in e ? e.changedTouches[0] : e;
+      this._touch = {
+        start: {
+          time: new Date().getTime(), // record time when finger first makes contact with surface
+          x: e.pageX,
+          y: e.pageY
+        },
+        dist: {
+          x: 0,
+          y: 0
+        }
+      };
+    }
+
+    /**
+     * Save current position on end swiping
+     * @method onSwipeMove
+     * @param  {Event}  e swipe event
+     * @return {void}
+     */
+
+  }, {
+    key: onSwipeMove,
+    value: function value(e) {
+      if (!supportsPassive) {
+        e.preventDefault();
+      }
+    }
+
+    /**
+     * Save current position on end swiping
+     * @method onSwipeEnd
+     * @param  {Event}  e swipe event
+     * @return {void}
+     */
+
+  }, {
+    key: onSwipeEnd,
+    value: function value(e) {
+      if (!supportsPassive) {
+        e.preventDefault();
+      }
+
+      e = e ? e : window.event;
+      e = 'changedTouches' in e ? e.changedTouches[0] : e;
+      this._touch.dist = {
+        x: e.pageX - this._touch.start.x, // get horizontal dist traveled by finger while in contact with surface
+        y: e.pageY - this._touch.start.y // get vertical dist traveled by finger while in contact with surface
+      };
+
+      this._handleGesture();
+    }
+
+    /**
+     * Identify the gestureand slide if necessary
+     * @method _handleGesture
+     * @return {void}
+     */
+
+  }, {
+    key: '_handleGesture',
+    value: function _handleGesture() {
+      var elapsedTime = new Date().getTime() - this._touch.start.time; // get time elapsed
+      if (elapsedTime <= this.options.allowedTime) {
+        // first condition for awipe met
+        if (Math.abs(this._touch.dist.x) >= this.options.threshold && Math.abs(this._touch.dist.y) <= this.options.restraint) {
+          // 2nd condition for horizontal swipe met
+          this._touch.dist.x < 0 ? this._slide('next') : this._slide('previous'); // if dist traveled is negative, it indicates left swipe
+        }
+      }
+    }
+
+    /**
+     * Initiate Navigation area and Previous/Next buttons
+     * @method _initNavigation
+     * @return {[type]}        [description]
+     */
+
+  }, {
+    key: '_initNavigation',
+    value: function _initNavigation() {
+      this.previousControl = this.element.querySelector('.carousel-nav-left');
+      this.nextControl = this.element.querySelector('.carousel-nav-right');
+
+      if (this.items.length <= 1 || this.forceHiddenNavigation) {
+        if (this.container) {
+          this.container.style.left = '0';
+        }
+        if (this.previousControl) {
+          this.previousControl.style.display = 'none';
+        }
+        if (this.nextControl) {
+          this.nextControl.style.display = 'none';
+        }
+      }
+    }
+
+    /**
+     * Update each item order
+     * @method _setOrder
+     */
+
+  }, {
+    key: '_setOrder',
+    value: function _setOrder() {
+      this.currentItem.node.style.order = '1';
+      this.currentItem.node.style.zIndex = '1';
+      var item = this.currentItem.node;
+      var i = void 0,
+          j = void 0,
+          ref = void 0;
+      for (i = j = 2, ref = Array.from(this.items).length; 2 <= ref ? j <= ref : j >= ref; i = 2 <= ref ? ++j : --j) {
+        item = this._next(item);
+        item.style.order = '' + i % Array.from(this.items).length;
+        item.style.zIndex = '0';
+      }
+    }
+
+    /**
+     * Find next item to display
+     * @method _next
+     * @param  {Node} element Current Node element
+     * @return {Node}         Next Node element
+     */
+
+  }, {
+    key: '_next',
+    value: function _next(element) {
+      if (element.nextElementSibling) {
+        return element.nextElementSibling;
+      } else {
+        return this.items[0];
+      }
+    }
+
+    /**
+     * Find previous item to display
+     * @method _previous
+     * @param  {Node}  element Current Node element
+     * @return {Node}          Previous Node element
+     */
+
+  }, {
+    key: '_previous',
+    value: function _previous(element) {
+      if (element.previousElementSibling) {
+        return element.previousElementSibling;
+      } else {
+        return this.items[this.items.length - 1];
+      }
+    }
+
+    /**
+     * Update slides to display the wanted one
+     * @method _slide
+     * @param  {String} [direction='next'] Direction in which items need to move
+     * @return {void}
+     */
+
+  }, {
+    key: '_slide',
+    value: function _slide() {
+      var _this4 = this;
+
+      var direction = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'next';
+
+      if (this.items.length) {
+        this.oldItemNode = this.currentItem.node;
+        this.emit(BULMA_CAROUSEL_EVENTS.slideBefore, this.currentItem);
+        // initialize direction to change order
+        if (direction === 'previous') {
+          this.currentItem.node = this._previous(this.currentItem.node);
+          // add reverse class
+          if (!this.element.classList.contains('carousel-animate-fade')) {
+            this.element.classList.add('is-reversing');
+            this.container.style.transform = 'translateX(' + -Math.abs(this.offset) + 'px)';
+          }
+        } else {
+          // Reorder items
+          this.currentItem.node = this._next(this.currentItem.node);
+          // re_slide reverse class
+          this.element.classList.remove('is-reversing');
+          this.container.style.transform = 'translateX(' + Math.abs(this.offset) + 'px)';
+        }
+        this.currentItem.node.classList.add('is-active');
+        this.oldItemNode.classList.remove('is-active');
+
+        // Disable transition to instant change order
+        this.element.classList.remove('carousel-animated');
+        // Enable transition to animate order 1 to order 2
+        setTimeout(function () {
+          _this4.element.classList.add('carousel-animated');
+        }, 50);
+
+        this._setOrder();
+        this.emit(BULMA_CAROUSEL_EVENTS.slideAfter, this.currentItem);
+      }
+    }
+
+    /**
+     * Initiate autoplay system
+     * @method _autoPlay
+     * @param  {Number}  [delay=5000] Delay between slides in milliseconds
+     * @return {void}
+     */
+
+  }, {
+    key: '_autoPlay',
+    value: function _autoPlay() {
+      var _this5 = this;
+
+      var delay = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 5000;
+
+      this._autoPlayInterval = setInterval(function () {
+        _this5._slide('next');
+      }, delay);
+    }
+  }], [{
+    key: 'attach',
+    value: function attach() {
+      var selector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '.carousel, .hero-carousel';
+      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+      var instances = new Array();
+
+      var elements = document.querySelectorAll(selector);
+      [].forEach.call(elements, function (element) {
+        setTimeout(function () {
+          instances.push(new bulmaCarousel(element, options));
+        }, 100);
+      });
+      return instances;
+    }
+  }]);
+
+  return bulmaCarousel;
+}(__WEBPACK_IMPORTED_MODULE_0__events__["a" /* default */]);
+
+/* harmony default export */ __webpack_exports__["default"] = (bulmaCarousel);
+
+/***/ }),
+/* 1 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var EventEmitter = function () {
+  function EventEmitter() {
+    var listeners = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+
+    _classCallCheck(this, EventEmitter);
+
+    this._listeners = new Map(listeners);
+    this._middlewares = new Map();
+  }
+
+  _createClass(EventEmitter, [{
+    key: "listenerCount",
+    value: function listenerCount(eventName) {
+      if (!this._listeners.has(eventName)) {
+        return 0;
+      }
+
+      var eventListeners = this._listeners.get(eventName);
+      return eventListeners.length;
+    }
+  }, {
+    key: "removeListeners",
+    value: function removeListeners() {
+      var _this = this;
+
+      var eventName = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+      var middleware = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
+      if (eventName !== null) {
+        if (Array.isArray(eventName)) {
+          name.forEach(function (e) {
+            return _this.removeListeners(e, middleware);
+          });
+        } else {
+          this._listeners.delete(eventName);
+
+          if (middleware) {
+            this.removeMiddleware(eventName);
+          }
+        }
+      } else {
+        this._listeners = new Map();
+      }
+    }
+  }, {
+    key: "middleware",
+    value: function middleware(eventName, fn) {
+      var _this2 = this;
+
+      if (Array.isArray(eventName)) {
+        name.forEach(function (e) {
+          return _this2.middleware(e, fn);
+        });
+      } else {
+        if (!Array.isArray(this._middlewares.get(eventName))) {
+          this._middlewares.set(eventName, []);
+        }
+
+        this._middlewares.get(eventName).push(fn);
+      }
+    }
+  }, {
+    key: "removeMiddleware",
+    value: function removeMiddleware() {
+      var _this3 = this;
+
+      var eventName = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
+      if (eventName !== null) {
+        if (Array.isArray(eventName)) {
+          name.forEach(function (e) {
+            return _this3.removeMiddleware(e);
+          });
+        } else {
+          this._middlewares.delete(eventName);
+        }
+      } else {
+        this._middlewares = new Map();
+      }
+    }
+  }, {
+    key: "on",
+    value: function on(name, callback) {
+      var _this4 = this;
+
+      var once = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+
+      if (Array.isArray(name)) {
+        name.forEach(function (e) {
+          return _this4.on(e, callback);
+        });
+      } else {
+        name = name.toString();
+        var split = name.split(/,|, | /);
+
+        if (split.length > 1) {
+          split.forEach(function (e) {
+            return _this4.on(e, callback);
+          });
+        } else {
+          if (!Array.isArray(this._listeners.get(name))) {
+            this._listeners.set(name, []);
+          }
+
+          this._listeners.get(name).push({ once: once, callback: callback });
+        }
+      }
+    }
+  }, {
+    key: "once",
+    value: function once(name, callback) {
+      this.on(name, callback, true);
+    }
+  }, {
+    key: "emit",
+    value: function emit(name, data) {
+      var _this5 = this;
+
+      var silent = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+
+      name = name.toString();
+      var listeners = this._listeners.get(name);
+      var middlewares = null;
+      var doneCount = 0;
+      var execute = silent;
+
+      if (Array.isArray(listeners)) {
+        listeners.forEach(function (listener, index) {
+          // Start Middleware checks unless we're doing a silent emit
+          if (!silent) {
+            middlewares = _this5._middlewares.get(name);
+            // Check and execute Middleware
+            if (Array.isArray(middlewares)) {
+              middlewares.forEach(function (middleware) {
+                middleware(data, function () {
+                  var newData = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
+                  if (newData !== null) {
+                    data = newData;
+                  }
+                  doneCount++;
+                }, name);
+              });
+
+              if (doneCount >= middlewares.length) {
+                execute = true;
+              }
+            } else {
+              execute = true;
+            }
+          }
+
+          // If Middleware checks have been passed, execute
+          if (execute) {
+            if (listener.once) {
+              listeners[index] = null;
+            }
+            listener.callback(data);
+          }
+        });
+
+        // Dirty way of removing used Events
+        while (listeners.indexOf(null) !== -1) {
+          listeners.splice(listeners.indexOf(null), 1);
+        }
+      }
+    }
+  }]);
+
+  return EventEmitter;
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = (EventEmitter);
+
+/***/ }),
+/* 2 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var defaultOptions = {
+  size: 1,
+  autoplay: false,
+  delay: 5000,
+  threshold: 50, //required min distance traveled to be considered swipe
+  restraint: 100, // maximum distance allowed at the same time in perpendicular direction
+  allowedTime: 500 // maximum time allowed to travel that distance
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (defaultOptions);
+
+/***/ })
+/******/ ])["default"];
+});
+
+/***/ }),
+
+/***/ 86:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(10);
+
 
 /***/ })
 

@@ -273,7 +273,7 @@
             <div class="section">
                 <section style="overflow-y: scroll; max-height: 400px;">
                     <center>
-                        <table class="table">
+                        <table class="table" style="with: 100vh">
                             <thead>
                                 <th><abbr title="Numero">#</abbr></th>
                                 <th><abbr title="Titulo">Titulo</abbr></th>
@@ -299,14 +299,106 @@
         <div v-if="renderReportes">
             <div class="section">
                 <section>
-
-                </section>
-            </div>
-        </div>
-        <div v-if="renderImportar">
-            <div class="section">
-                <section>
-
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label">Rango de edades</label>
+                        </div>
+                        <div class="field-body">
+                            <div class="field">
+                                <p class="control">
+                                    <div class="select is-fullwidth">
+                                        <select v-model="reporteUsrs.edad1">
+                                            <option v-for="i in 100" :key="i" :value="i">{{i}}</option>
+                                        </select>
+                                    </div>
+                                </p>
+                            </div>
+                            <div class="field">
+                                <p class="control">
+                                    <div class="select is-fullwidth">
+                                        <select v-model="reporteUsrs.edad2">
+                                            <option v-for="i in 100" :key="i" :value="i">{{i}}</option>
+                                        </select>
+                                    </div>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label">Tipo de usuario</label>
+                        </div>
+                        <div class="field-body">
+                            <div class="field">
+                                <p class="control">
+                                    <div class="select is-fullwidth">
+                                        <select v-model="reporteUsrs.rol">
+                                            <option v-for="rol in roles" :key="rol.name" :value="rol.name">{{rol.description}}</option>
+                                        </select>
+                                    </div>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label">Genero</label>
+                        </div>
+                        <div class="field-body">
+                            <div class="field">
+                                <p class="control">
+                                    <div class="select is-fullwidth">
+                                        <select v-model="reporteUsrs.gen">
+                                            <option v-for="gen in genders" :key="gen.id" :value="gen.id">{{gen.nombre}}</option>
+                                        </select>
+                                    </div>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field is-horizontal">
+                        <div class="field-label">
+                            <label>Rango de salarios</label>
+                        </div>
+                        <div class="field-body">
+                            <div class="field is-expanded">
+                                <div class="field has-addons">
+                                    <p class="control">
+                                    <a class="button is-static">
+                                        $
+                                    </a>
+                                    </p>
+                                    <p class="control is-expanded">
+                                    <input v-model="reporteUsrs.sal1" class="input" type="number" placeholder="Salario">
+                                    </p>
+                                </div>
+                                <div class="field has-addons">
+                                    <p class="control">
+                                    <a class="button is-static">
+                                        $
+                                    </a>
+                                    </p>
+                                    <p class="control is-expanded">
+                                    <input class="input"  v-model="reporteUsrs.sal2" type="number" placeholder="Salario">
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field is-horizontal">
+                    <div class="field-label">
+                        <!-- Left empty for spacing -->
+                    </div>
+                    <div class="field-body">
+                        <div class="field">
+                        <div class="control">
+                            <button class="button is-primary">
+                            Buscar
+                            </button>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
                 </section>
             </div>
         </div>
@@ -360,6 +452,14 @@
                 notificacion:{
                     titulo:'',
                     texto:'',
+                },
+                reporteUsrs:{
+                    edad1:'',
+                    edad2:'',
+                    rol:'',
+                    gen:'',
+                    sal1:'',
+                    sla2:'',
                 }
             };
         },

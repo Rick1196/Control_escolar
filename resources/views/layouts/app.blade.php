@@ -101,6 +101,10 @@
                     <nav-slider-adm></nav-slider-adm>
                 @elseif(Auth::user()->hasRole('directivo') or Auth::user()->hasRole('administrativo') )
                     <nav-slider-dir></nav-slider-dir>
+                @elseif(Auth::user()->hasRole('profesor'))
+                    <nav-slider-prof></nav-slider-prof>
+                @elseif(Auth::user()->hasRole('alumno'))
+                    <nav-slider-std></nav-slider-std>
                 @endif
             </section>
             @yield('content')
