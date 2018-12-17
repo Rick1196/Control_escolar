@@ -12,13 +12,13 @@ class UserTableSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
+    {   
+            
             
             $alumno = Role::where('name', 'alumno')->first();
             $admin = Role::where('name', 'admin')->first();
             $administrativo = Role::where('name', 'administrativo')->first();
             $profesor = Role::where('name', 'profesor')->first();
-
             /*
             $user = new User();
             $user->name = 'ricardo.admin';
@@ -74,10 +74,10 @@ class UserTableSeeder extends Seeder
             $user->email = 'abril.alumno@gmail.com';
             $user->password = bcrypt('secret');
             $user->save();
-            $user->roles()->attach($alumno);*/
+            $user->roles()->attach($alumno);
 
-            /*
-            for ($i = 30; $i < 60; $i++){
+            */
+            for ($i = 50; $i < 100; $i++){
 
                 $user = new User();
                 $user->name = 'profesor'.$i;
@@ -85,9 +85,9 @@ class UserTableSeeder extends Seeder
                 $user->password = bcrypt('secret');
                 $user->save();
                 $user->roles()->attach($profesor);
-            }*/
+            }
 
-            for ($i = 101; $i < 110; $i++){
+            for ($i = 50; $i < 151; $i++){
 
                 $user = new User();
                 $user->name = 'alumno'.$i;
